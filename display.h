@@ -17,6 +17,7 @@ class Display
     Display() {}
     virtual ~Display() {}
 
+    static void printBoard(const Board& board);
     static void printMap(const WallMap& map);
 
  private:

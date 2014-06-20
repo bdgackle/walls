@@ -9,9 +9,27 @@
 
 // Internal Headers
 #include "display.h"
+#include "board.h"
 #include "wall_map.h"
 
 namespace walls{
+
+void Display::printBoard(const Board& board)
+{
+    for (size_t y = 0; y < board.getHeight(); y++)
+    {
+        for (size_t x = 0; x < board.getWidth(); x++)
+        {
+            if (board.isWall(x,y))
+                printf("X ");
+            else if (board.isOutside(x,y))
+                printf("* ");
+            else
+                printf(". ");
+        }
+        printf("\n");
+    }
+}
 
 void Display::printMap(const WallMap& map)
 {

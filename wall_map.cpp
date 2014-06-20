@@ -15,7 +15,7 @@
 
 namespace walls{
 
-WallMap::WallMap(size_t height, size_t width) :
+WallMap::WallMap(size_t width, size_t height) :
 m_height(height),
 m_width(width)
 {

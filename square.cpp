@@ -38,7 +38,7 @@ bool Square::checkNeighbors()
 
     if ((getNorth()->isOutside()) ||
         (getSouth()->isOutside()) ||
-        (getWest()->isOutside()) ||
+        (getEast()->isOutside()) ||
         (getWest()->isOutside()))
     {
         return true;
