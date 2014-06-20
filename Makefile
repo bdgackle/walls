@@ -1,0 +1,55 @@
+INC = .
+SRC = .
+OBJ = .
+BIN = .
+
+CPP     := g++
+CFLAGS  := -Wfatal-errors
+CFLAGS  += -I$(INC)
+
+# Objects
+square.o: $(SRC)/square.cpp\
+          $(INC)/square.h
+	$(CPP) $(CFLAGS) -c $< -o $(OBJ)/$@
+
+wall_map.o: $(SRC)/wall_map.cpp\
+            $(INC)/wall_map.h
+	$(CPP) $(CFLAGS) -c $< -o $(OBJ)/$@
+
+ut.o: $(SRC)/ut.cpp\
+      $(INC)/ut.h
+	$(CPP) $(CFLAGS) -c $< -o $(OBJ)/$@
+
+testsquare.o: $(SRC)/testsquare.cpp\
+              $(INC)/square.h\
+              $(INC)/ut.h
+	$(CPP) $(CFLAGS) -c $< -o $(OBJ)/$@
+
+testwall_map.o: $(SRC)/testwall_map.cpp\
+                $(INC)/wall_map.h\
+                $(INC)/ut.h
+	$(CPP) $(CFLAGS) -c $< -o $(OBJ)/$@
+
+# Individual unit tests            
+testsquare: $(OBJ)/testsquare.o\
+            $(OBJ)/ut.o\
+            $(OBJ)/square.o
+	$(CPP) $(CFLAGS) $^ -o $(BIN)/$@
+
+testwall_map: $(OBJ)/testwall_map.o\
+              $(OBJ)/ut.o\
+              $(OBJ)/wall_map.o
+	$(CPP) $(CFLAGS) $^ -o $(BIN)/$@
+
+# Run all tests
+.PHONY: test
+test: $(BIN)/testsquare\
+      $(BIN)/testwall_map
+	$(BIN)/testsquare
+	$(BIN)/testwall_map
+
+.PHONY: clean
+clean:
+	rm -f *.o
+	rm -f testsquare
+	rm -f testwall_map
