@@ -8,7 +8,6 @@
 
 // Internal Headers
 #include "world.h"
-#include "block.h"
 
 namespace walls
 {
