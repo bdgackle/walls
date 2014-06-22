@@ -21,8 +21,8 @@ class Block
     void setX(int x) { m_x = x; }
     void setY(int y) { m_y = y; }
     void setType(int type) { m_type = type; }
-    void setHasPlayer(bool p) { m_has_player p; }
-    void setHasCursor(bool c) { m_has_cursor c; }
+    void setHasPlayer(bool p) { m_has_player = p; }
+    void setHasCursor(bool c) { m_has_cursor = c; }
 
     Block* getNorth() const { return m_north; }
     Block* getSouth() const { return m_south; }

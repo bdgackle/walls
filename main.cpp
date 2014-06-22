@@ -1,77 +1,24 @@
-// Test program for curses
-#include <curses.h>
-#include <time.h>
+/**
+ *  @author: Barry Gackle
+ *  @author: 21 June 2014
+ */
+
+// C Standard Headers
+#include <stdio.h>
+
+// Internal Headers
+#include "world.h"
+#include "ui.h"
 
 int main()
 {
-    initscr(); // Initialize ncurses
-    cbreak();  // Place input in c-break mode
-    noecho();  // Prevent getch() from echoing
-    keypad(stdscr, TRUE); // Make arrow keys work
-    nodelay(stdscr, TRUE); // Make getch non blocking
+    walls::UserInterface ui;
+    ui.init();
 
-    int x = COLS / 2;
-    int y = LINES / 2;
-    int dx = 0;
-    int dy = 0;
-    const char * str = "@";
-    int input;
+    walls::World world(ui.getWidth(), ui.getHeight());
 
-    struct timespec delay;
-    delay.tv_sec = 0;
-    delay.tv_nsec = 200000000;
-
-    while (1)
-    {
-        erase();
-        mvaddstr(y, x, str);
-        move(LINES - 1, COLS - 1);
-        refresh();
-
-        input = getch();
-
-        if (input == KEY_UP )
-        {
-            dx = 0;
-            dy = -1;
-        }
-
-        if (input == KEY_DOWN )
-        {
-            dx = 0;
-            dy = 1;
-        }
-
-        if (input == KEY_LEFT )
-        {
-            dx = -1;
-            dy = 0;
-        }
-
-        if (input == KEY_RIGHT )
-        {
-            dx = 1;
-            dy = 0;
-        }
-
-        if ((dy == -1) && (y > 0))
-            y--;
-
-        if ((dy == 1) && (y < LINES - 1))
-            y++;
-
-        if ((dx == -1) && (x > 0))
-            x--;
-
-        if ((dx == 1) && (x < COLS -1))
-            x++;
-
-        nanosleep(&delay, NULL);
-    }
-
-    endwin();  // Return console to sane state
+    ui.setWorld(&world);
+    ui.start();
 
     return 0;
 }
-
-

@@ -17,7 +17,7 @@ m_world(NULL),
 m_height(0),
 m_width(0),
 m_last_frame(NULL),
-m_next_frame(NULL)
+m_mode(MODE_NORMAL)
 {
 }
 
@@ -25,9 +25,6 @@ UserInterface::~UserInterface()
 {
     if (m_last_frame != NULL)
         delete m_last_frame;
-
-    if (m_next_frame != NULL)
-        delete m_next_frame;
 
     endwin(); // Return console to way we found it
 }
@@ -45,7 +42,7 @@ void UserInterface::init()
     m_last_frame = new char[m_height * m_width];
 
     for (int i = 0; i < m_height * m_width; i++)
-        m_last_frame[i] = '.';
+        m_last_frame[i] = 'a';
 }
 
 void UserInterface::start()
@@ -67,7 +64,7 @@ void UserInterface::drawWorld()
     for (int y = 0; y < m_height; y++)
     {
         char tile;
-        int index = x + y * m_height;
+        int index = x + y * m_width;
         tile = m_world->getBlock(x,y)->getTop();
         if (tile != m_last_frame[index])
         {
@@ -75,6 +72,7 @@ void UserInterface::drawWorld()
             m_last_frame[index] = tile;
         }
     }
+    move(m_height - 1, m_width - 1);
 }
 
 void UserInterface::waitForInput()
@@ -84,14 +82,12 @@ void UserInterface::waitForInput()
     switch (m_mode)
     {
         case MODE_NORMAL:
-            processInputNormal(input);
+            processInputNormal(raw_input);
             break;
 
         case MODE_EDIT:
-            processInputEdit(input);
+            processInputEdit(raw_input);
             break;
-
-        default: // Do nothing
     }
 }
 
@@ -99,24 +95,24 @@ void UserInterface::processInputNormal(int input)
 {
     switch(input)
     {
-        case: 'j'
-        case: KEY_DOWN
-            m_last_input = World::PLAYER_SOUTH
+        case 'j':
+        case KEY_DOWN:
+            m_last_input = World::PLAYER_SOUTH;
             break;
 
-        case: 'k'
-        case: KEY_UP
-            m_last_input = World::PLAYER_NORTH
+        case 'k':
+        case KEY_UP:
+            m_last_input = World::PLAYER_NORTH;
             break;
 
-        case: 'h'
-        case: KEY_LEFT
-            m_last_input = World::PLAYER_WEST
+        case 'h':
+        case KEY_LEFT:
+            m_last_input = World::PLAYER_WEST;
             break;
 
-        case: 'l'
-        case: KEY_RIGHT
-            m_last_input = World::PLAYER_EAST
+        case 'l':
+        case KEY_RIGHT:
+            m_last_input = World::PLAYER_EAST;
             break;
 
         default:
@@ -128,32 +124,32 @@ void UserInterface::processInputEdit(int input)
 {
     switch(input)
     {
-        case: 'j'
-        case: KEY_DOWN
-            m_last_input = World::CURSOR_SOUTH
+        case 'j':
+        case KEY_DOWN:
+            m_last_input = World::CURSOR_SOUTH;
             break;
 
-        case: 'k'
-        case: KEY_UP
-            m_last_input = World::CURSOR_NORTH
+        case 'k':
+        case KEY_UP:
+            m_last_input = World::CURSOR_NORTH;
             break;
 
-        case: 'h'
-        case: KEY_LEFT
-            m_last_input = World::CURSOR_WEST
+        case 'h':
+        case KEY_LEFT:
+            m_last_input = World::CURSOR_WEST;
             break;
 
-        case: 'l'
-        case: KEY_RIGHT
-            m_last_input = World::CURSOR_EAST
+        case 'l':
+        case KEY_RIGHT:
+            m_last_input = World::CURSOR_EAST;
             break;
 
-        case: 'a'
-            m_last_input = World::ADD_WALL
+        case 'a':
+            m_last_input = World::WALL_ADD;
             break;
 
-        case: 'd'
-            m_last_input = World::ADD_WALL
+        case 'd':
+            m_last_input = World::WALL_REMOVE;
             break;
 
         default:
@@ -165,14 +161,17 @@ void UserInterface::processInputCommon(int input)
 {
     switch(input)
     {
-        case: ' '
+        case ' ':
             if (m_mode == MODE_NORMAL)
+            {
                 m_mode = MODE_EDIT;
                 m_last_input = World::CURSOR_ON;
+            }
             else
+            {
                 m_mode = MODE_NORMAL;
                 m_last_input = World::CURSOR_OFF;
-        default: // Do nothing
+            }
     }
 }
 

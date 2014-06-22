@@ -3,6 +3,9 @@
  *  @author 20 June 2014
  */
 
+// C Standard Headers
+#include <stddef.h>
+
 // Internal Headers
 #include "world.h"
 #include "block.h"
@@ -15,9 +18,9 @@ m_width(width),
 m_height(height),
 m_player_x(0),
 m_player_y(0),
-m_cursor_x(0),
-m_cursor_y(0),
-is_cursor(false)
+m_cursor_x(width - 1),
+m_cursor_y(height - 1),
+m_cursor_active(false)
 {
     m_blocks = new Block*[m_height * m_width];
 
@@ -42,6 +45,11 @@ is_cursor(false)
         if (y < (height - 1))
             block->setSouth(getBlock(x, y + 1));
     }
+
+    Block* player_block = getBlock(m_player_x, m_player_y);
+    player_block->setHasPlayer(true);
+    Block* cursor_block = getBlock(m_cursor_x, m_cursor_y);
+    cursor_block->setHasCursor(true);
 }
 
 World::~World()
@@ -56,14 +64,10 @@ World::~World()
         delete m_blocks;
 }
 
-void World::updateWorld(int input)
+void World::updateModel(int input)
 {
     switch(input)
     {
-        case ACTION:
-            action();
-            break;
-
         case PLAYER_NORTH:
             movePlayer(0, -1);
             break;
@@ -73,7 +77,7 @@ void World::updateWorld(int input)
             break;
 
         case PLAYER_WEST:
-            playerWest(-1, 0);
+            movePlayer(-1, 0);
             break;
 
         case PLAYER_EAST:
@@ -111,20 +115,18 @@ void World::updateWorld(int input)
         case WALL_REMOVE:
             wallRemove();
             break;
-
-        default: //Do nothing
     }
 }
 
-void movePlayer(int delta_x, int delta_y)
+void World::movePlayer(int delta_x, int delta_y)
 {
         int new_x = m_player_x + delta_x;
         int new_y = m_player_y + delta_y;
 
-        if ((new_x <= 0) || (new_x >= m_width))
+        if ((new_x < 0) || (new_x >= m_width))
             new_x = m_player_x;
         
-        if ((new_y <= 0) || (new_y >= m_width))
+        if ((new_y < 0) || (new_y >= m_height))
             new_y = m_player_y;
         
         Block* oldBlock = getBlock(m_player_x, m_player_y);
@@ -137,15 +139,15 @@ void movePlayer(int delta_x, int delta_y)
         m_player_y = new_y;
 }
 
-void moveCursor(int delta_x, int delta_y)
+void World::moveCursor(int delta_x, int delta_y)
 {
         int new_x = m_cursor_x + delta_x;
         int new_y = m_cursor_y + delta_y;
 
-        if ((new_x <= 0) || (new_x >= m_width))
+        if ((new_x < 0) || (new_x >= m_width))
             new_x = m_cursor_x;
         
-        if ((new_y <= 0) || (new_y >= m_width))
+        if ((new_y < 0) || (new_y >= m_height))
             new_y = m_cursor_y;
         
         Block* oldBlock = getBlock(m_cursor_x, m_cursor_y);
@@ -153,28 +155,28 @@ void moveCursor(int delta_x, int delta_y)
 
         oldBlock->setHasCursor(false);
 
-        if (m_is_cursor)
+        if (m_cursor_active)
             newBlock->setHasCursor(true);
 
         m_cursor_x = new_x;
         m_cursor_y = new_y;
 }
 
-void wallAdd()
+void World::wallAdd()
 {
-    block = getBlock(m_cursor_x, m_cursor_y);
-    block->setType("X");
+    Block* block = getBlock(m_cursor_x, m_cursor_y);
+    block->setType('X');
 }
 
-void wallRemove()
+void World::wallRemove()
 {
-    block = getBlock(m_cursor_x, m_cursor_y);
-    block->setType(".");
+    Block* block = getBlock(m_cursor_x, m_cursor_y);
+    block->setType('.');
 }
 
-void setCursor(bool c)
+void World::setCursor(bool c)
 {
-    m_is_cursor = c;
+    m_cursor_active = c;
 
     Block* block = getBlock(m_cursor_x, m_cursor_y);
     block->setHasCursor(c);

@@ -3,6 +3,9 @@
  *  @author 20 June 2014
  */
 
+// C Standard Headers
+#include "stddef.h"
+
 // Internal Headers
 #include "block.h"
 
@@ -23,10 +26,12 @@ m_has_cursor(false)
 
 char Block::getTop()
 {
-    if (m_has_cursor)
-        return CURSOR;
+    if (m_type == WALL)
+        return m_type;
     else if (m_has_player)
         return PLAYER;
+    else if (m_has_cursor)
+        return CURSOR;
     else
         return m_type;
 }

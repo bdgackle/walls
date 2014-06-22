@@ -18,12 +18,15 @@ class UserInterface
     UserInterface();
     virtual ~UserInterface();
 
-    void setWorld(World* world) { m_world = world };
+    void setWorld(World* world) { m_world = world; }
 
+    int getHeight() { return m_height; }
+    int getWidth() { return m_width; }
+
+    void init();
     void start();
 
  protected:
-    void init();
     void drawWorld();
     void waitForInput();
 
@@ -42,8 +45,8 @@ class UserInterface
 
     char* m_last_frame;
 
-    static const int MODE_NORMAL;
-    static const int MODE_EDIT;
+    static const int MODE_NORMAL = 1;
+    static const int MODE_EDIT   = 2;
 };
 
 } // walls
