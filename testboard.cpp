@@ -6,6 +6,9 @@
 // Standard Headers
 #include <stddef.h>
 
+// External Headers
+#include <gperftools/profiler.h>
+
 // Internal Headers
 #include "board.h"
 #include "wall_map.h"
@@ -21,6 +24,7 @@ int main()
     Board* test1 = new Board(20,20);
     Board* test2 = new Board(20,20);
     WallMap* wall_map = new WallMap(20,20);
+    WallMap* wall_map2 = new WallMap(20,20);
 
     const char * map = "...................."
                        "..............XXXXXX"
@@ -43,26 +47,51 @@ int main()
                        "........XXXX....XXXX"
                        "....................";
 
+    const char * map2 = "...................."
+                       "...................."
+                       "...................."
+                       "...................."
+                       "...................."
+                       "...................."
+                       "...................."
+                       "...................."
+                       "...................."
+                       "...................."
+                       "...................."
+                       "...................."
+                       "...................."
+                       "...................."
+                       "...................."
+                       "...................."
+                       "...................."
+                       "...................."
+                       "...................."
+                       "....................";
+
     wall_map->setWall(map);
+    wall_map2->setWall(map2);
     test2->setWalls(*wall_map);
 
-    //nextTest("Construction");
-    //Display::printBoard(*test1);
+    nextTest("Construction");
+    Display::printBoard(*test1);
 
-    //nextTest("setWalls()");
-    //Display::printBoard(*test2);
+    nextTest("setWalls()");
+    Display::printBoard(*test2);
 
-    for (int i = 0; i < 10000; i++)
-    {
-        delete test2;
-        test2 = new Board(20,20);
+//    ProfilerStart("./board.prof");
+//    for (int i = 0; i < 100000; i++)
+//    {
         test2->setWalls(*wall_map);
-        while(test2->scan())
-        {
-            //nextTest("scan()");
-            //Display::printBoard(*test2);
+        while(test2->scan()) {
+            nextTest("Scan");
+            Display::printBoard(*test2);
         }
-    }
+//        test2->setWalls(*wall_map2);
+//        while(test2->scan()) {
+//            nextTest("Scan");
+//        }
+//    }
+ //   ProfilerStop();
                     
     delete test1;
     delete test2;
