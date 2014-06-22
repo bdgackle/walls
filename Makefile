@@ -6,6 +6,11 @@ BIN = .
 CPP     := g++
 CFLAGS  := -Wfatal-errors
 CFLAGS  += -I$(INC)
+CFLAGS  += -g
+
+# Temproary main.cpp
+main: main.cpp
+	g++ main.cpp -o main -lncurses
 
 # Objects
 square.o: $(SRC)/square.cpp\
@@ -74,7 +79,7 @@ testboard: $(OBJ)/testboard.o\
            $(OBJ)/square.o\
            $(OBJ)/ut.o\
            $(OBJ)/wall_map.o
-	$(CPP) $(CFLAGS) $^ -o $(BIN)/$@
+	$(CPP) $(CFLAGS) $^ -o $(BIN)/$@ -lprofiler -g
 
 # Run all tests
 .PHONY: test
