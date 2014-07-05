@@ -8,17 +8,15 @@
 
 // Internal Headers
 #include "world.h"
+#include "maplocation.h"
 #include "ui.h"
 
 int main()
 {
+    walls::World world(1000, 1000, 1);
     walls::UserInterface ui;
-    ui.init();
 
-    walls::World world(ui.getWidth(), ui.getHeight());
-
-    ui.setWorld(&world);
-    ui.start();
+    ui.start(&world, walls::MapLocation(0,0,0));
 
     return 0;
 }
