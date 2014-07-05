@@ -3,65 +3,51 @@
  *  @author 20 June 2014
  */
 
-#ifndef BOARD_H
-#define BOARD_H
+#ifndef WORLD_H
+#define WORLD_H
 
 // Internal Headers
-#include "block.h"
+#include "game_constants.h"
+#include "boundry_scanner.h"
+#include "player.h"
+#include "map.h"
 
 namespace walls{
 
-class WallMap;
+class MapLocation;
 
 class World
 {
  public:
-    static const int PLAYER_NORTH      =   1;
-    static const int PLAYER_SOUTH      =   2;
-    static const int PLAYER_EAST       =   3;
-    static const int PLAYER_WEST       =   4;
-    static const int CURSOR_NORTH      =   5;
-    static const int CURSOR_SOUTH      =   6;
-    static const int CURSOR_EAST       =   7;
-    static const int CURSOR_WEST       =   8;
-    static const int CURSOR_OFF        =   9;
-    static const int CURSOR_ON         =  10;
-    static const int WALL_ADD          =  11;
-    static const int WALL_REMOVE       =  12;
 
-    World(int width, int height);
+    World(int width, int height, int depth);
     virtual ~World();
 
-    int getHeight() const { return m_height; }
-    int getWidth() const { return m_width; }
-    Block* getBlock(int x, int y) { return m_blocks[getIndex(x, y)]; }
-    bool isCursor() const { return m_cursor_active; }
+    void doCommand(Command command, const MapLocation& location);
 
-    void updateModel(int input);
+    MapLocation getPlayerLocation() const;
+    PlayerStatus getPlayerStatus() const;
+    BlockType getBlockType(const MapLocation& location) const;
 
  protected:
-    int getIndex(int x, int y) { return x + y * m_width; }
+    void movePlayer(int delta_x, int delta_y, int delta_z);
+    void addWall(const MapLocation& location);
+    void addDoor(const MapLocation& location);
+    void addGround(const MapLocation& location);
 
-    void movePlayer(int delta_x, int delta_y);
-    void moveCursor(int delta_x, int delta_y);
-    void wallAdd();
-    void wallRemove();
-    void setCursor(bool c);
+    void setBoundriesDirty(bool dirty);
+    bool getBoundriesDirty() const;
+
+    void update();
 
  private:
-    Block** m_blocks;
-    int m_width;
-    int m_height;
+    Map m_map;
+    BoundryScanner m_scanner;
+    Player m_player;
 
-    int m_player_x;
-    int m_player_y;
-    int m_cursor_x;
-    int m_cursor_y;
-
-    bool m_cursor_active;
-
+    bool m_boundries_dirty;
 };
 
 } // walls
 
-#endif // BOARD_H
+#endif // WORLD_H
