@@ -1,0 +1,50 @@
+/**
+ *  @author Barry Gackle
+ *  @author 4 July 2014
+ */
+
+#ifndef INPUT_HANDLER_H
+#define INPUT_HANDLER_H
+
+#include "game_constants.h"
+
+namespace walls{
+
+class InputHandler
+{
+ public:
+    InputHandler();
+    ~InputHandler();
+
+    Command getInput();
+
+    int getCursorX();
+    int getCursorY();
+    bool getCursorVisible();
+
+    void setDimensions(int width, int height);
+
+ protected:
+    Command processInputNormal(int input);
+    Command processInputEdit(int input);
+    Command processInputCommon(int input);
+
+    void moveCursor(int delta_x, int delta_y);
+
+ private:
+    enum Mode {
+        NORMAL,
+        EDIT
+    };
+
+    Mode m_mode;
+    int m_cursor_x;
+    int m_cursor_y;
+
+    int m_screen_width;
+    int m_screen_height;
+};
+
+} // walls
+
+#endif // INPUT_HANDLER_H
