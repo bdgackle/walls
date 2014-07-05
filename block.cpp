@@ -3,37 +3,74 @@
  *  @author 20 June 2014
  */
 
-// C Standard Headers
-#include "stddef.h"
-
 // Internal Headers
 #include "block.h"
+#include "game_constants.h"
 
 namespace walls{
 
 Block::Block() :
-m_north(NULL),
-m_south(NULL),
-m_east(NULL),
-m_west(NULL),
-m_x(0),
-m_y(0),
 m_type(GROUND),
-m_has_player(false),
-m_has_cursor(false)
+m_is_outdoors(true),
+m_is_updated(false) {}
+
+Block::~Block() {}
+
+BlockType Block::getType() const
 {
+    return m_type;
 }
 
-char Block::getTop()
+bool Block::getIsOutdoors() const
 {
-    if (m_type == WALL)
-        return m_type;
-    else if (m_has_player)
-        return PLAYER;
-    else if (m_has_cursor)
-        return CURSOR;
-    else
-        return m_type;
+    return m_is_outdoors;
+}
+
+bool Block::getIsMovementBoundry() const
+{
+    switch(m_type)
+    {
+        case WALL:
+            return true;
+            break;
+
+        default:
+            return false;
+    }
+}
+
+bool Block::getIsIndoorBoundry() const
+{
+    switch(m_type)
+    {
+        case WALL:
+        case DOOR:
+            return true;
+            break;
+
+        default:
+            return false;
+    }
+}
+
+bool Block::getIsUpdated() const
+{
+    return m_is_updated;
+}
+
+void Block::setType(BlockType type)
+{
+    m_type = type;
+}
+
+void Block::setIsOutdoors(bool outdoors)
+{
+    m_is_outdoors = outdoors;
+}
+
+void Block::setIsUpdated(bool updated)
+{
+    m_is_updated = updated;
 }
 
 } // walls
