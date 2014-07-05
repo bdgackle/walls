@@ -7,10 +7,15 @@
 #define UI_H
 
 // Internal Headers
-#include "world.h"
+#include "display.h"
+#include "input_handler.h"
+
+class World;
 
 namespace walls
 {
+
+using std::string;
 
 class UserInterface
 {
@@ -18,35 +23,15 @@ class UserInterface
     UserInterface();
     virtual ~UserInterface();
 
-    void setWorld(World* world) { m_world = world; }
-
-    int getHeight() { return m_height; }
-    int getWidth() { return m_width; }
-
-    void init();
-    void start();
+    void start(World *world, const MapLocation& start);
 
  protected:
-    void drawWorld();
-    void waitForInput();
-
-    void processInputNormal(int input);
-    void processInputEdit(int input);
-    void processInputCommon(int input);
+    void init(const MapLocation& start);
 
  private:
+    Display m_display;
+    InputHandler m_input;
     World* m_world;
-    int m_last_input;
-
-    int m_height;
-    int m_width;
-
-    int m_mode;
-
-    char* m_last_frame;
-
-    static const int MODE_NORMAL = 1;
-    static const int MODE_EDIT   = 2;
 };
 
 } // walls
