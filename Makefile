@@ -10,29 +10,48 @@ CFLAGS  += -g
 
 # Main target
 main: $(OBJ)/main.o\
+      $(OBJ)/block.o\
+      $(OBJ)/boundry_scanner.o\
+      $(OBJ)/player.o\
+      $(OBJ)/map.o\
+      $(OBJ)/maplocation.o\
       $(OBJ)/world.o\
-      $(OBJ)/ui.o\
-      $(OBJ)/block.o
+      $(OBJ)/commandreceiver.o\
+      $(OBJ)/ui.o
 	$(CPP) $(CFLAGS) $^ -o $(OBJ)/$@ -lncurses
 
 # Objects
-main.o: $(SRC)/main.cpp\
-        $(INC)/ui.h\
-        $(INC)/world.h
+main.o: $(SRC)/main.cpp
 	$(CPP) $(CFLAGS) -c $< -o $(OBJ)/$@
 
-block.o: $(SRC)/block.cpp\
-         $(INC)/block.h
+block.o: $(SRC)/block.cpp
 	$(CPP) $(CFLAGS) -c $< -o $(OBJ)/$@
 
-world.o: $(SRC)/world.cpp\
-         $(INC)/world.h\
-         $(INC)/block.h
+boundry_scanner.o: $(SRC)/boundry_scanner.cpp
 	$(CPP) $(CFLAGS) -c $< -o $(OBJ)/$@
 
-ui.o: $(SRC)/ui.cpp\
-      $(INC)/ui.h\
-      $(INC)/world.h
+player.o: $(SRC)/player.cpp
+	$(CPP) $(CFLAGS) -c $< -o $(OBJ)/$@
+
+map.o: $(SRC)/map.cpp
+	$(CPP) $(CFLAGS) -c $< -o $(OBJ)/$@
+
+maplocation.o: $(SRC)/maplocation.cpp
+	$(CPP) $(CFLAGS) -c $< -o $(OBJ)/$@
+
+world.o: $(SRC)/world.cpp
+	$(CPP) $(CFLAGS) -c $< -o $(OBJ)/$@
+
+display.o: $(SRC)/display.cpp
+	$(CPP) $(CFLAGS) -c $< -o $(OBJ)/$@
+
+input_handler.o: $(SRC)/input_handler.cpp
+	$(CPP) $(CFLAGS) -c $< -o $(OBJ)/$@
+
+game_constants.o: $(SRC)/game_constants.cpp
+	$(CPP) $(CFLAGS) -c $< -o $(OBJ)/$@
+
+ui.o: $(SRC)/ui.cpp
 	$(CPP) $(CFLAGS) -c $< -o $(OBJ)/$@
 
 .PHONY: clean
