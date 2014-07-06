@@ -13,9 +13,20 @@
 namespace walls{
 
 InputHandler::InputHandler() :
-    m_mode(NORMAL) {}
+    m_mode(NORMAL),
+    m_cursor_x(0),
+    m_cursor_y(0),
+    m_screen_width(0),
+    m_screen_height(0) {}
 
 InputHandler::~InputHandler() {}
+
+void InputHandler::init(int width, int height, int curs_x, int curs_y)
+{
+    m_screen_width = width;
+    m_screen_height = height;
+    moveCursor(curs_x, curs_y);
+}
 
 Command InputHandler::getInput()
 {
@@ -51,13 +62,6 @@ bool InputHandler::getCursorVisible()
         return true;
     else
         return false;
-}
-
-void InputHandler::setDimensions(int width, int height)
-{
-    m_screen_width = width;
-    m_screen_height = height;
-    moveCursor(0, 0); //No move, but take advantage of bounds checking
 }
 
 Command InputHandler::processInputNormal(int input)

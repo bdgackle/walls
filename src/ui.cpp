@@ -20,10 +20,10 @@ UserInterface::UserInterface() :
 
 UserInterface::~UserInterface() {}
 
-void UserInterface::start(World *world, const MapLocation& start)
+void UserInterface::start(World *world, const MapLocation& initial_location)
 {
     m_world = world;
-    init(start);
+    init(initial_location);
 
     while (1) {
         m_display.drawWorld();
@@ -41,17 +41,15 @@ void UserInterface::start(World *world, const MapLocation& start)
     }
 }
 
-void UserInterface::init(const MapLocation& start)
+void UserInterface::init(const MapLocation& initial_location)
 {
     initscr();            // Initialize ncurses
     cbreak();             // Place input in c-break mode
     noecho();             // Prevent getch() from echoing
     keypad(stdscr, TRUE); // Make arrow keys work
 
-    m_display.init(m_world, start);
-
-    m_display.setDimensions(COLS, LINES);
-    m_input.setDimensions(COLS, LINES);
+    m_display.init(m_world, initial_location, COLS, LINES);
+    m_input.init(COLS, LINES, 0, 2);
 }
 
 int UserInterface::getDepth()

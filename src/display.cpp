@@ -25,10 +25,14 @@ Display::~Display()
     shutdown();
 }
 
-void Display::init(const World* world, const MapLocation& upper_left)
+void Display::init(const World* world,
+                   const MapLocation& upper_left,
+                   int initial_width,
+                   int initial_height)
 {
     m_world = world;
     m_upper_left = upper_left;
+    setDimensions(initial_width, initial_height);
 }
 
 void Display::drawWorld()

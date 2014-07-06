@@ -20,7 +20,11 @@ class Display
     Display();
     virtual ~Display();
 
-    void init(const World* world, const MapLocation& upper_left);
+    void init(const World* world,
+              const MapLocation& upper_left,
+              int width,
+              int height);
+
     void drawWorld();
     void drawStatus();
     void drawPlayer();

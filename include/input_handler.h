@@ -16,13 +16,13 @@ class InputHandler
     InputHandler();
     ~InputHandler();
 
+    void init(int width, int height, int curs_x, int curs_y);
+
     Command getInput();
 
     int getCursorX();
     int getCursorY();
     bool getCursorVisible();
-
-    void setDimensions(int width, int height);
 
  protected:
     Command processInputNormal(int input);

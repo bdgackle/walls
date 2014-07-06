@@ -18,14 +18,14 @@ namespace walls{
 
 World::World(int width, int height, int depth) :
 m_map(width, height, depth),
-m_scanner(&m_map)
+m_scanner(&m_map),
+m_boundries_dirty(true)
 {
-    m_scanner.updateBoundry();
+    sprintf(m_update_time, "% 7d", 0);
+    m_player.setLocation(MapLocation(0, 3, 0), &m_map);
 }
 
-World::~World()
-{
-}
+World::~World() {}
 
 void World::update()
 {
