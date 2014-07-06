@@ -6,7 +6,7 @@
 #include <stddef.h>
 
 // C++ Standard Headers
-#include <vector>
+#include <deque>
 
 // Internal Headers
 #include "map.h"
@@ -16,7 +16,7 @@
 
 namespace walls{
 
-using std::vector;
+using std::deque;
 
 Map::Map(int width, int height, int depth) :
 m_width(width),
@@ -40,13 +40,13 @@ int Map::getDepth() const { return m_depth; }
 
 bool Map::exists(const MapLocation& location) const
 {
-    MapLocation upper_north_west(0,0,0);
-    MapLocation lower_south_east(getWidth(), getHeight(), getDepth());
+    MapLocation upper_nw(0,0,0);
+    MapLocation lower_se(getWidth() - 1, getHeight() - 1, getDepth() -1);
 
-    return location.isInSpace(upper_north_west, lower_south_east);
+    return location.isInSpace(upper_nw, lower_se);
 }
 
-void Map::getEdges(vector<MapLocation>* edges, int depth)
+void Map::getEdges(deque<MapLocation>* edges, int depth)
 {
     const int top = 0;
     const int bottom = getHeight() - 1;
@@ -64,7 +64,7 @@ void Map::getEdges(vector<MapLocation>* edges, int depth)
     }
 }
 
-int Map::getType(const MapLocation& location) const
+BlockType Map::getType(const MapLocation& location) const
 {
     if (exists(location))
         return getBlock(location)->getType();
@@ -123,7 +123,7 @@ void Map::setIsUpdated(const MapLocation& location, bool updated)
 }
 
 void Map::addLocationToList(const MapLocation& location,
-                            vector<MapLocation>* list)
+                            deque<MapLocation>* list)
 {
     if (exists(location) && !getIsUpdated(location)) {
         list->push_back(location);

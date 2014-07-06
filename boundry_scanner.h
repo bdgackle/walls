@@ -7,7 +7,7 @@
 #define BOUNDRY_SCANNER_H
 
 // C++ Standard Headers
-#include <vector>
+#include <deque>
 
 namespace walls
 {
@@ -15,7 +15,7 @@ namespace walls
 class Map;
 class MapLocation;
 
-using std::vector;
+using std::deque;
 
 class BoundryScanner
 {
@@ -30,8 +30,9 @@ class BoundryScanner
     void pushLocation(MapLocation location);
 
  private:
-    vector<MapLocation> m_stack;
+    deque<MapLocation> m_stack;
     Map *m_map;
+    int m_perf_count; //DEBUG: Used only for profiling 
 };
 
 } // namespace walls

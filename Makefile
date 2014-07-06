@@ -10,13 +10,15 @@ CFLAGS  += -g
 
 # Main target
 main: $(OBJ)/main.o\
+      $(OBJ)/display.o\
       $(OBJ)/block.o\
+      $(OBJ)/game_constants.o\
+      $(OBJ)/input_handler.o\
       $(OBJ)/boundry_scanner.o\
       $(OBJ)/player.o\
       $(OBJ)/map.o\
       $(OBJ)/maplocation.o\
       $(OBJ)/world.o\
-      $(OBJ)/commandreceiver.o\
       $(OBJ)/ui.o
 	$(CPP) $(CFLAGS) $^ -o $(OBJ)/$@ -lncurses
 

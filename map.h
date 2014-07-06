@@ -7,7 +7,7 @@
 #define MAP_H
 
 // C++ Standard Headers
-#include <vector>
+#include <deque>
 
 // Internal Headers
 #include "game_constants.h"
@@ -17,7 +17,7 @@ namespace walls{
 class Block;
 class MapLocation;
 
-using std::vector;
+using std::deque;
 
 class Map
 {
@@ -30,9 +30,9 @@ class Map
     int getDepth() const;
 
     bool exists(const MapLocation& location) const;
-    void getEdges(vector<MapLocation>* edges, int depth);
+    void getEdges(deque<MapLocation>* edges, int depth);
 
-    int getType(const MapLocation& location) const;
+    BlockType getType(const MapLocation& location) const;
     bool getIsOutdoors(const MapLocation& location) const;
     bool getIsMovementBoundry(const MapLocation& location) const;
     bool getIsIndoorBoundry(const MapLocation& location) const;
@@ -46,7 +46,7 @@ class Map
 
  protected:
     void addLocationToList(const MapLocation& location,
-                           vector<MapLocation>* list);
+                           deque<MapLocation>* list);
 
     Block* getBlock(const MapLocation& location) const;
 

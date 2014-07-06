@@ -15,7 +15,8 @@
 
 namespace walls {
 
-UserInterface::UserInterface() {}
+UserInterface::UserInterface() :
+    m_depth(0) {}
 
 UserInterface::~UserInterface() {}
 
@@ -32,7 +33,11 @@ void UserInterface::start(World *world, const MapLocation& start)
                              m_input.getCursorY(),
                              m_input.getCursorVisible());
 
-        world->doCommand(m_input.getInput());
+        MapLocation location(m_input.getCursorX(),
+                             m_input.getCursorY(),
+                             getDepth());
+
+        world->doCommand(m_input.getInput(), location);
     }
 }
 
@@ -47,6 +52,11 @@ void UserInterface::init(const MapLocation& start)
 
     m_display.setDimensions(COLS, LINES);
     m_input.setDimensions(COLS, LINES);
+}
+
+int UserInterface::getDepth()
+{
+    return m_depth;
 }
 
 } // walls

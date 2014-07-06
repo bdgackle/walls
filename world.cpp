@@ -68,6 +68,21 @@ void World::doCommand(Command command, const MapLocation& location)
     update();
 }
 
+MapLocation World::getPlayerLocation() const
+{
+    return m_player.getLocation();
+}
+
+PlayerStatus World::getPlayerStatus() const
+{
+    return m_player.getStatus();
+}
+
+BlockType World::getBlockType(const MapLocation& location) const
+{
+    return m_map.getType(location);
+}
+
 void World::movePlayer(int delta_x, int delta_y, int delta_z)
 {
     MapLocation old_loc = m_player.getLocation();

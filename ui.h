@@ -27,11 +27,13 @@ class UserInterface
 
  protected:
     void init(const MapLocation& start);
+    int getDepth();
 
  private:
     Display m_display;
     InputHandler m_input;
     World* m_world;
+    int m_depth;
 };
 
 } // walls

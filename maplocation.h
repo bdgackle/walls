@@ -48,10 +48,10 @@ class MapLocation
     int getDistanceY(const MapLocation& location) const;
     int getDistanceZ(const MapLocation& location) const;
 
-private:
     int getX() const;
     int getY() const;
     int getZ() const;
+private:
 
     int m_x;
     int m_y;

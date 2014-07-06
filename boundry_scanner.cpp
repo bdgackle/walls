@@ -11,7 +11,8 @@
 namespace walls{
 
 BoundryScanner::BoundryScanner(Map *map) :
-m_map(map)
+m_map(map),
+m_perf_count(0)
 {
 }
 
@@ -21,6 +22,7 @@ BoundryScanner::~BoundryScanner()
 
 void BoundryScanner::updateBoundry()
 {
+    clock_t start = clock();
     m_map->clearIsUpdated();
     m_map->clearIsOutdoors();
 
@@ -33,6 +35,8 @@ void BoundryScanner::updateBoundry()
     {
         popLocation();
     }
+    clock_t stop = clock();
+    clock_t elapse = (stop - start);
 }
 
 void BoundryScanner::popLocation()

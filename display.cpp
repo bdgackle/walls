@@ -17,7 +17,8 @@ using std::string;
 
 namespace walls{
 
-Display::Display() {}
+Display::Display() :
+    m_frame(NULL) {}
 
 Display::~Display()
 {

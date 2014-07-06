@@ -8,29 +8,29 @@
 
 // Internal Headers
 #include "maplocation.h"
+#include "game_constants.h"
 
 namespace walls
 {
 
+class Map;
+
 class Player
 {
  public:
-    const static int STATUS_HAPPY = 0;
-    const static int STATUS_VENGEFUL = 1;
-
     Player();
     virtual ~Player();
 
     MapLocation getLocation() const;
-    int getStatus() const;
+    PlayerStatus getStatus() const;
     void setLocation(const MapLocation& location, const Map *map);
 
  protected:
-    void setStatus(int status);
+    void setStatus(PlayerStatus status);
 
  private:
     MapLocation m_location;
-    int m_status;
+    PlayerStatus m_status;
 };
 
 } // namespace walls
