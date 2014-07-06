@@ -1,0 +1,6 @@
+bin/walls
+obj/*.o
+obj/*.d
+bin/perf.data
+bin/perf.data.old
+tags
