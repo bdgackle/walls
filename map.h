@@ -30,31 +30,54 @@ class Map
     int getDepth() const;
 
     bool exists(const MapLocation& location) const;
-    void getEdges(deque<MapLocation>* edges, int depth);
+    bool exists(int index) const;
+    void getEdges(deque<int>* edges, int depth);
 
     BlockType getType(const MapLocation& location) const;
+    BlockType getType(int index) const;
     bool getIsOutdoors(const MapLocation& location) const;
+    bool getIsOutdoors(int index) const;
     bool getIsMovementBoundry(const MapLocation& location) const;
+    bool getIsMovementBoundry(int index) const;
     bool getIsIndoorBoundry(const MapLocation& location) const;
+    bool getIsIndoorBoundry(int index) const;
     bool getIsUpdated(const MapLocation& location) const;
+    bool getIsUpdated(int index) const;
+    bool getIsEdge(const MapLocation& location) const;
+    bool getIsEdge(int index) const;
 
     void setType(const MapLocation& location, BlockType type);
+    void setType(int index, BlockType type);
     void setIsOutdoors(const MapLocation& location, bool isOutdoors);
+    void setIsOutdoors(int index, bool isOutdoors);
     void setIsUpdated(const MapLocation& location, bool isUpdated);
+    void setIsUpdated(int index, bool isUpdated);
+    void setIsEdge(const MapLocation& location, bool isEdge);
+    void setIsEdge(int index, bool isEdge);
     void clearIsUpdated();
     void clearIsOutdoors();
 
  protected:
-    void addLocationToList(const MapLocation& location,
-                           deque<MapLocation>* list);
+    void addLocationToList(int index,
+                           deque<int>* list);
 
     Block* getBlock(const MapLocation& location) const;
+    Block* getBlock(int index) const;
 
  private:
     Block* m_blocks;
     const int m_width;
     const int m_height;
     const int m_depth;
+
+    const int m_n_bound;
+    const int m_s_bound;
+    const int m_e_bound;
+    const int m_w_bound;
+    const int m_u_bound;
+    const int m_d_bound;
+
+    const int m_max_index;
 };
 
 } // walls

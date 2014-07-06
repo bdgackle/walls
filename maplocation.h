@@ -24,6 +24,8 @@ class MapLocation
     MapLocation& operator= (const MapLocation& other);
 
     MapLocation getRelative(int x, int y, int z) const;
+    static int getRelativeIndex(int index, int x, int y, int z);
+    static void setDimensions(int width, int height, int depth);
 
     MapLocation getN() const;
     MapLocation getS() const;
@@ -42,7 +44,7 @@ class MapLocation
     bool isInSpace(const MapLocation& upper_nw,
                    const MapLocation& lower_se) const;
 
-    int getIndex(int width, int height, int depth) const;
+    int getIndex() const;
 
     int getDistanceX(const MapLocation& location) const;
     int getDistanceY(const MapLocation& location) const;
@@ -56,6 +58,10 @@ private:
     int m_x;
     int m_y;
     int m_z;
+
+    static int m_map_height;
+    static int m_map_width;
+    static int m_map_depth;
 };
 
 } // walls

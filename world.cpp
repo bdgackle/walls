@@ -3,6 +3,10 @@
  *  @author 20 June 2014
  */
 
+// External Headers
+#include <time.h>
+#include <stdio.h>
+
 // Internal Headers
 #include "world.h"
 #include "boundry_scanner.h"
@@ -25,11 +29,14 @@ World::~World()
 
 void World::update()
 {
+    clock_t start = clock();
     if (getBoundriesDirty())
     {
         m_scanner.updateBoundry();
         setBoundriesDirty(false);
     }
+    clock_t stop = clock();
+    sprintf(m_update_time, "% 7d", stop - start);
 }
 
 void World::doCommand(Command command, const MapLocation& location)

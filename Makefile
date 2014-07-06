@@ -6,7 +6,7 @@ BIN = .
 CPP     := g++
 CFLAGS  := -Wfatal-errors
 CFLAGS  += -I$(INC)
-CFLAGS  += -g
+CFLAGS  += -g -O2
 
 # Main target
 main: $(OBJ)/main.o\

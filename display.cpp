@@ -43,7 +43,9 @@ void Display::drawWorld()
 void Display::drawStatus()
 {
     string status_string = getStatusString(m_world->getPlayerStatus());
+    const char* cpu = m_world->getCpuTime();
     mvaddstr(0, 0, status_string.c_str());
+    mvaddstr(1, 0, cpu);
 }
 
 void Display::drawPlayer()

@@ -41,6 +41,18 @@ MapLocation MapLocation::getRelative(int x, int y, int z) const
     return MapLocation(getX() + x, getY() + y, getZ() + z);
 }
 
+int MapLocation::getRelativeIndex(int index, int x, int y, int z)
+{
+    return index + x + y * m_map_width + z * m_map_width * m_map_height;
+}
+
+void MapLocation::setDimensions(int width, int height, int depth)
+{
+    m_map_width = width;
+    m_map_height = height;
+    m_map_depth = depth;
+}
+
 MapLocation MapLocation::getN() const
 {
     return getRelative(0, -1, 0);
@@ -137,9 +149,9 @@ bool MapLocation::isInSpace(const MapLocation& upper_nw,
     }
 }
 
-int MapLocation::getIndex(int width, int height, int depth) const
+int MapLocation::getIndex() const
 {
-    return getX() + getY() * width + getZ() * height * width;
+    return m_x + m_y * m_map_width + m_z * m_map_height * m_map_width;
 }
 
 int MapLocation::getDistanceX(const MapLocation& location) const
@@ -171,5 +183,9 @@ int MapLocation::getZ() const
 {
     return m_z;
 }
+
+int MapLocation::m_map_width = 0;
+int MapLocation::m_map_height = 0;
+int MapLocation::m_map_depth = 0;
 
 } // walls

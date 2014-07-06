@@ -21,15 +21,18 @@ class Block
     bool getIsMovementBoundry() const;
     bool getIsIndoorBoundry() const;
     bool getIsUpdated() const;
+    bool getIsEdge() const;
 
     void setType(BlockType type);
     void setIsOutdoors(bool outdoors);
     void setIsUpdated(bool updated);
+    void setIsEdge(bool edge);
 
  private:
     BlockType m_type;
     bool m_is_outdoors;
     bool m_is_updated;
+    bool m_is_edge;
 };
 
 } // walls

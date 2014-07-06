@@ -13,7 +13,6 @@ namespace walls
 {
 
 class Map;
-class MapLocation;
 
 using std::deque;
 
@@ -27,12 +26,11 @@ class BoundryScanner
 
  protected:
     void popLocation();
-    void pushLocation(MapLocation location);
+    void pushLocation(int index);
 
  private:
-    deque<MapLocation> m_stack;
+    deque<int> m_stack;
     Map *m_map;
-    int m_perf_count; //DEBUG: Used only for profiling 
 };
 
 } // namespace walls

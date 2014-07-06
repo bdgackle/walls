@@ -29,6 +29,8 @@ class World
     PlayerStatus getPlayerStatus() const;
     BlockType getBlockType(const MapLocation& location) const;
 
+    const char * getCpuTime() const { return m_update_time; }
+
  protected:
     void movePlayer(int delta_x, int delta_y, int delta_z);
     void addWall(const MapLocation& location);
@@ -46,6 +48,7 @@ class World
     Player m_player;
 
     bool m_boundries_dirty;
+    char m_update_time[15];
 };
 
 } // walls
