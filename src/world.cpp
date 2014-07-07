@@ -6,6 +6,7 @@
 // External Headers
 #include <time.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 // Internal Headers
 #include "world.h"
@@ -19,13 +20,36 @@ namespace walls{
 World::World(int width, int height, int depth) :
 m_map(width, height, depth),
 m_scanner(&m_map),
-m_boundries_dirty(true)
-{
-    sprintf(m_update_time, "% 7d", 0);
-    m_player.setLocation(MapLocation(0, 3, 0), &m_map);
-}
+m_boundries_dirty(true){}
 
 World::~World() {}
+
+void World::init(unsigned int seed)
+{
+    srand(seed);
+
+    int depth = 0;
+    int width = m_map.getWidth();
+    int height = m_map.getHeight();
+
+    // Seed the world with some random rocks/trees/pebbles
+    for (int x = 0; x < width; x++) {
+        for (int y = 0; y < height; y++) {
+
+            int random_number = rand() % 1000;
+
+            if (random_number < 5)
+                m_map.setType(MapLocation(x, y, depth), ROCK);
+            else if (random_number < 10)
+                m_map.setType(MapLocation(x, y, depth), SAPLING);
+            else if (random_number < 20)
+                m_map.setType(MapLocation(x, y, depth), SMALL_ROCK);
+        }
+    }
+
+    m_player.setLocation(MapLocation(height / 2, width / 2, 0), &m_map);
+    sprintf(m_update_time, "% 7d", 0);
+}
 
 void World::update()
 {
@@ -75,20 +99,19 @@ void World::doCommand(Command command, const MapLocation& location)
     update();
 }
 
-MapLocation World::getPlayerLocation() const
-{
-    return m_player.getLocation();
-}
+MapLocation World::getPlayerLocation() const { return m_player.getLocation(); }
 
-PlayerStatus World::getPlayerStatus() const
-{
-    return m_player.getStatus();
-}
+PlayerStatus World::getPlayerStatus() const { return m_player.getStatus(); }
 
 BlockType World::getBlockType(const MapLocation& location) const
 {
-    return m_map.getType(location);
+    if (m_map.exists(location))
+        return m_map.getType(location);
+    else
+        return NOT_ON_MAP;
 }
+
+const char* World::getCpuTime() const { return m_update_time; }
 
 void World::movePlayer(int delta_x, int delta_y, int delta_z)
 {
@@ -121,14 +144,8 @@ void World::addGround(const MapLocation& location)
     setBoundriesDirty(true);
 }
 
-void World::setBoundriesDirty(bool dirty)
-{
-    m_boundries_dirty = dirty;
-}
+void World::setBoundriesDirty(bool dirty) { m_boundries_dirty = dirty; }
 
-bool World::getBoundriesDirty() const
-{
-    return m_boundries_dirty;
-}
+bool World::getBoundriesDirty() const { return m_boundries_dirty; }
 
 } // walls

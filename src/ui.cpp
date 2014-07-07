@@ -33,9 +33,10 @@ void UserInterface::start(World *world, const MapLocation& initial_location)
                              m_input.getCursorY(),
                              m_input.getCursorVisible());
 
-        MapLocation location(m_input.getCursorX(),
-                             m_input.getCursorY(),
-                             getDepth());
+        int command_x = m_input.getCursorX() + m_display.getUpperLeft().getX();
+        int command_y = m_input.getCursorY() + m_display.getUpperLeft().getY();
+
+        MapLocation location(command_x, command_y, getDepth());
 
         world->doCommand(m_input.getInput(), location);
     }

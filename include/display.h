@@ -30,20 +30,22 @@ class Display
     void drawPlayer();
     void drawCursor(int curs_x, int curs_y, bool visible);
 
+    MapLocation getUpperLeft();
+
     void scrollRelative(int south, int east, int down);
     void scrollTo(const MapLocation& upper_left);
 
-    void setDimensions(int height, int width);
 
  protected:
     int getHeight() const;
     int getWidth() const;
 
-
     void setTile(int x, int y);
     void drawTile(int x, int y, char tile);
     char getDisplayChar(BlockType type) const;
     string getStatusString(PlayerStatus status) const;
+
+    void setDimensions(int height, int width);
 
     void shutdown();
 
@@ -51,6 +53,9 @@ class Display
     void deleteFrame();
 
     int getIndex(int x, int y);
+
+    int getCenterX();
+    int getCenterY();
 
  private:
     int m_width;

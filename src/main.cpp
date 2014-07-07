@@ -13,10 +13,13 @@
 
 int main()
 {
-    walls::World world(1000, 1000, 1);
-    walls::UserInterface ui;
+    walls::World world(200, 200, 1);
+    world.init(42);
 
-    ui.start(&world, walls::MapLocation(0,0,0));
+    walls::UserInterface ui;
+    walls::MapLocation player_location(world.getPlayerLocation());
+
+    ui.start(&world, player_location);
 
     return 0;
 }

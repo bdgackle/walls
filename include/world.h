@@ -23,13 +23,15 @@ class World
     World(int width, int height, int depth);
     virtual ~World();
 
+    void init(unsigned int seed);
+
     void doCommand(Command command, const MapLocation& location);
 
     MapLocation getPlayerLocation() const;
     PlayerStatus getPlayerStatus() const;
     BlockType getBlockType(const MapLocation& location) const;
 
-    const char * getCpuTime() const { return m_update_time; }
+    const char* getCpuTime() const;
 
  protected:
     void movePlayer(int delta_x, int delta_y, int delta_z);

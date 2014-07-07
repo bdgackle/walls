@@ -37,6 +37,11 @@ void Display::init(const World* world,
 
 void Display::drawWorld()
 {
+    int player_x = m_upper_left.getDistanceX(m_world->getPlayerLocation());
+    int player_y = m_upper_left.getDistanceY(m_world->getPlayerLocation());
+
+    scrollRelative(player_x - getCenterX(), player_y - getCenterY(), 0);
+
     for (int x = 0; x < m_width; x++) {
         for (int y = 0; y < m_height; y++) {
             setTile(x,y);
@@ -72,6 +77,11 @@ void Display::drawCursor(int curs_x, int curs_y, bool visible)
     } else {
         curs_set(0); // Cursor not visible
     }
+}
+
+MapLocation Display::getUpperLeft()
+{
+    return m_upper_left;
 }
 
 void Display::scrollRelative(int south, int east, int down)
@@ -128,6 +138,18 @@ char Display::getDisplayChar(BlockType type) const
             return GROUND_CHAR;
             break;
 
+        case SMALL_ROCK:
+            return SMALL_ROCK_CHAR;
+            break;
+
+        case ROCK:
+            return ROCK_CHAR;
+            break;
+
+        case SAPLING:
+            return SAPLING_CHAR;
+            break;
+
         case WALL:
             return WALL_CHAR;
             break;
@@ -157,6 +179,14 @@ string Display::getStatusString(PlayerStatus status) const
             return PLAYER_STATUS_VENGEFUL_STRING;
             break;
 
+        case SMELLS_FERRET:
+            return PLAYER_STATUS_SMELLS_FERRET_STRING;
+            break;
+
+        case INVADE_FERRET:
+            return PLAYER_STATUS_INVADE_FERRET_STRING;
+            break;
+
         default:
             return PLAYER_STATUS_NONE_STRING;
     }
@@ -183,6 +213,16 @@ void Display::deleteFrame()
 int Display::getIndex(int x, int y)
 {
     return x + y * m_width;
+}
+
+int Display::getCenterX()
+{
+    return m_width / 2;
+}
+
+int Display::getCenterY()
+{
+    return m_height / 2;
 }
 
 } // walls

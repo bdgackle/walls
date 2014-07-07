@@ -32,6 +32,8 @@ bool Block::getIsMovementBoundry() const
     switch(m_type)
     {
         case WALL:
+        case ROCK:
+        case SAPLING:
             return true;
             break;
 

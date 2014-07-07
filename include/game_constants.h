@@ -16,6 +16,9 @@ namespace walls{
 enum BlockType {
     NOT_ON_MAP,
     GROUND,
+    SMALL_ROCK,
+    ROCK,
+    SAPLING,
     WALL,
     DOOR,
     FLOOR
@@ -24,7 +27,9 @@ enum BlockType {
 enum PlayerStatus {
     NONE,
     HAPPY,
-    VENGEFUL
+    VENGEFUL,
+    SMELLS_FERRET,
+    INVADE_FERRET
 };
 
 enum Command {
@@ -40,17 +45,22 @@ enum Command {
 
 // Display Characters
 extern const char INVALID_CHAR;
-extern const char NOT_ON_MAP_CHAR;
 extern const char PLAYER_CHAR;
+extern const char NOT_ON_MAP_CHAR;
 extern const char GROUND_CHAR;
+extern const char SMALL_ROCK_CHAR;
+extern const char ROCK_CHAR;
+extern const char SAPLING_CHAR;
 extern const char WALL_CHAR;
 extern const char DOOR_CHAR;
 extern const char FLOOR_CHAR;
 
 // Display Strings
+extern const string PLAYER_STATUS_NONE_STRING;
 extern const string PLAYER_STATUS_HAPPY_STRING;
 extern const string PLAYER_STATUS_VENGEFUL_STRING;
-extern const string PLAYER_STATUS_NONE_STRING;
+extern const string PLAYER_STATUS_SMELLS_FERRET_STRING;
+extern const string PLAYER_STATUS_INVADE_FERRET_STRING;
 
 // Input Keys
 // These need to be #defines because I need literal constants for case labels
