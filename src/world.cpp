@@ -14,6 +14,7 @@
 #include "map.h"
 #include "maplocation.h"
 #include "player.h"
+#include "ferret.h"
 
 namespace walls{
 
@@ -47,6 +48,13 @@ void World::init(unsigned int seed)
         }
     }
 
+
+    for (int i = 0; i < 10; i++) {
+        Ferret* ferret = new Ferret;
+        ferret->init(MapLocation(5,5,0), &m_map);
+        addCreature(ferret);
+    }
+
     m_player.setLocation(MapLocation(height / 2, width / 2, 0), &m_map);
     sprintf(m_update_time, "% 7d", 0);
 }
@@ -59,6 +67,12 @@ void World::update()
         m_scanner.updateBoundry();
         setBoundriesDirty(false);
     }
+
+    for (int i = 0; i < m_creatures.size(); i++)
+    {
+        m_creatures.at(i)->update();
+    }
+
     clock_t stop = clock();
     sprintf(m_update_time, "% 7d", stop - start);
 }
@@ -142,6 +156,16 @@ void World::addGround(const MapLocation& location)
 {
     m_map.setType(location, GROUND);
     setBoundriesDirty(true);
+}
+
+vector<Creature*> World::getCreatures() const
+{
+    return m_creatures;
+}
+
+void World::addCreature(Creature* creature)
+{
+    m_creatures.push_back(creature);
 }
 
 void World::setBoundriesDirty(bool dirty) { m_boundries_dirty = dirty; }

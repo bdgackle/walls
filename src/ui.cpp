@@ -29,6 +29,7 @@ void UserInterface::start(World *world, const MapLocation& initial_location)
         m_display.drawWorld();
         m_display.drawStatus();
         m_display.drawPlayer();
+        m_display.drawCreatures();
         m_display.drawCursor(m_input.getCursorX(),
                              m_input.getCursorY(),
                              m_input.getCursorVisible());

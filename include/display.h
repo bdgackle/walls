@@ -28,6 +28,7 @@ class Display
     void drawWorld();
     void drawStatus();
     void drawPlayer();
+    void drawCreatures();
     void drawCursor(int curs_x, int curs_y, bool visible);
 
     MapLocation getUpperLeft();

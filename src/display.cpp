@@ -63,9 +63,26 @@ void Display::drawPlayer()
     int player_y = m_upper_left.getDistanceY(m_world->getPlayerLocation());
 
     // Make sure player is actually on the screen
-    if ((player_x >= 0) && (player_y < m_height) &&
+    if ((player_x >= 0) && (player_x < m_width) &&
         (player_y >= 0) && (player_y < m_height)) {
         drawTile(player_x, player_y, PLAYER_CHAR);
+    }
+}
+
+void Display::drawCreatures()
+{
+    for (int i = 0; i < m_world->getCreatures().size(); i++)
+    {
+        char c = m_world->getCreatures().at(i)->getDisplayChar();
+        MapLocation m = m_world->getCreatures().at(i)->getLocation();
+
+        int creature_x = m_upper_left.getDistanceX(m);
+        int creature_y = m_upper_left.getDistanceY(m);
+
+        if ((creature_x >= 0) && (creature_x < m_width) &&
+            (creature_y >= 0) && (creature_y < m_height)) {
+            drawTile(creature_x, creature_y, c);
+        }
     }
 }
 
