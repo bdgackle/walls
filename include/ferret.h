@@ -1,6 +1,5 @@
 /**
  *  @author Barry Gackle
- *  @author 6 July 2014
  */
 
 #ifndef FERRET_H
@@ -18,11 +17,12 @@ class Ferret : public Creature
     Ferret();
     virtual ~Ferret();
 
-    virtual void init(MapLocation location, Map* map);
+    virtual void init(const MapLocation& location, World* world);
 
-    virtual void update();
+    virtual void update(int time);
 
     char getDisplayChar() const;
+
     void move(int d_x, int d_y, int d_z);
 };
 

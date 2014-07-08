@@ -9,13 +9,14 @@
 // Internal Headers
 #include "display.h"
 #include "input_handler.h"
+#include "maplocation.h"
 
-class World;
+using std::string;
 
 namespace walls
 {
 
-using std::string;
+class World;
 
 class UserInterface
 {
@@ -23,17 +24,22 @@ class UserInterface
     UserInterface();
     virtual ~UserInterface();
 
-    void start(World *world, const MapLocation& start);
+    void init(World* world);
+    void start();
+
+    void centerPlayer();
 
  protected:
-    void init(const MapLocation& start);
-    int getDepth();
+    void doCommand(Command command);
+    int getDepth() const;
+    MapLocation getCursorLocation() const;
 
  private:
     Display m_display;
     InputHandler m_input;
     World* m_world;
-    int m_depth;
+
+    MapLocation m_display_upper_left;
 };
 
 } // walls

@@ -1,6 +1,5 @@
 /**
  *  @author Barry Gackle
- *  @author 6 July 2014
  */
 
 // C Standard Library
@@ -8,6 +7,7 @@
 
 // Internal Headers
 #include "ferret.h"
+#include "block.h"
 
 namespace walls {
 
@@ -15,13 +15,13 @@ Ferret::Ferret() {}
 
 Ferret::~Ferret() {}
 
-void Ferret::init(MapLocation location, Map* map)
+void Ferret::init(const MapLocation& location, World* world)
 {
     m_location = location;
-    m_map = map;
+    m_world = world;
 }
 
-void Ferret::update()
+void Ferret::update(int time)
 {
     int dir = rand() % 4;
 
@@ -46,8 +46,8 @@ void Ferret::move(int d_x, int d_y, int d_z)
     MapLocation new_loc = old_loc.getRelative(d_x, d_y, d_z);
 
     // Movement only happens if new location exists and is passable
-    if ((m_map->exists(new_loc)) &&
-        !(m_map->getIsMovementBoundry(new_loc)))
+    if ((m_world->getMap()->exists(new_loc)) &&
+        !(m_world->getMap()->getBlock(new_loc)->getIsMovementBoundry()))
     {
         setLocation(new_loc);
     }

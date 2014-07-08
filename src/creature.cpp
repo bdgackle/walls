@@ -9,19 +9,19 @@
 namespace walls {
 
 Creature::Creature() :
-    m_map(NULL),
+    m_world(NULL),
     m_location(0, 0, 0) {}
 
 Creature::~Creature() {}
 
-void Creature::setLocation(MapLocation location)
-{
-    m_location = location;
-}
-
 MapLocation Creature::getLocation() const
 {
     return m_location;
+}
+
+void Creature::setLocation(const MapLocation& location)
+{
+    m_location = location;
 }
 
 } // walls

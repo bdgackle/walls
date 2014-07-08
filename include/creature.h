@@ -7,6 +7,7 @@
 #define CREATURE_H
 
 // Internal Headers
+#include "world.h"
 #include "map.h"
 #include "maplocation.h"
 
@@ -19,18 +20,21 @@ class Creature
     Creature();
     virtual ~Creature();
 
-    virtual void init(MapLocation location, Map* map) = 0;
-    void setLocation(MapLocation location);
+    virtual void init(const MapLocation& location, World* world) = 0;
+
     MapLocation getLocation() const;
 
-    virtual void update() = 0;
+    void setLocation(const MapLocation& location);
+
+    virtual void update(int time) = 0;
 
     virtual char getDisplayChar() const = 0;
 
- protected:
-    Map* m_map;
-    MapLocation m_location;
+    virtual void move(int d_x, int d_y, int d_z) = 0;
 
+ protected:
+    World* m_world;
+    MapLocation m_location;
 };
 
 } // walls

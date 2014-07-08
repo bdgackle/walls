@@ -6,13 +6,22 @@
 #ifndef DISPLAY_H
 #define DISPLAY_H
 
+// C++ Standard Headers
+#include <string>
+#include <vector>
+
 // Internal Headers
 #include "game_constants.h"
-#include "maplocation.h"
+
+using std::string;
+using std::vector;
 
 namespace walls{
 
 class World;
+class Map;
+class MapLocation;
+class Creature;
 
 class Display
 {
@@ -20,52 +29,42 @@ class Display
     Display();
     virtual ~Display();
 
-    void init(const World* world,
+    void draw(const World& world,
               const MapLocation& upper_left,
-              int width,
-              int height);
+              int curs_x,
+              int curs_y,
+              bool curs_visible);
 
-    void drawWorld();
-    void drawStatus();
-    void drawPlayer();
-    void drawCreatures();
-    void drawCursor(int curs_x, int curs_y, bool visible);
-
-    MapLocation getUpperLeft();
-
-    void scrollRelative(int south, int east, int down);
-    void scrollTo(const MapLocation& upper_left);
-
-
- protected:
     int getHeight() const;
     int getWidth() const;
+    int getCenterX() const;
+    int getCenterY() const;
 
-    void setTile(int x, int y);
+    void setDimensions(int width, int height);
+
+ protected:
+    void drawMap(const Map& map, const MapLocation& upper_left);
+    void drawStatus(PlayerStatus status);
+    void drawPlayer(const MapLocation& location, const MapLocation& upper_left);
+    void drawCreatures(const vector<Creature*>& creatures,
+                       const MapLocation& upper_left);
+    void drawCursor(int curs_x, int curs_y, bool visible);
+
     void drawTile(int x, int y, char tile);
-    char getDisplayChar(BlockType type) const;
-    string getStatusString(PlayerStatus status) const;
 
-    void setDimensions(int height, int width);
+    int getIndex(int x, int y) const;
 
-    void shutdown();
+    static char getDisplayChar(BlockType type);
+    static string getStatusString(PlayerStatus status);
 
     void createFrame();
     void deleteFrame();
-
-    int getIndex(int x, int y);
-
-    int getCenterX();
-    int getCenterY();
 
  private:
     int m_width;
     int m_height;
 
     char* m_frame;
-
-    MapLocation m_upper_left;
-    const World* m_world;
 };
 
 } // walls

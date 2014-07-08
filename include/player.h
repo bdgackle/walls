@@ -14,6 +14,7 @@ namespace walls
 {
 
 class Map;
+class World;
 
 class Player
 {
@@ -21,9 +22,14 @@ class Player
     Player();
     virtual ~Player();
 
-    MapLocation getLocation() const;
+    void init(World* world);
+
     PlayerStatus getStatus() const;
-    void setLocation(const MapLocation& location, const Map *map);
+    MapLocation getLocation() const;
+
+    void move(int d_x, int d_y, int d_z);
+
+    void setLocation(const MapLocation& location);
 
  protected:
     void setStatus(PlayerStatus status);
@@ -31,6 +37,7 @@ class Player
  private:
     MapLocation m_location;
     PlayerStatus m_status;
+    World* m_world;
 };
 
 } // namespace walls

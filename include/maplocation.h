@@ -27,23 +27,6 @@ class MapLocation
     static int getRelativeIndex(int index, int x, int y, int z);
     static void setDimensions(int width, int height, int depth);
 
-    MapLocation getN() const;
-    MapLocation getS() const;
-    MapLocation getE() const;
-    MapLocation getW() const;
-    MapLocation getU() const;
-    MapLocation getD() const;
-
-    bool isNorthOf(const MapLocation& location) const;
-    bool isSouthOf(const MapLocation& location) const;
-    bool isEastOf(const MapLocation& location) const;
-    bool isWestOf(const MapLocation& location) const;
-    bool isAbove(const MapLocation& location) const;
-    bool isBelow(const MapLocation& location) const;
-
-    bool isInSpace(const MapLocation& upper_nw,
-                   const MapLocation& lower_se) const;
-
     int getIndex() const;
 
     int getDistanceX(const MapLocation& location) const;
@@ -53,8 +36,8 @@ class MapLocation
     int getX() const;
     int getY() const;
     int getZ() const;
-private:
 
+private:
     int m_x;
     int m_y;
     int m_z;

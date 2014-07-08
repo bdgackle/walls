@@ -1,49 +1,56 @@
 /**
  *  @author Barry Gackle
- *  @author 29 June 2014
  */
+
+// C Standard Headers
+#include <stddef.h>
 
 // Internal Headers
 #include "player.h"
 #include "game_constants.h"
+#include "world.h"
 #include "maplocation.h"
 #include "map.h"
+#include "block.h"
 
 namespace walls{
 
 Player::Player() :
-m_location(0, 0, 0),
-m_status(HAPPY)
+m_status(HAPPY),
+m_world(NULL) {}
+
+Player::~Player() {}
+
+void Player::init(World* world)
 {
+    m_world = world;
 }
 
-Player::~Player()
+PlayerStatus Player::getStatus() const { return m_status; }
+
+MapLocation Player::getLocation() const { return m_location; }
+
+void Player::move(int d_x, int d_y, int d_z)
 {
+    MapLocation dest = m_location.getRelative(d_x, d_y, d_z);
+
+    if ((m_world->getMap()->exists(dest)) &&
+        !(m_world->getMap()->getBlock(dest)->getIsMovementBoundry())) {
+
+        setLocation(dest);
+    }
 }
 
-MapLocation Player::getLocation() const
-{
-    return m_location;
-}
-
-PlayerStatus Player::getStatus() const
-{
-    return m_status;
-}
-
-void Player::setLocation(const MapLocation& location, const Map *map)
+void Player::setLocation(const MapLocation& location)
 {
     m_location = location;
 
-    if (map->getIsOutdoors(location))
+    if (m_world->getMap()->getBlock(location)->getIsOutdoors())
         setStatus(VENGEFUL);
     else
         setStatus(HAPPY);
 }
 
-void Player::setStatus(PlayerStatus status)
-{
-    m_status = status;
-}
+void Player::setStatus(PlayerStatus status) { m_status = status; }
 
 } // walls

@@ -3,9 +3,6 @@
  *  @author: 21 June 2014
  */
 
-// C Standard Headers
-#include <stdio.h>
-
 // Internal Headers
 #include "world.h"
 #include "maplocation.h"
@@ -17,9 +14,9 @@ int main()
     world.init(42);
 
     walls::UserInterface ui;
-    walls::MapLocation player_location(world.getPlayerLocation());
+    ui.init(&world);
 
-    ui.start(&world, player_location);
+    ui.start();
 
     return 0;
 }

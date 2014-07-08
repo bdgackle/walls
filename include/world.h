@@ -1,6 +1,5 @@
 /**
  *  @author Barry Gackle
- *  @author 20 June 2014
  */
 
 #ifndef WORLD_H
@@ -10,58 +9,48 @@
 #include <vector>
 
 // Internal Headers
-#include "game_constants.h"
 #include "boundry_scanner.h"
 #include "player.h"
 #include "map.h"
-#include "creature.h"
 
+// Forward Declarations
+namespace walls {
+    class MapLocation;
+    class Creature;
+}
+
+// Using
 using std::vector;
 
 namespace walls{
 
-class MapLocation;
-
 class World
 {
  public:
-
     World(int width, int height, int depth);
     virtual ~World();
 
     void init(unsigned int seed);
+    void update(int time);
 
-    void doCommand(Command command, const MapLocation& location);
+    const Map& getMap() const;
+    const Player& getPlayer() const;
+    const vector<Creature*>& getCreatures() const;
 
-    MapLocation getPlayerLocation() const;
-    PlayerStatus getPlayerStatus() const;
-    BlockType getBlockType(const MapLocation& location) const;
+    Map* getMap();
+    Player* getPlayer();
+    vector<Creature*>* getCreatures();
 
-    vector<Creature*> getCreatures() const;
     void addCreature(Creature* creature);
-
-    const char* getCpuTime() const;
-
- protected:
-    void movePlayer(int delta_x, int delta_y, int delta_z);
-    void addWall(const MapLocation& location);
-    void addDoor(const MapLocation& location);
-    void addGround(const MapLocation& location);
-
-
-    void setBoundriesDirty(bool dirty);
-    bool getBoundriesDirty() const;
-
-    void update();
+    void setBoundriesDirty();
 
  private:
     Map m_map;
-    BoundryScanner m_scanner;
     Player m_player;
     vector<Creature*> m_creatures;
 
+    BoundryScanner m_scanner;
     bool m_boundries_dirty;
-    char m_update_time[15];
 };
 
 } // walls

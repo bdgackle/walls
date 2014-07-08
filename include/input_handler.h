@@ -20,9 +20,9 @@ class InputHandler
 
     Command getInput();
 
-    int getCursorX();
-    int getCursorY();
-    bool getCursorVisible();
+    int getCursorX() const;
+    int getCursorY() const;
+    bool getCursorVisible() const;
 
  protected:
     Command processInputNormal(int input);

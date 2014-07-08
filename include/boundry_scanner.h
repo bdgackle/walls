@@ -7,20 +7,22 @@
 #define BOUNDRY_SCANNER_H
 
 // C++ Standard Headers
-#include <deque>
+#include <vector>
 
 namespace walls
 {
 
 class Map;
 
-using std::deque;
+using std::vector;
 
 class BoundryScanner
 {
  public:
-    BoundryScanner(Map *map);
+    BoundryScanner(Map* map);
     virtual ~BoundryScanner();
+
+    void init(int map_size);
 
     void updateBoundry();
 
@@ -29,8 +31,9 @@ class BoundryScanner
     void pushLocation(int index);
 
  private:
-    deque<int> m_stack;
-    Map *m_map;
+    vector<int> m_stack;
+    Map* m_map;
+    bool* m_updated;
 };
 
 } // namespace walls

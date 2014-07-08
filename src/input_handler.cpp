@@ -46,17 +46,17 @@ Command InputHandler::getInput()
     return command;
 }
 
-int InputHandler::getCursorX()
+int InputHandler::getCursorX() const
 {
     return m_cursor_x;
 }
 
-int InputHandler::getCursorY()
+int InputHandler::getCursorY() const
 {
     return m_cursor_y;
 }
 
-bool InputHandler::getCursorVisible()
+bool InputHandler::getCursorVisible() const
 {
     if (m_mode == EDIT)
         return true;
