@@ -10,7 +10,7 @@
 
 int main()
 {
-    walls::World world(200, 200, 1);
+    walls::World world(200, 200, 4);
     world.init(42);
 
     walls::UserInterface ui;

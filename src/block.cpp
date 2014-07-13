@@ -47,6 +47,16 @@ bool Block::getIsIndoorBoundry() const
     }
 }
 
+bool Block::getIsWaterBoundry() const
+{
+    switch(m_type) {
+        case WALL:
+            return true;
+        default:
+            return false;
+    }
+}
+
 bool Block::getIsEdge() const { return m_is_edge; }
 
 void Block::setType(BlockType type) { m_type = type; }

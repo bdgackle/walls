@@ -43,6 +43,13 @@ enum Command {
     ADD_DOOR
 };
 
+enum ThingType {
+    NONE,
+    WATER,
+    CREATURE,
+    PLANT
+};
+
 // Display Characters
 extern const char INVALID_CHAR;
 extern const char PLAYER_CHAR;
@@ -76,6 +83,8 @@ extern const string PLAYER_STATUS_INVADE_FERRET_STRING;
 #define DOOR_2          'D'
 #define GROUND_1        's'
 #define GROUND_2        'S'
+#define WATER_1         'w'
+#define WATER_2         'W'
 #define WALL_1          'f'
 #define WALL_2          'F'
 #define MODE_TOGGLE_1   ' '
