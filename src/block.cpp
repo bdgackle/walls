@@ -36,7 +36,7 @@ bool Block::getIsMovementBoundry() const
 
 bool Block::getIsIndoorBoundry() const
 {
-    switch(m_type){
+    switch(m_type) {
         case WALL:
         case DOOR:
             return true;

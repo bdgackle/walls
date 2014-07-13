@@ -45,7 +45,7 @@ void Player::setLocation(const MapLocation& location)
 {
     m_location = location;
 
-    if (m_world->getMap()->getBlock(location)->getIsOutdoors())
+    if (m_world->getMap()->getBlock(location)->getIsOutdoors() == true)
         setStatus(VENGEFUL);
     else
         setStatus(HAPPY);

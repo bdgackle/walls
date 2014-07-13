@@ -114,7 +114,7 @@ void Map::getEdges(vector<int>* edges, int depth) const
     vector<bool> done;
     done.resize(getBlockCount());
     // TODO: Slow... use std::map for this
-    for (int i = 0; i < done.size(); i++){
+    for (int i = 0; i < done.size(); i++) {
         done.at(i) = false;
     }
 
@@ -134,7 +134,7 @@ void Map::getEdges(vector<int>* edges, int depth) const
 
 void Map::pushIndex(int index, vector<int>* list, vector<bool>* done) const
 {
-    if (done->at(index) == true) {
+    if (done->at(index) == false) {
         list->push_back(index);
         done->at(index) = true;
     }
