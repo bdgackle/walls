@@ -20,7 +20,8 @@ m_scanner(&m_map),
 m_boundries_dirty(true),
 m_player(this),
 m_time(0),
-m_creature_count(0) {}
+m_creature_count(0),
+m_plant_count(0) {}
 
 World::~World() {}
 
@@ -35,6 +36,10 @@ void World::update(int time)
         m_creatures.at(i)->update(time);
     }
 
+    for (int i = 0; i < m_plants.size(); i++) {
+        m_plants.at(i)->update(time);
+    }
+
     m_time += time;
 }
 
@@ -44,9 +49,13 @@ const Player& World::getPlayer() const { return m_player; }
 
 const vector<Creature*>& World::getCreatures() const { return m_creatures; }
 
+const vector<Creature*>& World::getPlants() const { return m_plants; }
+
 int World::getTime() const { return m_time; }
 
 int World::getCreatureCount() const { return m_creature_count; }
+
+int World::getPlantCount() const { return m_plant_count; }
 
 Map* World::getMap() { return &m_map; }
 
@@ -54,11 +63,20 @@ Player* World::getPlayer() { return &m_player; }
 
 vector<Creature*>* World::getCreatures() { return &m_creatures; }
 
+vector<Creature*>* World::getPlants() { return &m_plants; }
+
 void World::addCreature(Creature* creature) 
 {
     m_creature_count++;
     m_creatures.push_back(creature);
     m_map.getBlock(creature->getLocation())->addCreature(creature);
+}
+
+void World::addPlant(Creature* plant) 
+{
+    m_plant_count++;
+    m_plants.push_back(plant);
+    m_map.getBlock(plant->getLocation())->addCreature(plant);
 }
 
 void World::setBoundriesDirty() { m_boundries_dirty = true; }

@@ -3,7 +3,10 @@
  */
 
 // C Standard Library
-#include "stdlib.h"
+#include <stdlib.h>
+
+// External Headers
+#include <ncurses.h>
 
 // Internal Headers
 #include "ferret.h"
@@ -36,6 +39,11 @@ void Ferret::update(int time)
 char Ferret::getDisplayChar() const
 {
     return 'f';
+}
+
+int Ferret::getDisplayColor() const
+{
+    return COLOR_PAIR(2);
 }
 
 } // walls

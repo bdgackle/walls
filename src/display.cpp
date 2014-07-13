@@ -45,8 +45,10 @@ void Display::draw(const World& world,
     PlayerStatus player_status = world.getPlayer().getStatus();
     MapLocation player_location = world.getPlayer().getLocation();
     const vector<Creature*>& creatures = world.getCreatures();
+    const vector<Creature*>& plants = world.getPlants();
 
     drawMap(map, upper_left);
+    drawCreatures(plants, upper_left);
     drawCreatures(creatures, upper_left);
     drawPlayer(player_location, upper_left);
     drawStatus(player_status, world);
@@ -88,10 +90,10 @@ void Display::drawMap(const Map& map, const MapLocation& upper_left)
             if (map.exists(next)) {
                 const Block& block = map.getBlock(next);
                 BlockType type = block.getType();
-                drawTile(x, y, getDisplayChar(block.getType()));
+                drawTile(x, y, getDisplayChar(type), getDisplayColor(type));
             }
             else {
-                drawTile(x, y, getDisplayChar(NOT_ON_MAP));
+                drawTile(x, y, getDisplayChar(NOT_ON_MAP), getDisplayColor(NOT_ON_MAP));
             }
         }
    }
@@ -101,6 +103,7 @@ void Display::drawStatus(PlayerStatus status, const World& world)
 {
     char line_two[40];
     char line_three[40];
+    char line_four[40];
 
     string stat_string = getStatusString(status);
     mvaddstr(0, 0, stat_string.c_str());
@@ -112,6 +115,10 @@ void Display::drawStatus(PlayerStatus status, const World& world)
     sprintf(line_three, "Creatures: %d", world.getCreatureCount());
     mvaddstr(2, 0, PLAYER_STATUS_NONE_STRING.c_str());
     mvaddstr(2, 0, line_three);
+
+    sprintf(line_four, "Plants: %d", world.getPlantCount());
+    mvaddstr(3, 0, PLAYER_STATUS_NONE_STRING.c_str());
+    mvaddstr(3, 0, line_four);
 }
 
 void Display::drawPlayer(const MapLocation& location,
@@ -132,6 +139,7 @@ void Display::drawCreatures(const vector<Creature*>& creatures,
 {
     for (int i = 0; i < creatures.size(); i++) {
         char c = creatures.at(i)->getDisplayChar();
+        int color = creatures.at(i)->getDisplayColor();
         MapLocation m = creatures.at(i)->getLocation();
 
         int creature_x = upper_left.getDistanceX(m);
@@ -139,7 +147,7 @@ void Display::drawCreatures(const vector<Creature*>& creatures,
 
         if ((creature_x >= 0) && (creature_x < m_width) &&
             (creature_y >= 0) && (creature_y < m_height)) {
-            drawTile(creature_x, creature_y, c);
+            drawTile(creature_x, creature_y, c, color);
         }
     }
 }
@@ -154,11 +162,13 @@ void Display::drawCursor(int curs_x, int curs_y, bool visible)
     }
 }
 
-void Display::drawTile(int x, int y, char tile)
+void Display::drawTile(int x, int y, char tile, int color)
 {
     if (tile != m_frame[getIndex(x,y)]) {
+        attron(color);
         mvaddch(y, x, tile);
         m_frame[getIndex(x,y)] = tile;
+        attroff(color);
     }
 }
 
@@ -200,6 +210,42 @@ char Display::getDisplayChar(BlockType type)
 
         default:
             return INVALID_CHAR;
+    }
+}
+
+int Display::getDisplayColor(BlockType type)
+{
+    switch(type) {
+        case NOT_ON_MAP:
+            return NOT_ON_MAP_COLOR;
+            break;
+
+        case GROUND:
+            return GROUND_COLOR;
+            break;
+
+        case ROCK:
+            return ROCK_COLOR;
+            break;
+
+        case SAPLING:
+            return SAPLING_COLOR;
+            break;
+
+        case WALL:
+            return WALL_COLOR;
+            break;
+
+        case DOOR:
+            return DOOR_COLOR;
+            break;
+
+        case FLOOR:
+            return FLOOR_COLOR;
+            break;
+
+        default:
+            return INVALID_COLOR;
     }
 }
 

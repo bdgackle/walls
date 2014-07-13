@@ -108,10 +108,20 @@ void UserInterface::centerPlayer()
 void UserInterface::init()
 {
     initscr();            // Initialize ncurses
+    start_color();        // Use color
     cbreak();             // Place input in c-break mode
     noecho();             // Prevent getch() from echoing
     keypad(stdscr, TRUE); // Make arrow keys work
 
+    init_pair(1, COLOR_BLACK, COLOR_BLACK);
+    init_pair(2, COLOR_RED, COLOR_BLACK);
+    init_pair(3, COLOR_GREEN, COLOR_BLACK);
+    init_pair(4, COLOR_YELLOW, COLOR_BLACK);
+    init_pair(5, COLOR_BLUE, COLOR_BLACK);
+    init_pair(6, COLOR_MAGENTA, COLOR_BLACK);
+    init_pair(7, COLOR_CYAN, COLOR_BLACK);
+    init_pair(8, COLOR_WHITE, COLOR_BLACK);
+    
     m_display.setDimensions(COLS, LINES);
     m_input.init(COLS, LINES, 0, 2);
 

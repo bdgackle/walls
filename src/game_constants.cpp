@@ -26,6 +26,17 @@ extern const char WALL_CHAR             = 'X';
 extern const char DOOR_CHAR             = '=';
 extern const char FLOOR_CHAR            = '.';
 
+// Mapping of colors to color integer codes
+extern const int INVALID_COLOR          = COLOR_PAIR(8);
+extern const int PLAYER_COLOR           = COLOR_PAIR(8);
+extern const int NOT_ON_MAP_COLOR       = COLOR_PAIR(8);
+extern const int GROUND_COLOR           = COLOR_PAIR(8);
+extern const int ROCK_COLOR             = COLOR_PAIR(5);
+extern const int SAPLING_COLOR          = COLOR_PAIR(8);
+extern const int WALL_COLOR             = COLOR_PAIR(8);
+extern const int DOOR_COLOR             = COLOR_PAIR(8);
+extern const int FLOOR_COLOR            = COLOR_PAIR(8);
+
 // Value of display strings
 extern const string PLAYER_STATUS_NONE_STRING =
     "                                                    ";

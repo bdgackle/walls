@@ -50,11 +50,12 @@ class Display
                        const MapLocation& upper_left);
     void drawCursor(int curs_x, int curs_y, bool visible);
 
-    void drawTile(int x, int y, char tile);
+    void drawTile(int x, int y, char tile, int color = 8);
 
     int getIndex(int x, int y) const;
 
     static char getDisplayChar(BlockType type);
+    static int getDisplayColor(BlockType type);
     static string getStatusString(PlayerStatus status);
 
     void createFrame();

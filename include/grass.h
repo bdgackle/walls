@@ -24,6 +24,7 @@ class Grass : public Creature
     virtual void update(int time);
 
     char getDisplayChar() const;
+    int getDisplayColor() const;
 
  protected:
     void reproduce();

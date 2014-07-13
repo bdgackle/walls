@@ -5,6 +5,9 @@
 // C Standard Library
 #include <stdlib.h>
 
+// External Headers
+#include <ncurses.h>
+
 // Internal Headers
 #include "grass.h"
 #include "block.h"
@@ -42,6 +45,14 @@ char Grass::getDisplayChar() const
         return ',';
 }
 
+int Grass::getDisplayColor() const
+{
+    if (m_flower)
+        return COLOR_PAIR(4);
+    else
+        return COLOR_PAIR(3);
+}
+
 void Grass::reproduce()
 {
     seed(m_location.getRelative(0, -1, 0));
@@ -67,7 +78,7 @@ void Grass::seed(const MapLocation& location)
         (m_world->getMap()->getBlock(location)->getIsEmpty()))
     {
         Grass* newborn = new Grass(m_world, location);
-        m_world->addCreature(newborn);
+        m_world->addPlant(newborn);
     }
 }
 

@@ -22,6 +22,7 @@ class Creature : public Object
     virtual ~Creature();
 
     virtual char getDisplayChar() const = 0;
+    virtual int getDisplayColor() const = 0;
 
  protected:
     virtual void move(int d_x, int d_y, int d_z);

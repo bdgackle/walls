@@ -22,6 +22,7 @@ class Ferret : public Creature
     virtual void update(int time);
 
     char getDisplayChar() const;
+    int getDisplayColor() const;
 };
 
 } // walls

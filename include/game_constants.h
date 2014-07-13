@@ -60,6 +60,19 @@ extern const char FLOOR_CHAR;
 extern const char SLOPE_UP_CHAR;
 extern const char SLOPE_DOWN_CHAR;
 
+// Display Colors
+extern const char INVALID_COLOR;
+extern const char PLAYER_COLOR;
+extern const char NOT_ON_MAP_COLOR;
+extern const char GROUND_COLOR;
+extern const char ROCK_COLOR;
+extern const char SAPLING_COLOR;
+extern const char WALL_COLOR;
+extern const char DOOR_COLOR;
+extern const char FLOOR_COLOR;
+extern const char SLOPE_UP_COLOR;
+extern const char SLOPE_DOWN_COLOR;
+
 // Display Strings
 extern const string PLAYER_STATUS_NONE_STRING;
 extern const string PLAYER_STATUS_HAPPY_STRING;
