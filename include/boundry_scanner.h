@@ -9,12 +9,12 @@
 // C++ Standard Headers
 #include <vector>
 
+using std::vector;
+
 namespace walls
 {
 
 class Map;
-
-using std::vector;
 
 class BoundryScanner
 {

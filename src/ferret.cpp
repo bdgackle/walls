@@ -8,6 +8,7 @@
 // Internal Headers
 #include "ferret.h"
 #include "block.h"
+#include "world.h"
 
 namespace walls {
 

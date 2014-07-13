@@ -5,11 +5,13 @@
 #ifndef FERRET_H
 #define FERRET_H
 
+// Internal Headers
 #include "creature.h"
-#include "maplocation.h"
-#include "map.h"
 
 namespace walls{
+
+class World;
+class MapLocation;
 
 class Ferret : public Creature
 {

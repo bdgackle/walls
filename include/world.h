@@ -13,16 +13,11 @@
 #include "player.h"
 #include "map.h"
 
-// Forward Declarations
-namespace walls {
-    class MapLocation;
-    class Creature;
-}
-
-// Using
 using std::vector;
 
 namespace walls{
+
+class Creature;
 
 class World
 {

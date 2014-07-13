@@ -8,16 +8,12 @@
 // C++ Standard Headers
 #include <vector>
 
-// Forward Declarations
-namespace walls {
-    class Block;
-    class MapLocation;
-}
-
-// Using statements
 using std::vector;
 
 namespace walls {
+
+class Block;
+class MapLocation;
 
 class Map
 {
