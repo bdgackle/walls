@@ -113,6 +113,12 @@ Command InputHandler::processInputEdit(int input)
             moveCursor(1, 0);
             return NO_COMMAND;
 
+        case INCREASE_DEPTH:
+            return CAMERA_DOWN;
+
+        case DECREASE_DEPTH:
+            return CAMERA_UP;
+
         case WALL_1:
         case WALL_2:
             return ADD_WALL;

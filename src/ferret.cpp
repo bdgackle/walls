@@ -12,18 +12,15 @@
 
 namespace walls {
 
-Ferret::Ferret() {}
+Ferret::Ferret(World* world, const MapLocation& location) :
+    Creature(world, location) {}
 
 Ferret::~Ferret() {}
 
-void Ferret::init(const MapLocation& location, World* world)
-{
-    m_location = location;
-    m_world = world;
-}
-
 void Ferret::update(int time)
 {
+    Object::update(time);
+
     int dir = rand() % 4;
 
     if (dir == 0)
@@ -39,19 +36,6 @@ void Ferret::update(int time)
 char Ferret::getDisplayChar() const
 {
     return 'f';
-}
-
-void Ferret::move(int d_x, int d_y, int d_z)
-{
-    MapLocation old_loc = getLocation();
-    MapLocation new_loc = old_loc.getRelative(d_x, d_y, d_z);
-
-    // Movement only happens if new location exists and is passable
-    if ((m_world->getMap()->exists(new_loc)) &&
-        !(m_world->getMap()->getBlock(new_loc)->getIsMovementBoundry()))
-    {
-        setLocation(new_loc);
-    }
 }
 
 } // walls

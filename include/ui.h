@@ -21,10 +21,10 @@ class World;
 class UserInterface
 {
  public:
-    UserInterface();
+    UserInterface(World* world);
     virtual ~UserInterface();
 
-    void init(World* world);
+    void init();
     void start();
 
     void centerPlayer();

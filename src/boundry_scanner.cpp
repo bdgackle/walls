@@ -3,9 +3,6 @@
  *  @author 23 June 2014
  */
 
-// C Standard Includes
-#include <stddef.h>
-
 // Internal Includes
 #include "boundry_scanner.h"
 #include "map.h"
@@ -15,26 +12,17 @@ namespace walls{
 
 BoundryScanner::BoundryScanner(Map *map) :
 m_map(map),
-m_updated(NULL) {}
+m_updated(map->getBlockCount()) {}
 
-BoundryScanner::~BoundryScanner()
-{
-    if (m_updated != NULL)
-        delete [] m_updated;
-}
-
-void BoundryScanner::init(int map_size)
-{
-    m_updated = new bool[map_size];
-}
+BoundryScanner::~BoundryScanner() {}
 
 void BoundryScanner::updateBoundry()
 {
     int block_count = m_map->getBlockCount();
 
+    m_updated.reset();
     for (int i = 0; i < block_count; i++) {
         m_map->getBlock(i)->setIsOutdoors(false);
-        m_updated[i] = false;
     }
 
     for (int z = 0; z < m_map->getDepth(); z++) {
@@ -86,9 +74,9 @@ void BoundryScanner::popLocation()
 
 void BoundryScanner::pushLocation(int index)
 {
-    if (m_updated[index] == false) {
+    if (m_updated.getFast(index) == false) {
         m_stack.push_back(index);
-        m_updated[index] = true;
+        m_updated.setFast(index);
     }
 }
 

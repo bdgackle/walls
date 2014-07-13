@@ -7,52 +7,49 @@
 
 // C++ Standard Headers
 #include <vector>
+#include <stdexcept>
 
 // Internal Headers
 #include "map.h"
 #include "maplocation.h"
 #include "block.h"
-
-namespace walls{
+#include "update_map.h"
 
 using std::vector;
 
+namespace walls{
+
 Map::Map(int width, int height, int depth) :
-m_width(width),
-m_height(height),
-m_depth(depth),
-m_n_bound(0),
-m_s_bound(height - 1),
-m_e_bound(width - 1),
-m_w_bound(0),
-m_u_bound(0),
-m_d_bound(depth - 1),
-m_block_count(m_height * m_width * m_depth) {}
-
-Map::~Map()
-{
-    if (m_blocks != NULL)
-        delete [] m_blocks;
-}
-
-void Map::init()
+    m_width(width),
+    m_height(height),
+    m_depth(depth),
+    m_n_bound(0),
+    m_s_bound(height - 1),
+    m_e_bound(width - 1),
+    m_w_bound(0),
+    m_u_bound(0),
+    m_d_bound(depth - 1),
+    m_block_count(m_height * m_width * m_depth)
 {
     m_blocks = new Block[m_block_count];
     MapLocation::setDimensions(m_width, m_height, m_depth);
 
     for (int z = m_u_bound; z < m_depth; z++) {
-
         for (int x = m_w_bound; x < m_width; x++) {
             getBlock(MapLocation(x, m_n_bound, z))->setIsEdge(true);
             getBlock(MapLocation(x, m_s_bound, z))->setIsEdge(true);
         }
-
         for (int y = m_n_bound; y < m_height; y++) {
             getBlock(MapLocation(m_e_bound, y, z))->setIsEdge(true);
             getBlock(MapLocation(m_w_bound, y, z))->setIsEdge(true);
         }
     }
+}
 
+Map::~Map()
+{
+    if (m_blocks != NULL)
+        delete [] m_blocks;
 }
 
 int Map::getHeight() const { return m_height; }
@@ -68,12 +65,20 @@ int Map::getMaxIndex() const { return m_block_count - 1; }
 const Block& Map::getBlock(const MapLocation& location) const
 {
     int index = location.getIndex();
+
+    if (!exists(index))
+        throw std::runtime_error("Attempt to get non-existant block.\n");
+
     return m_blocks[index];
 }
 
 Block* Map::getBlock(const MapLocation& location)
 {
     int index = location.getIndex();
+
+    if (!exists(index))
+        throw std::runtime_error("Attempt to get non-existant block.\n");
+
     return getBlock(index);
 }
 
@@ -111,32 +116,27 @@ void Map::getEdges(vector<int>* edges, int depth) const
     int top_base = layer_base;
     int bottom_base = layer_base + getWidth() * (getHeight() - 1);
 
-    vector<bool> done;
-    done.resize(getBlockCount());
-    // TODO: Slow... use std::map for this
-    for (int i = 0; i < done.size(); i++) {
-        done.at(i) = false;
-    }
+    UpdateMap updated(getBlockCount());
 
     for (int x = 0; x < getWidth(); x++) {
-        pushIndex(top_base + x, edges, &done);
-        pushIndex(bottom_base + x, edges, &done);
+        pushIndex(top_base + x, edges, &updated);
+        pushIndex(bottom_base + x, edges, &updated);
     }
 
     int left_base = layer_base;
     int right_base = layer_base + (getHeight() - 1);
     for (int y = 0; y < getHeight(); y++) {
         int offset = getWidth() * y;
-        pushIndex(left_base + offset, edges, &done);
-        pushIndex(right_base + offset, edges, &done);
+        pushIndex(left_base + offset, edges, &updated);
+        pushIndex(right_base + offset, edges, &updated);
     }
 }
 
-void Map::pushIndex(int index, vector<int>* list, vector<bool>* done) const
+void Map::pushIndex(int index, vector<int>* list, UpdateMap* done) const
 {
-    if (done->at(index) == false) {
+    if (done->get(index) == false) {
         list->push_back(index);
-        done->at(index) = true;
+        done->set(index);
     }
 }
 

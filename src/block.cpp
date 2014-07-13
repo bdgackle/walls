@@ -59,10 +59,22 @@ bool Block::getIsWaterBoundry() const
 
 bool Block::getIsEdge() const { return m_is_edge; }
 
+bool Block::getIsEmpty() const
+{ 
+    if (m_creature == NULL)
+        return true;
+    else
+        return false;
+}
+
 void Block::setType(BlockType type) { m_type = type; }
 
 void Block::setIsOutdoors(bool outdoors) { m_is_outdoors = outdoors; }
 
 void Block::setIsEdge(bool edge) { m_is_edge = edge; }
+
+void Block::addCreature(const Creature* creature) { m_creature = creature; }
+
+void Block::removeCreature() { m_creature = NULL; }
 
 } // walls

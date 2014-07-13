@@ -25,12 +25,14 @@ class World
     World(int width, int height, int depth);
     virtual ~World();
 
-    void init(unsigned int seed);
     void update(int time);
 
     const Map& getMap() const;
     const Player& getPlayer() const;
     const vector<Creature*>& getCreatures() const;
+
+    int getTime() const;
+    int getCreatureCount() const;
 
     Map* getMap();
     Player* getPlayer();
@@ -46,6 +48,9 @@ class World
 
     BoundryScanner m_scanner;
     bool m_boundries_dirty;
+
+    int m_time;
+    int m_creature_count;
 };
 
 } // walls

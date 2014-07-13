@@ -47,9 +47,9 @@ void Display::draw(const World& world,
     const vector<Creature*>& creatures = world.getCreatures();
 
     drawMap(map, upper_left);
-    drawStatus(player_status);
-    drawPlayer(player_location, upper_left);
     drawCreatures(creatures, upper_left);
+    drawPlayer(player_location, upper_left);
+    drawStatus(player_status, world);
     drawCursor(curs_x, curs_y, curs_visible);
 }
 
@@ -97,10 +97,21 @@ void Display::drawMap(const Map& map, const MapLocation& upper_left)
    }
 }
 
-void Display::drawStatus(PlayerStatus status)
+void Display::drawStatus(PlayerStatus status, const World& world)
 {
+    char line_two[40];
+    char line_three[40];
+
     string stat_string = getStatusString(status);
     mvaddstr(0, 0, stat_string.c_str());
+
+    sprintf(line_two, "Time: %d", world.getTime());
+    mvaddstr(1, 0, PLAYER_STATUS_NONE_STRING.c_str());
+    mvaddstr(1, 0, line_two);
+
+    sprintf(line_three, "Creatures: %d", world.getCreatureCount());
+    mvaddstr(2, 0, PLAYER_STATUS_NONE_STRING.c_str());
+    mvaddstr(2, 0, line_three);
 }
 
 void Display::drawPlayer(const MapLocation& location,
@@ -165,10 +176,6 @@ char Display::getDisplayChar(BlockType type)
 
         case GROUND:
             return GROUND_CHAR;
-            break;
-
-        case SMALL_ROCK:
-            return SMALL_ROCK_CHAR;
             break;
 
         case ROCK:

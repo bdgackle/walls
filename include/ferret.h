@@ -16,16 +16,12 @@ class MapLocation;
 class Ferret : public Creature
 {
  public:
-    Ferret();
+    Ferret(World* world, const MapLocation & location);
     virtual ~Ferret();
-
-    virtual void init(const MapLocation& location, World* world);
 
     virtual void update(int time);
 
     char getDisplayChar() const;
-
-    void move(int d_x, int d_y, int d_z);
 };
 
 } // walls

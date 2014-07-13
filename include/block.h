@@ -7,9 +7,12 @@
 
 // Internal Headers
 #include "game_constants.h"
-#include "thing.h"
 
-namespace walls{
+namespace walls {
+    class Creature;
+}
+
+namespace walls {
 
 class Block
 {
@@ -23,19 +26,20 @@ class Block
     bool getIsIndoorBoundry() const;
     bool getIsWaterBoundry() const;
     bool getIsEdge() const;
-    const vector<Thing*>* getContents() const;
+    bool getIsEmpty() const;
 
     void setType(BlockType type);
     void setIsOutdoors(bool outdoors);
     void setIsEdge(bool edge);
-    void addToContents(Thing* new_thing);
-    void removeFromContents(Thing* old_thing);
+
+    void addCreature(const Creature* creature);
+    void removeCreature();
 
  private:
     BlockType m_type;
     bool m_is_outdoors;
     bool m_is_edge;
-    vector<Thing*> m_contents;
+    const Creature* m_creature;
 };
 
 } // walls

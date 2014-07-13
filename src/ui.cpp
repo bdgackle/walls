@@ -21,7 +21,8 @@ using std::string;
 
 namespace walls {
 
-UserInterface::UserInterface() :
+UserInterface::UserInterface(World* world) :
+    m_world(world),
     m_display_upper_left(0,0,0) {}
 
 UserInterface::~UserInterface()
@@ -68,6 +69,14 @@ void UserInterface::doCommand(Command command)
             centerPlayer();
             break;
 
+        case CAMERA_UP:
+            m_display_upper_left = m_display_upper_left.getRelative(0, 0, -1);
+            break;
+
+        case CAMERA_DOWN:
+            m_display_upper_left = m_display_upper_left.getRelative(0, 0, 1);
+            break;
+
         case ADD_WALL:
             m_world->getMap()->getBlock(getCursorLocation())->setType(WALL);
             m_world->setBoundriesDirty();
@@ -96,10 +105,8 @@ void UserInterface::centerPlayer()
                                                   0);
 }
 
-void UserInterface::init(World* world)
+void UserInterface::init()
 {
-    m_world = world;
-
     initscr();            // Initialize ncurses
     cbreak();             // Place input in c-break mode
     noecho();             // Prevent getch() from echoing
@@ -108,7 +115,7 @@ void UserInterface::init(World* world)
     m_display.setDimensions(COLS, LINES);
     m_input.init(COLS, LINES, 0, 2);
 
-    m_display_upper_left = m_display_upper_left.getRelative(0, 1, 0);
+    centerPlayer();
 }
 
 int UserInterface::getDepth() const { return m_display_upper_left.getZ(); }

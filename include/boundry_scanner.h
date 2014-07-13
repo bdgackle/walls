@@ -9,6 +9,9 @@
 // C++ Standard Headers
 #include <vector>
 
+// Internal Headers
+#include "update_map.h"
+
 using std::vector;
 
 namespace walls
@@ -33,7 +36,7 @@ class BoundryScanner
  private:
     vector<int> m_stack;
     Map* m_map;
-    bool* m_updated;
+    UpdateMap m_updated;
 };
 
 } // namespace walls

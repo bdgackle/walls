@@ -8,20 +8,23 @@
 // C++ Standard Headers
 #include <vector>
 
+// Internal Headers
+#include "block.h"
+
+namespace walls {
+    class MapLocation;
+    class UpdateMap;
+}
+
 using std::vector;
 
 namespace walls {
-
-class Block;
-class MapLocation;
 
 class Map
 {
  public:
     Map(int width, int height, int depth);
     virtual ~Map();
-
-    void init();
 
     int getHeight() const;
     int getWidth() const;
@@ -43,7 +46,7 @@ class Map
     void clearIsOutdoors();
 
  protected:
-    void pushIndex(int index, vector<int>* list, vector<bool>* done) const;
+    void pushIndex(int index, vector<int>* list, UpdateMap* done) const;
 
  private:
     Block* m_blocks;

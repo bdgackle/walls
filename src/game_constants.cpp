@@ -20,7 +20,6 @@ extern const char INVALID_CHAR          = 'B';
 extern const char PLAYER_CHAR           = '@';
 extern const char NOT_ON_MAP_CHAR       = '0';
 extern const char GROUND_CHAR           = ' ';
-extern const char SMALL_ROCK_CHAR       = ',';
 extern const char ROCK_CHAR             = 'o';
 extern const char SAPLING_CHAR          = '|';
 extern const char WALL_CHAR             = 'X';
@@ -38,5 +37,4 @@ extern const string PLAYER_STATUS_SMELLS_FERRET_STRING =
     "Little guy smells ferrets.  They are wafting.       ";
 extern const string PLAYER_STATUS_INVADE_FERRET_STRING =
     "FERRETS IN HOUSE! FERRETS IN HOUSE! Ferrets are bad.";
-
 } // walls

@@ -2,9 +2,6 @@
  *  @author Barry Gackle
  */
 
-// C Standard Headers
-#include <stddef.h>
-
 // Internal Headers
 #include "player.h"
 #include "game_constants.h"
@@ -15,16 +12,11 @@
 
 namespace walls{
 
-Player::Player() :
-m_status(HAPPY),
-m_world(NULL) {}
+Player::Player(World* world) :
+    m_status(HAPPY),
+    m_world(world) {}
 
 Player::~Player() {}
-
-void Player::init(World* world)
-{
-    m_world = world;
-}
 
 PlayerStatus Player::getStatus() const { return m_status; }
 

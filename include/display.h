@@ -44,7 +44,7 @@ class Display
 
  protected:
     void drawMap(const Map& map, const MapLocation& upper_left);
-    void drawStatus(PlayerStatus status);
+    void drawStatus(PlayerStatus status, const World& world);
     void drawPlayer(const MapLocation& location, const MapLocation& upper_left);
     void drawCreatures(const vector<Creature*>& creatures,
                        const MapLocation& upper_left);
