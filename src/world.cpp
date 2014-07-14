@@ -32,12 +32,13 @@ void World::update(int time)
         m_boundries_dirty = false;
     }
 
-    for (int i = 0; i < m_creatures.size(); i++) {
-        m_creatures.at(i)->update(time);
+    list<Creature*>::iterator iter;
+    for (iter = m_creatures.begin(); iter != m_creatures.end(); ++iter) {
+        (*iter)->update(time);
     }
 
-    for (int i = 0; i < m_plants.size(); i++) {
-        m_plants.at(i)->update(time);
+    for (iter = m_plants.begin(); iter != m_plants.end(); ++iter) {
+        (*iter)->update(time);
     }
 
     m_time += time;
@@ -47,9 +48,9 @@ const Map& World::getMap() const { return m_map; }
 
 const Player& World::getPlayer() const { return m_player; }
 
-const vector<Creature*>& World::getCreatures() const { return m_creatures; }
+const list<Creature*>& World::getCreatures() const { return m_creatures; }
 
-const vector<Creature*>& World::getPlants() const { return m_plants; }
+const list<Creature*>& World::getPlants() const { return m_plants; }
 
 int World::getTime() const { return m_time; }
 
@@ -61,9 +62,9 @@ Map* World::getMap() { return &m_map; }
 
 Player* World::getPlayer() { return &m_player; }
 
-vector<Creature*>* World::getCreatures() { return &m_creatures; }
+list<Creature*>* World::getCreatures() { return &m_creatures; }
 
-vector<Creature*>* World::getPlants() { return &m_plants; }
+list<Creature*>* World::getPlants() { return &m_plants; }
 
 void World::addCreature(Creature* creature) 
 {

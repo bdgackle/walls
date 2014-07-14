@@ -6,7 +6,7 @@
 #define MAP_H
 
 // C++ Standard Headers
-#include <vector>
+#include <list>
 
 // Internal Headers
 #include "block.h"
@@ -16,7 +16,7 @@ namespace walls {
     class UpdateMap;
 }
 
-using std::vector;
+using std::list;
 
 namespace walls {
 
@@ -41,12 +41,12 @@ class Map
     bool exists(const MapLocation& location) const;
     bool exists(int index) const;
 
-    void getEdges(vector<int>* edges, int depth) const;
+    void getEdges(list<int>* edges, int depth) const;
 
     void clearIsOutdoors();
 
  protected:
-    void pushIndex(int index, vector<int>* list, UpdateMap* done) const;
+    void pushIndex(int index, list<int>* list, UpdateMap* done) const;
 
  private:
     Block* m_blocks;

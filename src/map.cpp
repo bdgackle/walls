@@ -6,7 +6,7 @@
 #include <stddef.h>
 
 // C++ Standard Headers
-#include <vector>
+#include <list>
 #include <stdexcept>
 
 // Internal Headers
@@ -15,7 +15,7 @@
 #include "block.h"
 #include "update_map.h"
 
-using std::vector;
+using std::list;
 
 namespace walls{
 
@@ -110,7 +110,7 @@ bool Map::exists(int index) const
         return true;
 }
 
-void Map::getEdges(vector<int>* edges, int depth) const
+void Map::getEdges(list<int>* edges, int depth) const
 {
     int layer_base = depth * getWidth() * getHeight();
     int top_base = layer_base;
@@ -132,7 +132,7 @@ void Map::getEdges(vector<int>* edges, int depth) const
     }
 }
 
-void Map::pushIndex(int index, vector<int>* list, UpdateMap* done) const
+void Map::pushIndex(int index, list<int>* list, UpdateMap* done) const
 {
     if (done->get(index) == false) {
         list->push_back(index);

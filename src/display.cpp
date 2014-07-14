@@ -5,7 +5,7 @@
 
 // C++ Standard Headers
 #include <string>
-#include <vector>
+#include <list>
 
 // External Headers
 #include <curses.h>
@@ -21,7 +21,7 @@
 #include "block.h"
 
 using std::string;
-using std::vector;
+using std::list;
 
 namespace walls{
 
@@ -44,8 +44,8 @@ void Display::draw(const World& world,
     const Map& map = world.getMap();
     PlayerStatus player_status = world.getPlayer().getStatus();
     MapLocation player_location = world.getPlayer().getLocation();
-    const vector<Creature*>& creatures = world.getCreatures();
-    const vector<Creature*>& plants = world.getPlants();
+    const list<Creature*>& creatures = world.getCreatures();
+    const list<Creature*>& plants = world.getPlants();
 
     drawMap(map, upper_left);
     drawCreatures(plants, upper_left);
@@ -134,13 +134,15 @@ void Display::drawPlayer(const MapLocation& location,
     }
 }
 
-void Display::drawCreatures(const vector<Creature*>& creatures,
+void Display::drawCreatures(const list<Creature*>& creatures,
                             const MapLocation& upper_left)
 {
-    for (int i = 0; i < creatures.size(); i++) {
-        char c = creatures.at(i)->getDisplayChar();
-        int color = creatures.at(i)->getDisplayColor();
-        MapLocation m = creatures.at(i)->getLocation();
+    list<Creature *>::const_iterator iter;
+    for (iter = creatures.begin(); iter != creatures.end(); ++iter) {
+  
+        char c = (*iter)->getDisplayChar();
+        int color = (*iter)->getDisplayColor();
+        MapLocation m = (*iter)->getLocation();
 
         int creature_x = upper_left.getDistanceX(m);
         int creature_y = upper_left.getDistanceY(m);

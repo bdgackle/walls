@@ -6,14 +6,14 @@
 #define WORLD_H
 
 // C++ Standard Headers
-#include <vector>
+#include <list>
 
 // Internal Headers
 #include "boundry_scanner.h"
 #include "player.h"
 #include "map.h"
 
-using std::vector;
+using std::list;
 
 namespace walls{
 
@@ -29,8 +29,8 @@ class World
 
     const Map& getMap() const;
     const Player& getPlayer() const;
-    const vector<Creature*>& getCreatures() const;
-    const vector<Creature*>& getPlants() const;
+    const list<Creature*>& getCreatures() const;
+    const list<Creature*>& getPlants() const;
 
     int getTime() const;
     int getCreatureCount() const;
@@ -38,8 +38,8 @@ class World
 
     Map* getMap();
     Player* getPlayer();
-    vector<Creature*>* getCreatures();
-    vector<Creature*>* getPlants();
+    list<Creature*>* getCreatures();
+    list<Creature*>* getPlants();
 
     void addCreature(Creature* creature);
     void addPlant(Creature* plant);
@@ -48,8 +48,8 @@ class World
  private:
     Map m_map;
     Player m_player;
-    vector<Creature*> m_creatures;
-    vector<Creature*> m_plants;
+    list<Creature*> m_creatures;
+    list<Creature*> m_plants;
 
     BoundryScanner m_scanner;
     bool m_boundries_dirty;

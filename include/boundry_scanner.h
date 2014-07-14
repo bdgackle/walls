@@ -7,12 +7,12 @@
 #define BOUNDRY_SCANNER_H
 
 // C++ Standard Headers
-#include <vector>
+#include <list>
 
 // Internal Headers
 #include "update_map.h"
 
-using std::vector;
+using std::list;
 
 namespace walls
 {
@@ -34,7 +34,7 @@ class BoundryScanner
     void pushLocation(int index);
 
  private:
-    vector<int> m_stack;
+    list<int> m_stack;
     Map* m_map;
     UpdateMap m_updated;
 };
