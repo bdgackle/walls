@@ -5,12 +5,17 @@
 #ifndef BLOCK_H
 #define BLOCK_H
 
+// C++ Standard Headers
+#include <list>
+
 // Internal Headers
 #include "game_constants.h"
 
 namespace walls {
-    class Creature;
+    class Object;
 }
+
+using std::list;
 
 namespace walls {
 
@@ -22,24 +27,26 @@ class Block
 
     BlockType getType() const;
     bool getIsOutdoors() const;
+    bool getIsEdge() const;
     bool getIsMovementBoundry() const;
     bool getIsIndoorBoundry() const;
-    bool getIsWaterBoundry() const;
-    bool getIsEdge() const;
     bool getIsEmpty() const;
 
     void setType(BlockType type);
     void setIsOutdoors(bool outdoors);
     void setIsEdge(bool edge);
 
-    void addCreature(const Creature* creature);
-    void removeCreature();
+    void addCreature(const Object* creature);
+    void addPlant(const Object* plant);
+    void removeCreature(const Object* creature);
+    void removePlant(const Object* plant);
 
  private:
     BlockType m_type;
     bool m_is_outdoors;
     bool m_is_edge;
-    const Creature* m_creature;
+    list<const Object*> m_creatures;
+    list<const Object*> m_plants;
 };
 
 } // walls

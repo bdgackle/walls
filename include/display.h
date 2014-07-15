@@ -21,7 +21,7 @@ namespace walls{
 class World;
 class Map;
 class MapLocation;
-class Creature;
+class Object;
 
 class Display
 {
@@ -46,8 +46,8 @@ class Display
     void drawMap(const Map& map, const MapLocation& upper_left);
     void drawStatus(PlayerStatus status, const World& world);
     void drawPlayer(const MapLocation& location, const MapLocation& upper_left);
-    void drawCreatures(const list<Creature*>& creatures,
-                       const MapLocation& upper_left);
+    void drawObjects(const list<Object*>& objects,
+                     const MapLocation& upper_left);
     void drawCursor(int curs_x, int curs_y, bool visible);
 
     void drawTile(int x, int y, char tile, int color = 8);

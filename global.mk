@@ -59,5 +59,5 @@ MAKE   := make
 CPP    := g++
 
 # Compiler flags common to all projects -- Note the use of '=' rather than ':='
-CFLAGS  += $(INCLUDES) -Wfatal-errors
-LDFLAGS += -Wfatal-errors
+CFLAGS  += $(INCLUDES) -Wfatal-errors -g
+LDFLAGS += -Wfatal-errors -g

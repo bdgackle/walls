@@ -17,7 +17,7 @@ namespace walls {
 
 Grass::Grass(World* world, const MapLocation& location) :
     m_flower(false),
-    Creature(world, location) {}
+    Plant(world, location) {}
 
 Grass::~Grass() {}
 
@@ -64,15 +64,14 @@ void Grass::reproduce()
     seed(m_location.getRelative(-1, -1, 0));
     seed(m_location.getRelative(-1, 1, 0));
 
-    m_flower = false;
-    m_age = 0;
+    die();
 }
 
 void Grass::seed(const MapLocation& location)
 {
-    int random_number = rand() % 8;
+    int random_number = rand() % 4;
 
-    if ((random_number == 0) &&
+    if ((random_number == 5) &&
         (m_world->getMap()->exists(location)) &&
         (m_world->getMap()->getBlock(location)->getType() == GROUND) &&
         (m_world->getMap()->getBlock(location)->getIsEmpty()))

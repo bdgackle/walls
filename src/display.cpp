@@ -16,7 +16,7 @@
 #include "maplocation.h"
 #include "map.h"
 #include "player.h"
-#include "creature.h"
+#include "object.h"
 #include "world.h"
 #include "block.h"
 
@@ -44,12 +44,12 @@ void Display::draw(const World& world,
     const Map& map = world.getMap();
     PlayerStatus player_status = world.getPlayer().getStatus();
     MapLocation player_location = world.getPlayer().getLocation();
-    const list<Creature*>& creatures = world.getCreatures();
-    const list<Creature*>& plants = world.getPlants();
+    const list<Object*>& creatures = world.getCreatures();
+    const list<Object*>& plants = world.getPlants();
 
     drawMap(map, upper_left);
-    drawCreatures(plants, upper_left);
-    drawCreatures(creatures, upper_left);
+    drawObjects(plants, upper_left);
+    drawObjects(creatures, upper_left);
     drawPlayer(player_location, upper_left);
     drawStatus(player_status, world);
     drawCursor(curs_x, curs_y, curs_visible);
@@ -93,10 +93,13 @@ void Display::drawMap(const Map& map, const MapLocation& upper_left)
                 drawTile(x, y, getDisplayChar(type), getDisplayColor(type));
             }
             else {
-                drawTile(x, y, getDisplayChar(NOT_ON_MAP), getDisplayColor(NOT_ON_MAP));
+                drawTile(x,
+                         y,
+                         getDisplayChar(NOT_ON_MAP),
+                         getDisplayColor(NOT_ON_MAP));
             }
         }
-   }
+    }
 }
 
 void Display::drawStatus(PlayerStatus status, const World& world)
@@ -134,22 +137,22 @@ void Display::drawPlayer(const MapLocation& location,
     }
 }
 
-void Display::drawCreatures(const list<Creature*>& creatures,
+void Display::drawObjects(const list<Object*>& objects,
                             const MapLocation& upper_left)
 {
-    list<Creature *>::const_iterator iter;
-    for (iter = creatures.begin(); iter != creatures.end(); ++iter) {
+    list<Object*>::const_iterator iter;
+    for (iter = objects.begin(); iter != objects.end(); ++iter) {
   
         char c = (*iter)->getDisplayChar();
         int color = (*iter)->getDisplayColor();
         MapLocation m = (*iter)->getLocation();
 
-        int creature_x = upper_left.getDistanceX(m);
-        int creature_y = upper_left.getDistanceY(m);
+        int object_x = upper_left.getDistanceX(m);
+        int object_y = upper_left.getDistanceY(m);
 
-        if ((creature_x >= 0) && (creature_x < m_width) &&
-            (creature_y >= 0) && (creature_y < m_height)) {
-            drawTile(creature_x, creature_y, c, color);
+        if ((object_x >= 0) && (object_x < m_width) &&
+            (object_y >= 0) && (object_y < m_height)) {
+            drawTile(object_x, object_y, c, color);
         }
     }
 }

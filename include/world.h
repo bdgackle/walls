@@ -13,11 +13,13 @@
 #include "player.h"
 #include "map.h"
 
+namespace walls {
+    class Object;
+}
+
 using std::list;
 
-namespace walls{
-
-class Creature;
+namespace walls {
 
 class World
 {
@@ -29,8 +31,8 @@ class World
 
     const Map& getMap() const;
     const Player& getPlayer() const;
-    const list<Creature*>& getCreatures() const;
-    const list<Creature*>& getPlants() const;
+    const list<Object*>& getCreatures() const;
+    const list<Object*>& getPlants() const;
 
     int getTime() const;
     int getCreatureCount() const;
@@ -38,25 +40,24 @@ class World
 
     Map* getMap();
     Player* getPlayer();
-    list<Creature*>* getCreatures();
-    list<Creature*>* getPlants();
+    list<Object*>* getCreatures();
+    list<Object*>* getPlants();
 
-    void addCreature(Creature* creature);
-    void addPlant(Creature* plant);
+    void addCreature(Object* creature);
+    void addPlant(Object* plant);
+
     void setBoundriesDirty();
 
  private:
     Map m_map;
     Player m_player;
-    list<Creature*> m_creatures;
-    list<Creature*> m_plants;
+    list<Object*> m_creatures;
+    list<Object*> m_plants;
 
     BoundryScanner m_scanner;
     bool m_boundries_dirty;
 
     int m_time;
-    int m_creature_count;
-    int m_plant_count;
 };
 
 } // walls

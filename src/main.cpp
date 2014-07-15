@@ -39,7 +39,7 @@ int main()
                 map->getBlock(MapLocation(x, y, 0))->setType(walls::ROCK);
             else if (random_number < 10)
                 map->getBlock(MapLocation(x, y, 0))->setType(walls::SAPLING);
-            else if (random_number < 20)
+            else if (random_number < 1000)
                 world.addPlant(new Grass(&world, MapLocation(x, y, 0)));
         }
     }

@@ -7,7 +7,7 @@
 
 // Internal Headers
 #include "grass.h"
-#include "creature.h"
+#include "plant.h"
 #include "maplocation.h"
 
 namespace walls{
@@ -15,7 +15,7 @@ namespace walls{
 class World;
 class MapLocation;
 
-class Grass : public Creature
+class Grass : public Plant
 {
  public:
     Grass(World* world, const MapLocation& location);

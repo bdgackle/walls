@@ -23,6 +23,9 @@ class Object
 
     virtual void update(int time);
 
+    virtual char getDisplayChar() const = 0;
+    virtual int getDisplayColor() const = 0;
+
     MapLocation getLocation() const;
     World* getWorld();
 

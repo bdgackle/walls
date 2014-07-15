@@ -1,6 +1,5 @@
 /**
  *  @author Barry Gackle
- *  @author 20 June 2014
  */
 
 // Internal Headers
@@ -19,6 +18,8 @@ Block::~Block() {}
 BlockType Block::getType() const { return m_type; }
 
 bool Block::getIsOutdoors() const { return m_is_outdoors; }
+
+bool Block::getIsEdge() const { return m_is_edge; }
 
 bool Block::getIsMovementBoundry() const
 {
@@ -47,34 +48,47 @@ bool Block::getIsIndoorBoundry() const
     }
 }
 
-bool Block::getIsWaterBoundry() const
-{
-    switch(m_type) {
-        case WALL:
-            return true;
-        default:
-            return false;
-    }
-}
-
-bool Block::getIsEdge() const { return m_is_edge; }
-
 bool Block::getIsEmpty() const
 { 
-    if (m_creature == NULL)
+    if (m_creatures.size() == 0)
         return true;
     else
         return false;
 }
 
-void Block::setType(BlockType type) { m_type = type; }
+void Block::setType(BlockType type)
+{
+    m_type = type;
+}
 
-void Block::setIsOutdoors(bool outdoors) { m_is_outdoors = outdoors; }
+void Block::setIsOutdoors(bool outdoors)
+{ 
+    m_is_outdoors = outdoors;
+}
 
-void Block::setIsEdge(bool edge) { m_is_edge = edge; }
+void Block::setIsEdge(bool edge)
+{ 
+    m_is_edge = edge;
+}
 
-void Block::addCreature(const Creature* creature) { m_creature = creature; }
+void Block::addCreature(const Object* creature)
+{
+    m_creatures.push_back(creature);
+}
 
-void Block::removeCreature() { m_creature = NULL; }
+void Block::addPlant(const Object* plant)
+{
+    m_plants.push_back(plant);
+}
+
+void Block::removeCreature(const Object* creature)
+{ 
+    m_creatures.remove(creature);
+}
+
+void Block::removePlant(const Object* plant)
+{
+    m_plants.remove(plant);
+}
 
 } // walls

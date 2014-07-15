@@ -15,9 +15,13 @@ Object::Object(World* world, const MapLocation& location) :
 Object::~Object() {}
 
 MapLocation Object::getLocation() const { return m_location; } 
+
 World* Object::getWorld() { return m_world; }
 
-void Object::setLocation(const MapLocation& location) { m_location = location; }
+void Object::setLocation(const MapLocation& location)
+{
+    m_location = location;
+}
 
 void Object::update(int time)
 {
