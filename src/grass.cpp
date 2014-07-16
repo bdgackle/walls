@@ -16,9 +16,9 @@
 
 namespace walls {
 
-const int Grass::k_flower_min = 1000;
-const int Grass::k_flower_max = 2000;
-const int Grass::k_seed_max   = 2200;
+const int Grass::k_flower_min = 0;
+const int Grass::k_flower_max = 200;
+const int Grass::k_seed_max   = 300;
 
 Grass::Grass(World* world, const MapLocation& location) :
     m_flower(false),

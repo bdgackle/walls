@@ -28,6 +28,7 @@ class ObjectList {
     void update(int time);
 
     const list<Object*>& getObjects() const;
+    Object* getFirstObject();
     int getCount() const;
 
     void addObject(Object* object);

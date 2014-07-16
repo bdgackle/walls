@@ -47,7 +47,7 @@ bool Block::getIsIndoorBoundry() const {
 }
 
 bool Block::getIsEmpty() const { 
-    if (m_plants.getCount() == 0)
+    if (m_plants.getCount() <= 0)
         return true;
     else
         return false;
@@ -70,6 +70,10 @@ void Block::addCreature(Object* creature) {
 }
 
 void Block::addPlant(Object* plant) { m_plants.addObject(plant); }
+
+Object* Block::getPlant() {
+    m_plants.getFirstObject();
+}
 
 void Block::removeCreature(Object* creature) { 
     m_creatures.removeObject(creature);

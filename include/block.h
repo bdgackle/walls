@@ -38,6 +38,7 @@ class Block {
 
     void addCreature(Object* creature);
     void addPlant(Object* plant);
+    Object* getPlant();
     void removeCreature(Object* creature);
     void removePlant(Object* plant);
 

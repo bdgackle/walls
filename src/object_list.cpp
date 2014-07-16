@@ -28,6 +28,10 @@ void ObjectList::update(int time) {
 
 const list<Object*>& ObjectList::getObjects() const { return m_list; }
 
+Object* ObjectList::getFirstObject() {
+    return m_list.front();
+}
+
 int ObjectList::getCount() const { return m_list.size(); }
 
 void ObjectList::addObject(Object* object) { m_list.push_back(object); }

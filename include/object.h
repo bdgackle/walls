@@ -29,9 +29,11 @@ class Object {
 
     MapLocation getLocation() const;
 
+    void setIsDead();
+
+    virtual void die() = 0;
  protected:
     void setLocation(const MapLocation& location);
-    void setIsDead();
 
     World* m_world;
     MapLocation m_location;

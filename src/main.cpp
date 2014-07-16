@@ -13,6 +13,7 @@
 #include "map.h"
 #include "game_constants.h"
 #include "ferret.h"
+#include "bunny.h"
 #include "grass.h"
 
 using walls::World;
@@ -20,6 +21,7 @@ using walls::UserInterface;
 using walls::MapLocation;
 using walls::Map;
 using walls::Ferret;
+using walls::Bunny;
 using walls::Grass;
 
 int main()
@@ -47,6 +49,7 @@ int main()
     // Seed the world with some random ferrets
     for (int i = 0; i < 10; i++) {
         world.addCreature(new Ferret(&world, MapLocation(5,i,0)));
+        world.addCreature(new Bunny(&world, MapLocation(15,i,0)));
     }
 
     // Make and start the ui
