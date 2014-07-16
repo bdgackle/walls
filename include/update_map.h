@@ -7,8 +7,7 @@
 
 namespace walls {
 
-class UpdateMap
-{
+class UpdateMap {
  public:
     UpdateMap(int size);
     virtual ~UpdateMap();

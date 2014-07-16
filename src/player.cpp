@@ -10,7 +10,7 @@
 #include "map.h"
 #include "block.h"
 
-namespace walls{
+namespace walls {
 
 Player::Player(World* world) :
     m_status(HAPPY),
@@ -22,8 +22,7 @@ PlayerStatus Player::getStatus() const { return m_status; }
 
 MapLocation Player::getLocation() const { return m_location; }
 
-void Player::move(int d_x, int d_y, int d_z)
-{
+void Player::move(int d_x, int d_y, int d_z) {
     MapLocation dest = m_location.getRelative(d_x, d_y, d_z);
 
     if ((m_world->getMap()->exists(dest)) &&
@@ -33,8 +32,7 @@ void Player::move(int d_x, int d_y, int d_z)
     }
 }
 
-void Player::setLocation(const MapLocation& location)
-{
+void Player::setLocation(const MapLocation& location) {
     m_location = location;
 
     if (m_world->getMap()->getBlock(location)->getIsOutdoors() == true)

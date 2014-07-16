@@ -13,13 +13,13 @@
 
 using std::string;
 
-namespace walls
-{
+namespace walls {
+    class World;
+}
 
-class World;
+namespace walls {
 
-class UserInterface
-{
+class UserInterface {
  public:
     UserInterface(World* world);
     virtual ~UserInterface();

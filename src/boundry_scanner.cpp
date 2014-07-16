@@ -8,7 +8,7 @@
 #include "map.h"
 #include "block.h"
 
-namespace walls{
+namespace walls {
 
 BoundryScanner::BoundryScanner(Map *map) :
 m_map(map),
@@ -16,8 +16,7 @@ m_updated(map->getBlockCount()) {}
 
 BoundryScanner::~BoundryScanner() {}
 
-void BoundryScanner::updateBoundry()
-{
+void BoundryScanner::updateBoundry() {
     int block_count = m_map->getBlockCount();
 
     m_updated.reset();
@@ -34,8 +33,7 @@ void BoundryScanner::updateBoundry()
     }
 }
 
-void BoundryScanner::popLocation()
-{
+void BoundryScanner::popLocation() {
     int index = m_stack.back();
     m_stack.pop_back();
 
@@ -72,8 +70,7 @@ void BoundryScanner::popLocation()
     }
 }
 
-void BoundryScanner::pushLocation(int index)
-{
+void BoundryScanner::pushLocation(int index) {
     if (m_updated.getFast(index) == false) {
         m_stack.push_back(index);
         m_updated.setFast(index);

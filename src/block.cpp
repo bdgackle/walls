@@ -21,22 +21,20 @@ bool Block::getIsOutdoors() const { return m_is_outdoors; }
 
 bool Block::getIsEdge() const { return m_is_edge; }
 
-bool Block::getIsMovementBoundry() const
-{
+bool Block::getIsMovementBoundry() const {
     switch(m_type) {
-        case WALL:
-        case ROCK:
-        case SAPLING:
-            return true;
-            break;
+    case WALL:
+    case ROCK:
+    case SAPLING:
+        return true;
+        break;
 
-        default:
-            return false;
+    default:
+        return false;
     }
 }
 
-bool Block::getIsIndoorBoundry() const
-{
+bool Block::getIsIndoorBoundry() const {
     switch(m_type) {
         case WALL:
         case DOOR:
@@ -48,47 +46,35 @@ bool Block::getIsIndoorBoundry() const
     }
 }
 
-bool Block::getIsEmpty() const
-{ 
-    if (m_creatures.size() == 0)
+bool Block::getIsEmpty() const { 
+    if (m_plants.getCount() == 0)
         return true;
     else
         return false;
 }
 
-void Block::setType(BlockType type)
-{
+void Block::setType(BlockType type) {
     m_type = type;
 }
 
-void Block::setIsOutdoors(bool outdoors)
-{ 
+void Block::setIsOutdoors(bool outdoors) {
     m_is_outdoors = outdoors;
 }
 
-void Block::setIsEdge(bool edge)
-{ 
+void Block::setIsEdge(bool edge) {
     m_is_edge = edge;
 }
 
-void Block::addCreature(const Object* creature)
-{
-    m_creatures.push_back(creature);
+void Block::addCreature(Object* creature) {
+    m_creatures.addObject(creature);
 }
 
-void Block::addPlant(const Object* plant)
-{
-    m_plants.push_back(plant);
+void Block::addPlant(Object* plant) { m_plants.addObject(plant); }
+
+void Block::removeCreature(Object* creature) { 
+    m_creatures.removeObject(creature);
 }
 
-void Block::removeCreature(const Object* creature)
-{ 
-    m_creatures.remove(creature);
-}
-
-void Block::removePlant(const Object* plant)
-{
-    m_plants.remove(plant);
-}
+void Block::removePlant(Object* plant) { m_plants.removeObject(plant); }
 
 } // walls

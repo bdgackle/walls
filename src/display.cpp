@@ -1,6 +1,5 @@
 /**
  *  @author Barry Gackle
- *  @author 4 July 2014
  */
 
 // C++ Standard Headers
@@ -30,22 +29,18 @@ Display::Display() :
     m_height(0),
     m_frame(NULL) {}
 
-Display::~Display()
-{
-    deleteFrame();
-}
+Display::~Display() { deleteFrame(); }
 
 void Display::draw(const World& world,
                    const MapLocation& upper_left,
                    int curs_x,
                    int curs_y,
-                   bool curs_visible)
-{
+                   bool curs_visible) {
     const Map& map = world.getMap();
     PlayerStatus player_status = world.getPlayer().getStatus();
     MapLocation player_location = world.getPlayer().getLocation();
-    const list<Object*>& creatures = world.getCreatures();
-    const list<Object*>& plants = world.getPlants();
+    const list<Object*>& creatures = world.getCreatures().getObjects();
+    const list<Object*>& plants = world.getPlants().getObjects();
 
     drawMap(map, upper_left);
     drawObjects(plants, upper_left);
@@ -55,35 +50,21 @@ void Display::draw(const World& world,
     drawCursor(curs_x, curs_y, curs_visible);
 }
 
-int Display::getHeight() const
-{
-    return m_height;
-}
+int Display::getHeight() const { return m_height; }
 
-int Display::getWidth() const
-{
-    return m_width;
-}
+int Display::getWidth() const { return m_width; }
 
-int Display::getCenterX() const
-{
-    return m_width / 2;
-}
+int Display::getCenterX() const { return m_width / 2; }
 
-int Display::getCenterY() const
-{
-    return m_height / 2;
-}
+int Display::getCenterY() const { return m_height / 2; }
 
-void Display::setDimensions(int width, int height)
-{
+void Display::setDimensions(int width, int height) {
     m_width = width;
     m_height = height;
     createFrame();
 }
 
-void Display::drawMap(const Map& map, const MapLocation& upper_left)
-{
+void Display::drawMap(const Map& map, const MapLocation& upper_left) {
     for (int x = 0; x < m_width; x++) {
         for (int y = 0; y < m_height; y++) {
             MapLocation next = upper_left.getRelative(x, y, 0);
@@ -102,8 +83,7 @@ void Display::drawMap(const Map& map, const MapLocation& upper_left)
     }
 }
 
-void Display::drawStatus(PlayerStatus status, const World& world)
-{
+void Display::drawStatus(PlayerStatus status, const World& world) {
     char line_two[40];
     char line_three[40];
     char line_four[40];
@@ -125,8 +105,7 @@ void Display::drawStatus(PlayerStatus status, const World& world)
 }
 
 void Display::drawPlayer(const MapLocation& location,
-                         const MapLocation& upper_left)
-{
+                         const MapLocation& upper_left) {
     int player_x = upper_left.getDistanceX(location);
     int player_y = upper_left.getDistanceY(location);
 
@@ -138,8 +117,7 @@ void Display::drawPlayer(const MapLocation& location,
 }
 
 void Display::drawObjects(const list<Object*>& objects,
-                            const MapLocation& upper_left)
-{
+                          const MapLocation& upper_left) {
     list<Object*>::const_iterator iter;
     for (iter = objects.begin(); iter != objects.end(); ++iter) {
   
@@ -157,8 +135,7 @@ void Display::drawObjects(const list<Object*>& objects,
     }
 }
 
-void Display::drawCursor(int curs_x, int curs_y, bool visible)
-{
+void Display::drawCursor(int curs_x, int curs_y, bool visible) {
     if (visible) {
         curs_set(1); // Cursor visible
         move(curs_y, curs_x); // Move ncurses cursor to track logical cursor
@@ -167,8 +144,7 @@ void Display::drawCursor(int curs_x, int curs_y, bool visible)
     }
 }
 
-void Display::drawTile(int x, int y, char tile, int color)
-{
+void Display::drawTile(int x, int y, char tile, int color) {
     if (tile != m_frame[getIndex(x,y)]) {
         attron(color);
         mvaddch(y, x, tile);
@@ -177,115 +153,107 @@ void Display::drawTile(int x, int y, char tile, int color)
     }
 }
 
-int Display::getIndex(int x, int y) const
-{
-    return x + y * m_width;
-}
+int Display::getIndex(int x, int y) const { return x + y * m_width; }
 
-char Display::getDisplayChar(BlockType type)
-{
+char Display::getDisplayChar(BlockType type) {
     switch(type) {
-        case NOT_ON_MAP:
-            return NOT_ON_MAP_CHAR;
-            break;
+    case NOT_ON_MAP:
+        return NOT_ON_MAP_CHAR;
+        break;
 
-        case GROUND:
-            return GROUND_CHAR;
-            break;
+    case GROUND:
+        return GROUND_CHAR;
+        break;
 
-        case ROCK:
-            return ROCK_CHAR;
-            break;
+    case ROCK:
+        return ROCK_CHAR;
+        break;
 
-        case SAPLING:
-            return SAPLING_CHAR;
-            break;
+    case SAPLING:
+        return SAPLING_CHAR;
+        break;
 
-        case WALL:
-            return WALL_CHAR;
-            break;
+    case WALL:
+        return WALL_CHAR;
+        break;
 
-        case DOOR:
-            return DOOR_CHAR;
-            break;
+    case DOOR:
+        return DOOR_CHAR;
+        break;
 
-        case FLOOR:
-            return FLOOR_CHAR;
-            break;
+    case FLOOR:
+        return FLOOR_CHAR;
+        break;
 
-        default:
-            return INVALID_CHAR;
+    default:
+        return INVALID_CHAR;
     }
 }
 
-int Display::getDisplayColor(BlockType type)
-{
+int Display::getDisplayColor(BlockType type) {
     switch(type) {
-        case NOT_ON_MAP:
-            return NOT_ON_MAP_COLOR;
-            break;
+    case NOT_ON_MAP:
+        return NOT_ON_MAP_COLOR;
+        break;
 
-        case GROUND:
-            return GROUND_COLOR;
-            break;
+    case GROUND:
+        return GROUND_COLOR;
+        break;
 
-        case ROCK:
-            return ROCK_COLOR;
-            break;
+    case ROCK:
+        return ROCK_COLOR;
+        break;
 
-        case SAPLING:
-            return SAPLING_COLOR;
-            break;
+    case SAPLING:
+        return SAPLING_COLOR;
+        break;
 
-        case WALL:
-            return WALL_COLOR;
-            break;
+    case WALL:
+        return WALL_COLOR;
+        break;
 
-        case DOOR:
-            return DOOR_COLOR;
-            break;
+    case DOOR:
+        return DOOR_COLOR;
+        break;
 
-        case FLOOR:
-            return FLOOR_COLOR;
-            break;
+    case FLOOR:
+        return FLOOR_COLOR;
+        break;
 
-        default:
-            return INVALID_COLOR;
+    default:
+        return INVALID_COLOR;
     }
 }
 
-string Display::getStatusString(PlayerStatus status)
-{
+string Display::getStatusString(PlayerStatus status) {
     switch(status) {
-        case HAPPY:
-            return PLAYER_STATUS_HAPPY_STRING;
-            break;
+    case HAPPY:
+        return PLAYER_STATUS_HAPPY_STRING;
+        break;
 
-        case VENGEFUL:
-            return PLAYER_STATUS_VENGEFUL_STRING;
-            break;
+    case VENGEFUL:
+        return PLAYER_STATUS_VENGEFUL_STRING;
+        break;
 
-        case SMELLS_FERRET:
-            return PLAYER_STATUS_SMELLS_FERRET_STRING;
-            break;
+    case SMELLS_FERRET:
+        return PLAYER_STATUS_SMELLS_FERRET_STRING;
+        break;
 
-        case INVADE_FERRET:
-            return PLAYER_STATUS_INVADE_FERRET_STRING;
-            break;
+    case INVADE_FERRET:
+        return PLAYER_STATUS_INVADE_FERRET_STRING;
+        break;
 
-        default:
-            return PLAYER_STATUS_NONE_STRING;
+    default:
+        return PLAYER_STATUS_NONE_STRING;
     }
 }
 
-void Display::createFrame()
-{
+void Display::createFrame() {
     deleteFrame();
     m_frame = new char[m_width * m_height];
 }
 
-void Display::deleteFrame()
-{
+void Display::deleteFrame() {
     if (m_frame != NULL)
         delete [] m_frame;
 }

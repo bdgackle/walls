@@ -10,6 +10,7 @@
 
 // Internal Headers
 #include "game_constants.h"
+#include "object_list.h"
 
 namespace walls {
     class Object;
@@ -19,8 +20,7 @@ using std::list;
 
 namespace walls {
 
-class Block
-{
+class Block {
  public:
     Block();
     virtual ~Block();
@@ -36,17 +36,17 @@ class Block
     void setIsOutdoors(bool outdoors);
     void setIsEdge(bool edge);
 
-    void addCreature(const Object* creature);
-    void addPlant(const Object* plant);
-    void removeCreature(const Object* creature);
-    void removePlant(const Object* plant);
+    void addCreature(Object* creature);
+    void addPlant(Object* plant);
+    void removeCreature(Object* creature);
+    void removePlant(Object* plant);
 
  private:
     BlockType m_type;
     bool m_is_outdoors;
     bool m_is_edge;
-    list<const Object*> m_creatures;
-    list<const Object*> m_plants;
+    ObjectList m_creatures;
+    ObjectList m_plants;
 };
 
 } // walls

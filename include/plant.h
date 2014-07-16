@@ -15,8 +15,7 @@ namespace walls{
 
 namespace walls {
 
-class Plant : public Object
-{
+class Plant : public Object {
  public:
     Plant(World* world, const MapLocation& location);
     virtual ~Plant();

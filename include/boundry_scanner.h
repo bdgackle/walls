@@ -14,10 +14,11 @@
 
 using std::list;
 
-namespace walls
-{
+namespace walls {
+    class Map;
+}
 
-class Map;
+namespace walls {
 
 class BoundryScanner
 {

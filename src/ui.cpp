@@ -25,13 +25,11 @@ UserInterface::UserInterface(World* world) :
     m_world(world),
     m_display_upper_left(0,0,0) {}
 
-UserInterface::~UserInterface()
-{
+UserInterface::~UserInterface() {
     endwin(); // Undo all ncurses console configuration
 }
 
-void UserInterface::start()
-{
+void UserInterface::start() {
     centerPlayer();
 
     while (1) {
@@ -45,59 +43,56 @@ void UserInterface::start()
     }
 }
 
-void UserInterface::doCommand(Command command)
-{
-    switch(command)
-    {
-        case PLAYER_NORTH:
-            m_world->getPlayer()->move(0, -1, 0);
-            centerPlayer();
-            break;
+void UserInterface::doCommand(Command command) {
+    switch(command) {
+    case PLAYER_NORTH:
+        m_world->getPlayer()->move(0, -1, 0);
+        centerPlayer();
+        break;
 
-        case PLAYER_SOUTH:
-            m_world->getPlayer()->move(0, 1, 0);
-            centerPlayer();
-            break;
+    case PLAYER_SOUTH:
+        m_world->getPlayer()->move(0, 1, 0);
+        centerPlayer();
+        break;
 
-        case PLAYER_WEST:
-            m_world->getPlayer()->move(-1, 0, 0);
-            centerPlayer();
-            break;
+    case PLAYER_WEST:
+        m_world->getPlayer()->move(-1, 0, 0);
+        centerPlayer();
+        break;
 
-        case PLAYER_EAST:
-            m_world->getPlayer()->move(1, 0, 0);
-            centerPlayer();
-            break;
+    case PLAYER_EAST:
+        m_world->getPlayer()->move(1, 0, 0);
+        centerPlayer();
+        break;
 
-        case CAMERA_UP:
-            m_display_upper_left = m_display_upper_left.getRelative(0, 0, -1);
-            break;
+    case CAMERA_UP:
+        m_display_upper_left = m_display_upper_left.getRelative(0, 0, -1);
+        break;
 
-        case CAMERA_DOWN:
-            m_display_upper_left = m_display_upper_left.getRelative(0, 0, 1);
-            break;
+    case CAMERA_DOWN:
+        m_display_upper_left = m_display_upper_left.getRelative(0, 0, 1);
+        break;
 
-        case ADD_WALL:
-            m_world->getMap()->getBlock(getCursorLocation())->setType(WALL);
-            m_world->setBoundriesDirty();
-            break;
+    case ADD_WALL:
+        m_world->getMap()->getBlock(getCursorLocation())->setType(WALL);
+        m_world->setBoundriesDirty();
+        break;
 
-        case ADD_GROUND:
-            m_world->getMap()->getBlock(getCursorLocation())->setType(GROUND);
-            m_world->setBoundriesDirty();
-            break;
+    case ADD_GROUND:
+        m_world->getMap()->getBlock(getCursorLocation())->setType(GROUND);
+        m_world->setBoundriesDirty();
+        break;
 
-        case ADD_DOOR:
-            m_world->getMap()->getBlock(getCursorLocation())->setType(DOOR);
-            m_world->setBoundriesDirty();
-            break;
+    case ADD_DOOR:
+        m_world->getMap()->getBlock(getCursorLocation())->setType(DOOR);
+        m_world->setBoundriesDirty();
+        break;
     }
 
     m_world->update(1);
 }
 
-void UserInterface::centerPlayer()
-{
+void UserInterface::centerPlayer() {
     MapLocation player_loc = m_world->getPlayer()->getLocation();
 
     m_display_upper_left = player_loc.getRelative(-m_display.getCenterX(),
@@ -105,8 +100,7 @@ void UserInterface::centerPlayer()
                                                   0);
 }
 
-void UserInterface::init()
-{
+void UserInterface::init() {
     initscr();            // Initialize ncurses
     start_color();        // Use color
     cbreak();             // Place input in c-break mode
@@ -130,12 +124,11 @@ void UserInterface::init()
 
 int UserInterface::getDepth() const { return m_display_upper_left.getZ(); }
 
-MapLocation UserInterface::getCursorLocation() const
-{
-        int command_x = m_input.getCursorX() + m_display_upper_left.getX();
-        int command_y = m_input.getCursorY() + m_display_upper_left.getY();
+MapLocation UserInterface::getCursorLocation() const {
+    int command_x = m_input.getCursorX() + m_display_upper_left.getX();
+    int command_y = m_input.getCursorY() + m_display_upper_left.getY();
 
-        return MapLocation(command_x, command_y, getDepth());
+    return MapLocation(command_x, command_y, getDepth());
 }
 
 } // walls

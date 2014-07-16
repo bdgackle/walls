@@ -14,8 +14,7 @@ namespace walls{
  *  It is the responsibility of the caller to verify that the coordinates
  *  actually exist in the world that they refer to.
  */
-class MapLocation
-{
+class MapLocation {
  public:
     MapLocation();
     MapLocation(int x, int y, int z);

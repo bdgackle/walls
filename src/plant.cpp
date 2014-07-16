@@ -9,14 +9,15 @@
 namespace walls {
 
 Plant::Plant(World* world, const MapLocation& location) :
-    Object(world, location) {}
+    Object(world, location) {
+    m_world->getMap()->getBlock(getLocation())->addPlant(this);
+}
 
 Plant::~Plant() {}
 
 void Plant::die() {
-    getWorld()->getPlants()->remove(this);
-    getWorld()->getMap()->getBlock(getLocation())->removePlant(this);
-    delete this;
+    m_world->getMap()->getBlock(getLocation())->removePlant(this);
+    setIsDead();
 }
 
 } // walls

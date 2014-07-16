@@ -1,6 +1,5 @@
 /**
  *  @author Barry Gackle
- *  @author 29 June 2014
  */
 
 #ifndef PLAYER_H
@@ -10,14 +9,14 @@
 #include "maplocation.h"
 #include "game_constants.h"
 
-namespace walls
-{
+namespace walls {
+    class Map;
+    class World;
+}
 
-class Map;
-class World;
+namespace walls {
 
-class Player
-{
+class Player {
  public:
     Player(World* world);
     virtual ~Player();

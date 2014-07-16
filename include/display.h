@@ -1,6 +1,5 @@
 /*
  *  @author Barry Gackle
- *  @author 4 July 2014
  */
 
 #ifndef DISPLAY_H
@@ -13,18 +12,19 @@
 // Internal Headers
 #include "game_constants.h"
 
+namespace walls {
+    class World;
+    class Map;
+    class MapLocation;
+    class Object;
+}
+
 using std::string;
 using std::list;
 
-namespace walls{
+namespace walls {
 
-class World;
-class Map;
-class MapLocation;
-class Object;
-
-class Display
-{
+class Display {
  public:
     Display();
     virtual ~Display();

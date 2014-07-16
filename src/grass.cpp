@@ -21,8 +21,7 @@ Grass::Grass(World* world, const MapLocation& location) :
 
 Grass::~Grass() {}
 
-void Grass::update(int time)
-{
+void Grass::update(int time) {
     Object::update(time);
 
     int random_number = rand() % 1000;
@@ -37,24 +36,21 @@ void Grass::update(int time)
     }
 }
 
-char Grass::getDisplayChar() const
-{
+char Grass::getDisplayChar() const {
     if (m_flower)
         return ';';
     else
         return ',';
 }
 
-int Grass::getDisplayColor() const
-{
+int Grass::getDisplayColor() const {
     if (m_flower)
         return COLOR_PAIR(4);
     else
         return COLOR_PAIR(3);
 }
 
-void Grass::reproduce()
-{
+void Grass::reproduce() {
     seed(m_location.getRelative(0, -1, 0));
     seed(m_location.getRelative(0, 1, 0));
     seed(m_location.getRelative(1, 0, 0));
@@ -63,19 +59,16 @@ void Grass::reproduce()
     seed(m_location.getRelative(1, 1, 0));
     seed(m_location.getRelative(-1, -1, 0));
     seed(m_location.getRelative(-1, 1, 0));
-
     die();
 }
 
-void Grass::seed(const MapLocation& location)
-{
+void Grass::seed(const MapLocation& location) {
     int random_number = rand() % 4;
 
-    if ((random_number == 5) &&
+    if ((random_number == 0) &&
         (m_world->getMap()->exists(location)) &&
         (m_world->getMap()->getBlock(location)->getType() == GROUND) &&
-        (m_world->getMap()->getBlock(location)->getIsEmpty()))
-    {
+        (m_world->getMap()->getBlock(location)->getIsEmpty())) {
         Grass* newborn = new Grass(m_world, location);
         m_world->addPlant(newborn);
     }

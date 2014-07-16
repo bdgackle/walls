@@ -12,6 +12,7 @@
 #include "boundry_scanner.h"
 #include "player.h"
 #include "map.h"
+#include "object_list.h"
 
 namespace walls {
     class Object;
@@ -21,8 +22,7 @@ using std::list;
 
 namespace walls {
 
-class World
-{
+class World {
  public:
     World(int width, int height, int depth);
     virtual ~World();
@@ -31,8 +31,8 @@ class World
 
     const Map& getMap() const;
     const Player& getPlayer() const;
-    const list<Object*>& getCreatures() const;
-    const list<Object*>& getPlants() const;
+    const ObjectList& getCreatures() const;
+    const ObjectList& getPlants() const;
 
     int getTime() const;
     int getCreatureCount() const;
@@ -40,8 +40,8 @@ class World
 
     Map* getMap();
     Player* getPlayer();
-    list<Object*>* getCreatures();
-    list<Object*>* getPlants();
+    ObjectList* getCreatures();
+    ObjectList* getPlants();
 
     void addCreature(Object* creature);
     void addPlant(Object* plant);
@@ -51,8 +51,8 @@ class World
  private:
     Map m_map;
     Player m_player;
-    list<Object*> m_creatures;
-    list<Object*> m_plants;
+    ObjectList m_creatures;
+    ObjectList m_plants;
 
     BoundryScanner m_scanner;
     bool m_boundries_dirty;

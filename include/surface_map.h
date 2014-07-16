@@ -9,8 +9,7 @@
 
 namespace walls{
 
-class SurfaceMap
-{
+class SurfaceMap {
  public:
     SurfaceMap(int width, int height);
     virtual ~SurfaceMap();

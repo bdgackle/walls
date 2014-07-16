@@ -9,10 +9,9 @@
 // Internal Headers
 #include "game_constants.h"
 
-namespace walls{
+namespace walls {
 
-class InputHandler
-{
+class InputHandler {
  public:
     InputHandler();
     ~InputHandler();

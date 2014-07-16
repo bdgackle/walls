@@ -20,8 +20,7 @@ using std::list;
 
 namespace walls {
 
-class Map
-{
+class Map {
  public:
     Map(int width, int height, int depth);
     virtual ~Map();

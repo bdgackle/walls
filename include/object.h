@@ -15,8 +15,7 @@ namespace walls {
 
 namespace walls {
 
-class Object
-{
+class Object {
  public:
     Object(World* world, const MapLocation& location);
     virtual ~Object();
@@ -25,16 +24,22 @@ class Object
 
     virtual char getDisplayChar() const = 0;
     virtual int getDisplayColor() const = 0;
+    int getId() const;
+    bool getIsDead() const;
 
     MapLocation getLocation() const;
-    World* getWorld();
-
-    void setLocation(const MapLocation& location);
 
  protected:
+    void setLocation(const MapLocation& location);
+    void setIsDead();
+
     World* m_world;
     MapLocation m_location;
     int m_age;
+    int m_id;
+    bool m_is_dead;
+
+    static int m_next_id;
 };
 
 } // walls

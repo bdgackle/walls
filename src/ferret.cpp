@@ -10,8 +10,7 @@
 
 // Internal Headers
 #include "ferret.h"
-#include "block.h"
-#include "world.h"
+#include "maplocation.h"
 
 namespace walls {
 
@@ -20,8 +19,7 @@ Ferret::Ferret(World* world, const MapLocation& location) :
 
 Ferret::~Ferret() {}
 
-void Ferret::update(int time)
-{
+void Ferret::update(int time) {
     Object::update(time);
 
     int dir = rand() % 4;
@@ -36,14 +34,8 @@ void Ferret::update(int time)
         move(0, 1, 0);
 }
 
-char Ferret::getDisplayChar() const
-{
-    return 'f';
-}
+char Ferret::getDisplayChar() const { return 'f'; }
 
-int Ferret::getDisplayColor() const
-{
-    return COLOR_PAIR(2);
-}
+int Ferret::getDisplayColor() const { return COLOR_PAIR(2); }
 
 } // walls

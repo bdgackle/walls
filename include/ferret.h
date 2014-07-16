@@ -13,8 +13,7 @@ namespace walls{
 class World;
 class MapLocation;
 
-class Ferret : public Creature
-{
+class Ferret : public Creature {
  public:
     Ferret(World* world, const MapLocation & location);
     virtual ~Ferret();
