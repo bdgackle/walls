@@ -34,6 +34,9 @@ class Grass : public Plant {
     bool m_flower;
     int m_flower_time;
     int m_seed_time;
+    static const int k_flower_min;
+    static const int k_flower_max;
+    static const int k_seed_max;
 };
 
 } // walls

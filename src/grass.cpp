@@ -16,11 +16,15 @@
 
 namespace walls {
 
+const int Grass::k_flower_min = 1000;
+const int Grass::k_flower_max = 2000;
+const int Grass::k_seed_max   = 2200;
+
 Grass::Grass(World* world, const MapLocation& location) :
     m_flower(false),
     Plant(world, location) {
-    m_flower_time = rand() % 1000;
-    m_seed_time = rand() % 200;
+    m_flower_time = k_flower_min + rand() % (k_flower_max - k_flower_min);
+    m_seed_time = m_flower_time + (rand() % (k_seed_max - k_flower_max));
 }
 
 Grass::~Grass() {}
@@ -28,10 +32,10 @@ Grass::~Grass() {}
 void Grass::update(int time) {
     Object::update(time);
 
-    if (m_age > m_flower_time)
-        m_flower = true;
-    else if (m_age > m_seed_time)
+    if (m_age > m_seed_time)
         reproduce();
+    else if (m_age > m_flower_time)
+        m_flower = true;
 }
 
 char Grass::getDisplayChar() const {

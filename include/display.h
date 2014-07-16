@@ -51,6 +51,7 @@ class Display {
     void drawCursor(int curs_x, int curs_y, bool visible);
 
     void drawTile(int x, int y, char tile, int color = 8);
+    void outputFrame();
 
     int getIndex(int x, int y) const;
 

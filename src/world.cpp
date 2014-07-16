@@ -4,6 +4,7 @@
 
 // External Headers
 #include <stdio.h>
+#include <time.h>
 
 // Internal Headers
 #include "world.h"
@@ -25,6 +26,7 @@ World::World(int width, int height, int depth) :
 World::~World() {}
 
 void World::update(int time) {
+    clock_t start = clock();
     if (m_boundries_dirty) {
         m_scanner.updateBoundry();
         m_boundries_dirty = false;
@@ -34,6 +36,8 @@ void World::update(int time) {
     m_plants.update(time);
 
     m_time += time;
+    clock_t stop = clock();
+    sprintf(m_update_time, "% 7d", stop - start);
 }
 
 const Map& World::getMap() const { return m_map; }
@@ -49,6 +53,8 @@ int World::getTime() const { return m_time; }
 int World::getCreatureCount() const { return m_creatures.getCount(); }
 
 int World::getPlantCount() const { return m_plants.getCount(); }
+
+const char* World::getUpdateTime() const { return m_update_time; }
 
 Map* World::getMap() { return &m_map; }
 

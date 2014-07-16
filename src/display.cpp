@@ -95,7 +95,7 @@ void Display::drawStatus(PlayerStatus status, const World& world) {
     mvaddstr(1, 0, PLAYER_STATUS_NONE_STRING.c_str());
     mvaddstr(1, 0, line_two);
 
-    sprintf(line_three, "Creatures: %d", world.getCreatureCount());
+    sprintf(line_three, "Update: %s", world.getUpdateTime());
     mvaddstr(2, 0, PLAYER_STATUS_NONE_STRING.c_str());
     mvaddstr(2, 0, line_three);
 
