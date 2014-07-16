@@ -32,6 +32,8 @@ class Grass : public Plant {
 
  private:
     bool m_flower;
+    int m_flower_time;
+    int m_seed_time;
 };
 
 } // walls
