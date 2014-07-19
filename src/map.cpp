@@ -7,7 +7,6 @@
 
 // C++ Standard Headers
 #include <list>
-#include <stdexcept>
 
 // Internal Headers
 #include "map.h"
@@ -31,6 +30,7 @@ Map::Map(int width, int height, int depth) :
     m_d_bound(depth - 1),
     m_block_count(m_height * m_width * m_depth) {
     m_blocks = new Block[m_block_count];
+    m_invalid_block.setType(NOT_ON_MAP);
     MapLocation::setDimensions(m_width, m_height, m_depth);
 
     for (int z = m_u_bound; z < m_depth; z++) {
@@ -45,10 +45,7 @@ Map::Map(int width, int height, int depth) :
     }
 }
 
-Map::~Map() {
-    if (m_blocks != NULL)
-        delete [] m_blocks;
-}
+Map::~Map() { delete [] m_blocks; }
 
 int Map::getHeight() const { return m_height; }
 
@@ -61,21 +58,17 @@ int Map::getBlockCount() const { return m_block_count; }
 int Map::getMaxIndex() const { return m_block_count - 1; }
 
 const Block& Map::getBlock(const MapLocation& location) const {
-    int index = location.getIndex();
-
-    if (!exists(index))
-        throw std::runtime_error("Attempt to get non-existant block.\n");
-
-    return m_blocks[index];
+    if (exists(location))
+        return m_blocks[location.getIndex()];
+    else
+        return m_invalid_block;
 }
 
 Block* Map::getBlock(const MapLocation& location) {
-    int index = location.getIndex();
-
-    if (!exists(index))
-        throw std::runtime_error("Attempt to get non-existant block.\n");
-
-    return getBlock(index);
+    if (exists(location))
+        return getBlock(location.getIndex());
+    else
+        return &m_invalid_block;
 }
 
 const Block& Map::getBlock(int index) const { return m_blocks[index]; }

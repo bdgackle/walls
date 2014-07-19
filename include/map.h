@@ -49,6 +49,7 @@ class Map {
 
  private:
     Block* m_blocks;
+    Block m_invalid_block;
     const int m_width;
     const int m_height;
     const int m_depth;
