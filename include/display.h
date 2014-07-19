@@ -49,6 +49,7 @@ class Display {
     void drawObjects(const list<Object*>& objects,
                      const MapLocation& upper_left);
     void drawCursor(int curs_x, int curs_y, bool visible);
+    void updateScreen();
 
     void drawTile(int x, int y, char tile, int color = 8);
     void outputFrame();
@@ -63,14 +64,17 @@ class Display {
     static int getDisplayColor(BlockType type);
     static string getStatusString(PlayerStatus status);
 
-    void createFrame();
-    void deleteFrame();
+    void createBuffers();
+    void deleteBuffers();
 
  private:
     int m_width;
     int m_height;
 
-    char* m_frame;
+    char* m_display_frame;
+    int* m_display_colors;
+    char* m_buffer_frame;
+    int* m_buffer_colors;
 };
 
 } // walls
