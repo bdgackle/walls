@@ -54,6 +54,10 @@ class Display {
     void outputFrame();
 
     int getIndex(int x, int y) const;
+    bool isOnScreen(const MapLocation& location,
+                    const MapLocation& upper_left,
+                    int* screen_x,
+                    int* screen_y);
 
     static char getDisplayChar(BlockType type);
     static int getDisplayColor(BlockType type);

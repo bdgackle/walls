@@ -68,17 +68,9 @@ void Display::drawMap(const Map& map, const MapLocation& upper_left) {
     for (int x = 0; x < m_width; x++) {
         for (int y = 0; y < m_height; y++) {
             MapLocation next = upper_left.getRelative(x, y, 0);
-            if (map.exists(next)) {
-                const Block& block = map.getBlock(next);
-                BlockType type = block.getType();
-                drawTile(x, y, getDisplayChar(type), getDisplayColor(type));
-            }
-            else {
-                drawTile(x,
-                         y,
-                         getDisplayChar(NOT_ON_MAP),
-                         getDisplayColor(NOT_ON_MAP));
-            }
+            const Block& block = map.getBlock(next);
+            BlockType type = block.getType();
+            drawTile(x, y, getDisplayChar(type), getDisplayColor(type));
         }
     }
 }
@@ -111,31 +103,23 @@ void Display::drawStatus(PlayerStatus status, const World& world) {
 
 void Display::drawPlayer(const MapLocation& location,
                          const MapLocation& upper_left) {
-    int player_x = upper_left.getDistanceX(location);
-    int player_y = upper_left.getDistanceY(location);
-
-    // Make sure player is actually on the screen
-    if ((player_x >= 0) && (player_x < m_width) &&
-        (player_y >= 0) && (player_y < m_height)) {
-        drawTile(player_x, player_y, PLAYER_CHAR);
-    }
+    int x;
+    int y;
+    if (isOnScreen(location, upper_left, &x, &y))
+        drawTile(x, y, PLAYER_CHAR);
 }
 
 void Display::drawObjects(const list<Object*>& objects,
                           const MapLocation& upper_left) {
     list<Object*>::const_iterator iter;
     for (iter = objects.begin(); iter != objects.end(); ++iter) {
-  
+        int x;
+        int y;
         char c = (*iter)->getDisplayChar();
         int color = (*iter)->getDisplayColor();
-        MapLocation m = (*iter)->getLocation();
-
-        int object_x = upper_left.getDistanceX(m);
-        int object_y = upper_left.getDistanceY(m);
-
-        if ((object_x >= 0) && (object_x < m_width) &&
-            (object_y >= 0) && (object_y < m_height)) {
-            drawTile(object_x, object_y, c, color);
+        MapLocation loc = (*iter)->getLocation();
+        if (isOnScreen(loc, upper_left, &x, &y)) {
+            drawTile(x, y, c, color);
         }
     }
 }
@@ -159,6 +143,22 @@ void Display::drawTile(int x, int y, char tile, int color) {
 }
 
 int Display::getIndex(int x, int y) const { return x + y * m_width; }
+
+bool Display::isOnScreen(const MapLocation& loc,
+                         const MapLocation& ul,
+                         int* screen_x,
+                         int* screen_y){
+    *screen_x = ul.getDistanceX(loc);
+    *screen_y = ul.getDistanceY(loc);
+    int screen_z = ul.getDistanceZ(loc);
+
+    if ((*screen_x >= 0) && (*screen_x < m_width) &&
+        (*screen_y >= 0) && (*screen_y < m_height) &&
+        (screen_z == 0))
+        return true;
+    else
+        return false;
+}
 
 char Display::getDisplayChar(BlockType type) {
     switch(type) {
