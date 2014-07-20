@@ -25,11 +25,13 @@ UserInterface::UserInterface(World* world) :
     m_world(world),
     m_display_upper_left(0,0,0) {}
 
-UserInterface::~UserInterface() {
+UserInterface::~UserInterface()
+{
     endwin(); // Undo all ncurses console configuration
 }
 
-void UserInterface::start() {
+void UserInterface::start()
+{
     centerPlayer();
 
     while (1) {
@@ -43,7 +45,8 @@ void UserInterface::start() {
     }
 }
 
-void UserInterface::doCommand(Command command) {
+void UserInterface::doCommand(Command command)
+{
     switch(command) {
     case PLAYER_NORTH:
         m_world->getPlayer()->move(0, -1, 0);
@@ -93,7 +96,8 @@ void UserInterface::doCommand(Command command) {
         m_world->update(1);
 }
 
-void UserInterface::centerPlayer() {
+void UserInterface::centerPlayer()
+{
     MapLocation player_loc = m_world->getPlayer()->getLocation();
 
     m_display_upper_left = player_loc.getRelative(-m_display.getCenterX(),
@@ -101,7 +105,8 @@ void UserInterface::centerPlayer() {
                                                   0);
 }
 
-void UserInterface::adjustPlayer() {
+void UserInterface::adjustPlayer()
+{
     MapLocation loc = m_world->getPlayer()->getLocation();
 
     int move_x = 0;
@@ -128,7 +133,8 @@ void UserInterface::adjustPlayer() {
     m_display_upper_left = m_display_upper_left.getRelative(move_x, move_y, 0);
 }
 
-void UserInterface::init() {
+void UserInterface::init()
+{
     initscr();            // Initialize ncurses
     start_color();        // Use color
     cbreak();             // Place input in c-break mode
@@ -150,9 +156,13 @@ void UserInterface::init() {
     centerPlayer();
 }
 
-int UserInterface::getDepth() const { return m_display_upper_left.getZ(); }
+int UserInterface::getDepth() const
+{
+    return m_display_upper_left.getZ();
+}
 
-MapLocation UserInterface::getCursorLocation() const {
+MapLocation UserInterface::getCursorLocation() const
+{
     int command_x = m_input.getCursorX() + m_display_upper_left.getX();
     int command_y = m_input.getCursorY() + m_display_upper_left.getY();
 

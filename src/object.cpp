@@ -16,15 +16,35 @@ Object::Object(World* world, const MapLocation& location) :
 
 Object::~Object() {}
 
-MapLocation Object::getLocation() const { return m_location; } 
+MapLocation Object::getLocation() const
+{
+    return m_location;
+} 
 
-bool Object::getIsDead() const { return m_is_dead; }
+bool Object::getIsDead() const
+{
+    return m_is_dead;
+}
 
-void Object::setLocation(const MapLocation& location) { m_location = location; }
+int Object::getAge() const
+{
+    return m_age;
+}
 
-void Object::setIsDead() { m_is_dead = true; }
+void Object::setLocation(const MapLocation& location)
+{
+    m_location = location;
+}
 
-void Object::update(int time) { m_age += time; }
+void Object::setIsDead()
+{
+    m_is_dead = true;
+}
+
+void Object::update(int time)
+{
+    m_age += time;
+}
 
 int Object::m_next_id = 0;
 

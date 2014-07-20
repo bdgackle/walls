@@ -19,6 +19,7 @@
 #include "world.h"
 #include "block.h"
 #include "creature.h"
+#include "ferret.h"
 
 using std::string;
 using std::list;
@@ -60,7 +61,7 @@ void Display::draw(const World& world,
 
     drawDebugBlank();
     drawStatus(player_status, world);
-    if (curs_visible) drawDebug(world, upper_left, curs_x, curs_y);
+    drawDebug(world, upper_left, curs_x, curs_y);
     drawCursor(curs_x, curs_y, curs_visible);
 }
 
@@ -69,15 +70,24 @@ void Display::drawDebug(const World& world,
                         int curs_x,
                         int curs_y)
 {
-    MapLocation curs_loc = upper_left.getRelative(curs_x, curs_y, 0);
     char line_one[40];
     char line_two[40];
+    char line_three[40];
+    char line_four[40];
+    char name[40]; *name = '\0';
+
+    int food = 0;
+    int age = 0;
+
+    MapLocation curs_loc = upper_left.getRelative(curs_x, curs_y, 0);
     Block curs = world.getMap().getBlock(curs_loc);
+
     if (curs.getHasCreature()) {
-        sprintf(line_one, "FEWWET!!!");
-        mvaddstr(0, 85, line_one);
         Creature* cre = (Creature *)(curs.getCreature());
         MapLocation cre_loc = cre->getTarget();
+        sprintf(name, "FEWWET!!");
+        food = cre->getFood();
+        age = cre->getAge();
 
         int cre_x;
         int cre_y;
@@ -88,10 +98,21 @@ void Display::drawDebug(const World& world,
     }
 
     if (curs.getHasPrey()) {
-        sprintf(line_one, "BUNNY!!!!!");
+        sprintf(name,"BUNNY!!!!!");
         mvaddstr(0, 85, line_one);
     }
 
+    sprintf(line_one, "Critter: %s", name);
+    mvaddstr(0, 85, line_one);
+    
+    sprintf(line_two, "FOOD: %d", food);
+    mvaddstr(1, 85, line_two);
+
+    sprintf(line_three, "AGE: %d", age);
+    mvaddstr(2, 85, line_three);
+
+    sprintf(line_four, "Update: %d", world.getUpdateTime());
+    mvaddstr(3, 85, line_four);
 }
 
 void Display::drawDebugBlank()
@@ -161,11 +182,6 @@ void Display::drawStatus(PlayerStatus status, const World& world)
     sprintf(line_three, "Bunnies: %d", world.getPreyCount());
     mvaddstr(2, 0, PLAYER_STATUS_NONE_STRING.c_str());
     mvaddstr(2, 0, line_three);
-/*
-    sprintf(line_three, "Update: %s", world.getUpdateTime());
-    mvaddstr(2, 0, PLAYER_STATUS_NONE_STRING.c_str());
-    mvaddstr(2, 0, line_three);
-*/
 
     sprintf(line_four, "Plants: %d", world.getPlantCount());
     mvaddstr(3, 0, PLAYER_STATUS_NONE_STRING.c_str());

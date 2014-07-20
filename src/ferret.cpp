@@ -16,9 +16,8 @@
 namespace walls {
 
 Ferret::Ferret(World* world, const MapLocation& location) :
-    Creature(world, location, false),
-    m_visual_range(30),
-    m_food(500) {}
+    Creature(world, location, false, INITIAL_FOOD_VALUE),
+    m_visual_range(VISUAL_RANGE) {}
 
 Ferret::~Ferret() {}
 
@@ -29,21 +28,21 @@ void Ferret::update(int time)
     if (m_food < 0)
         die();
 
-    if (m_food > 2500) {
+    if (m_food > BREED_FOOD_VALUE) {
         breed();
-        m_food = 1000;
+        m_food = POST_BREED_FOOD_VALUE;
     }
 
     if ((m_world->getMap()->getBlock(getLocation())->getHasPrey())) {
         m_world->getMap()->getBlock(getLocation())->getPrey()->die();
-        m_food += 100;
+        m_food += BUNNY_NUTRITION;
     }
     else {
-        m_food--;
+        m_food -= MOVE_NUTRITION;
         moveTowardClosestPrey(m_visual_range);
     }
 
-    // Prevent all ferrets from clumping on single square
+    // Hack to prevent all ferrets from clumping on single square
     if ((m_food % 10) == 0)
         moveRandom();
 }

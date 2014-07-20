@@ -17,13 +17,18 @@ namespace walls {
 
 class Creature : public Object {
  public:
-    Creature(World* world, const MapLocation& location, bool is_prey);
+    Creature(World* world,
+             const MapLocation& location,
+             bool is_prey,
+             int initial_food);
+
     virtual ~Creature();
 
     virtual void update(int time);
 
     virtual void die();
     virtual bool getIsPrey();
+    int getFood() const;
     MapLocation getTarget();
 
  protected:
@@ -34,6 +39,7 @@ class Creature : public Object {
     virtual MapLocation findClosestPrey(int range);
     MapLocation m_target;
     const bool m_is_prey;
+    int m_food;
 };
 
 } // walls

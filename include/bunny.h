@@ -23,9 +23,6 @@ class Bunny : public Creature {
 
     char getDisplayChar() const;
     int getDisplayColor() const;
-
- private:
-    int m_food;
 };
 
 } // walls

@@ -21,13 +21,15 @@ InputHandler::InputHandler() :
 
 InputHandler::~InputHandler() {}
 
-void InputHandler::init(int width, int height, int curs_x, int curs_y) {
+void InputHandler::init(int width, int height, int curs_x, int curs_y)
+{
     m_screen_width = width;
     m_screen_height = height;
     moveCursor(curs_x, curs_y);
 }
 
-Command InputHandler::getInput() {
+Command InputHandler::getInput()
+{
     int raw_input = getch();
     Command command;
 
@@ -43,18 +45,26 @@ Command InputHandler::getInput() {
     return command;
 }
 
-int InputHandler::getCursorX() const { return m_cursor_x; }
+int InputHandler::getCursorX() const
+{
+    return m_cursor_x;
+}
 
-int InputHandler::getCursorY() const { return m_cursor_y; }
+int InputHandler::getCursorY() const
+{
+    return m_cursor_y;
+}
 
-bool InputHandler::getCursorVisible() const {
+bool InputHandler::getCursorVisible() const
+{
     if (m_mode == EDIT)
         return true;
     else
         return false;
 }
 
-Command InputHandler::processInputNormal(int input) {
+Command InputHandler::processInputNormal(int input)
+{
     switch(input) {
     case DOWN_1:
     case DOWN_2:
@@ -77,7 +87,8 @@ Command InputHandler::processInputNormal(int input) {
     }
 }
 
-Command InputHandler::processInputEdit(int input) {
+Command InputHandler::processInputEdit(int input)
+{
     switch(input) {
     case DOWN_1:
     case DOWN_2:
@@ -122,17 +133,16 @@ Command InputHandler::processInputEdit(int input) {
    }
 }
 
-Command InputHandler::processInputCommon(int input) {
+Command InputHandler::processInputCommon(int input)
+{
     switch(input) {
     case MODE_TOGGLE_1:
     case MODE_TOGGLE_2:
-        if (m_mode == NORMAL)
-        {
+        if (m_mode == NORMAL) {
             m_mode = EDIT;
             return NO_COMMAND;
         }
-        else
-        {
+        else {
             m_mode = NORMAL;
             return NO_COMMAND;
         }
@@ -141,7 +151,8 @@ Command InputHandler::processInputCommon(int input) {
     }
 }
 
-void InputHandler::moveCursor(int delta_x, int delta_y) {
+void InputHandler::moveCursor(int delta_x, int delta_y)
+{
     m_cursor_x += delta_x;
     m_cursor_y += delta_y;
 

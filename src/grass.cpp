@@ -22,14 +22,16 @@ const int Grass::k_seed_max   = 150;
 
 Grass::Grass(World* world, const MapLocation& location) :
     m_flower(false),
-    Plant(world, location) {
+    Plant(world, location)
+{
     m_flower_time = k_flower_min + rand() % (k_flower_max - k_flower_min);
     m_seed_time = m_flower_time + (rand() % (k_seed_max - k_flower_max));
 }
 
 Grass::~Grass() {}
 
-void Grass::update(int time) {
+void Grass::update(int time)
+{
     Object::update(time);
 
     if (m_age > m_seed_time)
@@ -38,21 +40,24 @@ void Grass::update(int time) {
         m_flower = true;
 }
 
-char Grass::getDisplayChar() const {
+char Grass::getDisplayChar() const
+{
     if (m_flower)
         return ';';
     else
         return ',';
 }
 
-int Grass::getDisplayColor() const {
+int Grass::getDisplayColor() const
+{
     if (m_flower)
         return COLOR_PAIR(4);
     else
         return COLOR_PAIR(3);
 }
 
-void Grass::reproduce() {
+void Grass::reproduce()
+{
     uint8_t random_number = rand() % 255;
 
     if (random_number & 0x01)
@@ -82,7 +87,8 @@ void Grass::reproduce() {
     die();
 }
 
-void Grass::seed(const MapLocation& location) {
+void Grass::seed(const MapLocation& location)
+{
     if ((m_world->getMap()->exists(location)) &&
         (m_world->getMap()->getBlock(location)->getType() == GROUND) &&
         !(m_world->getMap()->getBlock(location)->getHasPlant())) {

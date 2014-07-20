@@ -10,7 +10,8 @@ namespace walls {
 
 SurfaceMap::SurfaceMap(int width, int height) :
     m_width(width),
-    m_height(height) {
+    m_height(height)
+{
     m_count = m_width * m_height;
     m_surface = new int[m_count];
 
@@ -19,25 +20,33 @@ SurfaceMap::SurfaceMap(int width, int height) :
     }
 }
 
-SurfaceMap::~SurfaceMap() { delete [] m_surface; }
+SurfaceMap::~SurfaceMap()
+{
+    delete [] m_surface;
+}
 
-int SurfaceMap::getSurfaceDepth(const MapLocation& location) const {
+int SurfaceMap::getSurfaceDepth(const MapLocation& location) const
+{
     return getDepth(location.getX(), location.getY());
 }
 
-bool SurfaceMap::isOnSurface(const MapLocation& location) const {
+bool SurfaceMap::isOnSurface(const MapLocation& location) const
+{
     return getSurfaceDepth(location) == location.getZ();
 }
 
-bool SurfaceMap::isBelowSurface(const MapLocation& location) const {
+bool SurfaceMap::isBelowSurface(const MapLocation& location) const
+{
     return getSurfaceDepth(location) < location.getZ();
 }
 
-bool SurfaceMap::isAboveSurface(const MapLocation& location) const {
+bool SurfaceMap::isAboveSurface(const MapLocation& location) const
+{
     return getSurfaceDepth(location) > location.getZ();
 }
 
-int SurfaceMap::getDepth(int x, int y) const {
+int SurfaceMap::getDepth(int x, int y) const
+{
     int index = getIndex(x,y);
 
     if ((index < m_count) && (index > 0))
@@ -46,7 +55,8 @@ int SurfaceMap::getDepth(int x, int y) const {
         return -1;
 }
 
-int SurfaceMap::getIndex(int x, int y) const {
+int SurfaceMap::getIndex(int x, int y) const
+{
     return y * m_width + x;
 }
 

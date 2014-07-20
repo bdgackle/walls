@@ -39,7 +39,7 @@ class World {
     int getCreatureCount() const;
     int getPlantCount() const;
     int getPreyCount() const;
-    const char* getUpdateTime() const;
+    int getUpdateTime() const;
 
     Map* getMap();
     Player* getPlayer();
@@ -64,7 +64,7 @@ class World {
     bool m_boundries_dirty;
 
     int m_time;
-    char m_update_time[20];
+    int m_update_time;
 };
 
 } // walls

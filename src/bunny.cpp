@@ -16,12 +16,12 @@
 namespace walls {
 
 Bunny::Bunny(World* world, const MapLocation& location) :
-    Creature(world, location, true),
-    m_food(100) {}
+    Creature(world, location, true, 100) {}
 
 Bunny::~Bunny() {}
 
-void Bunny::update(int time) {
+void Bunny::update(int time)
+{
     Creature::update(time);
 
 
@@ -76,12 +76,19 @@ void Bunny::update(int time) {
     }
 }
 
-void Bunny::breed() {
+void Bunny::breed()
+{
     m_world->addPrey(new Bunny(m_world, getLocation()));
 }
 
-char Bunny::getDisplayChar() const { return 'b'; }
+char Bunny::getDisplayChar() const
+{
+    return 'b';
+}
 
-int Bunny::getDisplayColor() const { return COLOR_PAIR(5); }
+int Bunny::getDisplayColor() const
+{
+    return COLOR_PAIR(5);
+}
 
 } // walls

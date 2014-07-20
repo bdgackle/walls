@@ -25,6 +25,7 @@ class Object {
     virtual char getDisplayChar() const = 0;
     virtual int getDisplayColor() const = 0;
     int getId() const;
+    int getAge() const;
     bool getIsDead() const;
 
     MapLocation getLocation() const;

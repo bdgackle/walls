@@ -13,10 +13,12 @@ namespace walls {
 
 Creature::Creature(World* world,
                    const MapLocation& location,
-                   bool is_prey) :
+                   bool is_prey,
+                   int initial_food) :
     Object(world, location),
     m_is_prey(is_prey),
-    m_target(0, 0, 0)
+    m_target(0, 0, 0),
+    m_food(initial_food)
 {
     if (m_is_prey)
         m_world->getMap()->getBlock(getLocation())->addPrey(this);
@@ -43,6 +45,11 @@ void Creature::die()
 bool Creature::getIsPrey()
 {
     return m_is_prey;
+}
+
+int Creature::getFood() const
+{
+    return m_food;
 }
 
 MapLocation Creature::getTarget()
