@@ -71,6 +71,7 @@ class World {
     mutable clock_t m_start;
     mutable clock_t m_stop;
     mutable int m_update_time;
+    mutable int m_averaged_time;
 };
 
 } // walls

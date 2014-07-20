@@ -127,9 +127,10 @@ void Creature::move(int d_x, int d_y, int d_z)
 //        the center, and stopped at the first creature, since we'd search
 //        a lot fewer spots.  It is more complex that way, though, so will only
 //        go that route if this becomes a hot spot.
-// PERF: 250
+// PERF: 140 @ -O2, 350 @ -O0
 MapLocation Creature::findClosestPrey(int range)
 {
+    m_world->startClock();
     list<MapLocation> adjacent;
     int closest_critter = range * 3 + 1;
     MapLocation closest_critter_loc = m_location;
@@ -152,6 +153,7 @@ MapLocation Creature::findClosestPrey(int range)
         }
     }
 
+    m_world->stopClock();
     return closest_critter_loc;
 }
 

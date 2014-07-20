@@ -22,7 +22,8 @@ World::World(int width, int height, int depth) :
     m_boundries_dirty(false), // For debugging purposes only
     m_player(this),
     m_time(0),
-    m_update_time(0)
+    m_update_time(0),
+    m_averaged_time(0)
 {
     m_player.setLocation(MapLocation(width/2, height/2, 0));
 }
@@ -90,7 +91,7 @@ int World::getPreyCount() const
 
 int World::getUpdateTime() const
 {
-    return m_update_time;
+    return m_averaged_time;
 }
 
 Map* World::getMap()
@@ -141,8 +142,14 @@ void World::startClock() const
 
 void World::stopClock() const
 {
+    static int samples = 0;
     m_stop = clock();
     m_update_time = m_stop - m_start;
+
+    if (samples < 100)
+        samples++;
+
+    m_averaged_time += (m_update_time - m_averaged_time)/samples;
 }
 
 void World::setBoundriesDirty()
