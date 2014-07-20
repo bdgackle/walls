@@ -47,8 +47,8 @@ int main()
     }
 
     // Seed the world with some random ferrets
-    for (int i = 0; i < 500; i++) {
-   //     world.addCreature(new Ferret(&world, MapLocation(i,i,0)));
+    for (int i = 0; i < 50; i++) {
+         world.addCreature(new Ferret(&world, MapLocation(i,i,0)));
     }
     world.addCreature(new Ferret(&world, MapLocation(100,105,0)));
 
