@@ -133,11 +133,11 @@ void Creature::move(int d_x, int d_y, int d_z)
 // PERF: 140, 350
 MapLocation Creature::findClosestPrey(int range)
 {
+    list<MapLocation> adjacent;
     for (int dist = 1; dist <= range; dist++) {
-        list<MapLocation> adjacent;
-        m_world->getMap()->getAdjacent(m_location, &adjacent, range);
+        m_world->getMap()->getAdjacent(m_location, &adjacent, dist);
 
-       while (adjacent.size() > 0) {
+        while (adjacent.size() > 0) {
             MapLocation loc = adjacent.back();
             adjacent.pop_back();
             if (m_world->getMap()->getBlock(loc)->getHasPrey()) {
