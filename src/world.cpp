@@ -37,7 +37,9 @@ void World::update(int time)
         m_boundries_dirty = false;
     }
 
+    startClock();
     m_creatures.update(time);
+    stopClock();
     m_plants.update(time);
     m_prey.update(time);
 

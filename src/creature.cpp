@@ -133,7 +133,6 @@ void Creature::move(int d_x, int d_y, int d_z)
 // PERF: 140, 350
 MapLocation Creature::findClosestPrey(int range)
 {
-    m_world->startClock();
     for (int dist = 1; dist <= range; dist++) {
         list<MapLocation> adjacent;
         m_world->getMap()->getAdjacent(m_location, &adjacent, range);
@@ -146,7 +145,6 @@ MapLocation Creature::findClosestPrey(int range)
             }
         }
     }
-    m_world->stopClock();
 
     // No prey found in range
     return m_location;
