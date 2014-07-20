@@ -47,22 +47,22 @@ void UserInterface::doCommand(Command command) {
     switch(command) {
     case PLAYER_NORTH:
         m_world->getPlayer()->move(0, -1, 0);
-        centerPlayer();
+        adjustPlayer();
         break;
 
     case PLAYER_SOUTH:
         m_world->getPlayer()->move(0, 1, 0);
-        centerPlayer();
+        adjustPlayer();
         break;
 
     case PLAYER_WEST:
         m_world->getPlayer()->move(-1, 0, 0);
-        centerPlayer();
+        adjustPlayer();
         break;
 
     case PLAYER_EAST:
         m_world->getPlayer()->move(1, 0, 0);
-        centerPlayer();
+        adjustPlayer();
         break;
 
     case CAMERA_UP:
@@ -98,6 +98,33 @@ void UserInterface::centerPlayer() {
     m_display_upper_left = player_loc.getRelative(-m_display.getCenterX(),
                                                   -m_display.getCenterY(),
                                                   0);
+}
+
+void UserInterface::adjustPlayer() {
+    MapLocation loc = m_world->getPlayer()->getLocation();
+
+    int move_x = 0;
+    int move_y = 0;
+
+    int min_x = (m_display.getWidth() / 4);
+    int max_x = (m_display.getWidth() / 4) + m_display.getCenterX();
+    int min_y = (m_display.getHeight() / 4);
+    int max_y = (m_display.getHeight() / 4) + m_display.getCenterY();
+
+    int player_x = m_display_upper_left.getDistanceX(loc);
+    int player_y = m_display_upper_left.getDistanceY(loc);
+
+    if (player_x < min_x)
+        move_x = player_x - min_x;
+    else if (player_x > max_x)
+        move_x = player_x - max_x;
+
+    if (player_y < min_y)
+        move_y = player_y - min_y;
+    else if (player_y > max_y)
+        move_y = player_y - max_y;
+
+    m_display_upper_left = m_display_upper_left.getRelative(move_x, move_y, 0);
 }
 
 void UserInterface::init() {

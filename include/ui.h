@@ -28,6 +28,7 @@ class UserInterface {
     void start();
 
     void centerPlayer();
+    void adjustPlayer();
 
  protected:
     void doCommand(Command command);
