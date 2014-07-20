@@ -79,13 +79,13 @@ void Creature::moveRandom()
 void Creature::moveTowardClosestPrey(int range)
 {
     MapLocation target = findClosestPrey(range);
-    m_target = target;
 
     // If we find no critters, just move randomly
     if (target == m_location) {
         moveRandom();
         return;
     }
+    m_target = target;
 
     int dist_x = m_location.getDistanceX(target);
     int dist_y = m_location.getDistanceY(target);
@@ -126,48 +126,23 @@ void Creature::move(int d_x, int d_y, int d_z)
     }
 }
 
-// PERF:  This function would be a lot more efficient if it searched out from
-//        the center, and stopped at the first creature, since we'd search
-//        a lot fewer spots.  It is more complex that way, though, so will only
-//        go that route if this becomes a hot spot.
-// PERF: 140, 350
 MapLocation Creature::findClosestPrey(int range)
 {
     list<MapLocation> adjacent;
+    MapLocation loc;
     for (int dist = 1; dist <= range; dist++) {
         m_world->getMap()->getAdjacent(m_location, &adjacent, dist);
 
         while (adjacent.size() > 0) {
-            MapLocation loc = adjacent.back();
-            adjacent.pop_back();
-            if (m_world->getMap()->getBlock(loc)->getHasPrey()) {
-                return loc;
+            if (m_world->getMap()->getBlock(adjacent.back())->getHasPrey()) {
+                return adjacent.back();
             }
+            adjacent.pop_back();
         }
     }
 
     // No prey found in range
     return m_location;
-
-/* OLD VERSION
-    m_world->getMap()->getAdjacent(m_location, &adjacent, range); //78, 101
-    while (adjacent.size() > 0) {
-        MapLocation loc = adjacent.back();
-        adjacent.pop_back();
-        Block* block = m_world->getMap()->getBlock(loc);
-
-        if (block->getHasPrey()) {
-            int distance = 0;
-            distance += abs(m_location.getDistanceX(loc));
-            distance += abs(m_location.getDistanceY(loc));
-            if (distance < closest_critter) {
-                closest_critter = distance;
-                closest_critter_loc = loc;
-            }
-        }
-    }
-    return closest_critter_loc;
-*/
 }
 
 } // walls

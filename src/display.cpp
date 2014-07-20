@@ -61,9 +61,10 @@ void Display::draw(const World& world,
     updateScreen();
 
     drawDebugBlank();
+    drawDebug(world, upper_left, curs_x, curs_y);
+
     drawStatus(player_status, world);
     drawCursor(curs_x, curs_y, curs_visible);
-    drawDebug(world, upper_left, curs_x, curs_y);
 }
 
 void Display::drawDebug(const World& world,

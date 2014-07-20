@@ -146,54 +146,33 @@ void Map::getAdjacent(const MapLocation& location,
                       list<MapLocation>* adjacent,
                       int distance) const
 {
-    MapLocation here = location.getRelative(0, -distance, 0);
-
-    for (int i = 0; i < distance; i++) {
-        here = here.getRelative(1, 1, 0);
-        adjacent->push_back(here);
-    }
-
-    for (int i = 0; i < distance; i++) {
-        here = here.getRelative(-1, 1, 0);
-        adjacent->push_back(here);
-    }
-
-    for (int i = 0; i < distance; i++) {
-        here = here.getRelative(-1, -1, 0);
-        adjacent->push_back(here);
-    }
-
-    for (int i = 0; i < distance; i++) {
-        here = here.getRelative(1, -1, 0);
-        adjacent->push_back(here);
-    }
-
-
-/*  OLD VERSION -- kept until conclusion of perf test
-    int min_x = location.getX() - distance;
-    int max_x = location.getX() + distance;
-    int min_y = location.getY() - distance;
-    int max_y = location.getY() + distance;
+    int x = location.getX();
+    int y = location.getX();
     int z = location.getZ();
+    /*
+    MapLocation north(x, y - distance, z);
+    MapLocation south(x, y + distance, z);
+    MapLocation east(x + distance, y, z);
+    MapLocation west(x - distance, y, z);
 
-    if (min_x < 0)
-        min_x = 0;
-    
-    if (max_x >= m_width)
-        max_x = m_width - 1;
+    MapLocation north = location.getRelative(0, -distance, 0);
+    MapLocation south = location.getRelative(0, distance, 0);
+    MapLocation east = location.getRelative(distance, 0, 0);
+    MapLocation west = location.getRelative(-distance, 0, 0);
+    */
 
-    if (min_y < 0)
-        min_y = 0;
-
-    if (max_y >= m_height)
-        max_y = m_height - 1;
-
-    for (int x = min_x; x <= max_x; x++) {
-        for (int y = min_y; y <= max_y; y++) {
-            adjacent->push_back(MapLocation(x, y, z));
-        }
+    for (int i = 1; i < distance; i++) {
+        adjacent->push_back(MapLocation(x + i, y - distance + i, 0));
+        adjacent->push_back(MapLocation(x + i, y + distance - i, 0));
+        adjacent->push_back(MapLocation(x - i, y - distance - i, 0));
+        adjacent->push_back(MapLocation(x - i, y + distance - i, 0));
+    /*
+        adjacent->push_back(north.getRelative(i, i, 0));
+        adjacent->push_back(south.getRelative(-i, -i, 0));
+        adjacent->push_back(east.getRelative(-i, i, 0));
+        adjacent->push_back(west.getRelative(i, -i, 0));
+    */
     }
-*/
 }
 
 void Map::pushIndex(int index, list<int>* list, UpdateMap* done) const

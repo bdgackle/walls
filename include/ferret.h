@@ -27,8 +27,8 @@ class Ferret : public Creature {
  private:
     int m_visual_range;
 
-    static const int INITIAL_FOOD_VALUE = 1000;
-    static const int BREED_FOOD_VALUE = 5000;
+    static const int INITIAL_FOOD_VALUE = 100;
+    static const int BREED_FOOD_VALUE = 500;
     static const int POST_BREED_FOOD_VALUE = 400;
     static const int BUNNY_NUTRITION = 50;
     static const int MOVE_NUTRITION = 1;
