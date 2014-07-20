@@ -18,16 +18,19 @@ namespace walls {
 World::World(int width, int height, int depth) :
     m_map(width, height, depth),
     m_scanner(&m_map),
-    m_boundries_dirty(true),
+ //   m_boundries_dirty(true),
+    m_boundries_dirty(false), // For debugging purposes only
     m_player(this),
     m_time(0),
-    m_update_time(0) {}
+    m_update_time(0)
+{
+    m_player.setLocation(MapLocation(width/2, height/2, 0));
+}
 
 World::~World() {}
 
 void World::update(int time)
 {
-    clock_t start = clock();
     if (m_boundries_dirty) {
         m_scanner.updateBoundry();
         m_boundries_dirty = false;
@@ -38,8 +41,6 @@ void World::update(int time)
     m_prey.update(time);
 
     m_time += time;
-    clock_t stop = clock();
-    m_update_time = stop - start;
 }
 
 const Map& World::getMap() const
@@ -130,6 +131,18 @@ void World::addPlant(Object* plant)
 void World::addPrey(Object* prey)
 {
     m_prey.addObject(prey);
+}
+
+void World::startClock() const
+{
+    m_update_time = -1;
+    m_start = clock();
+}
+
+void World::stopClock() const
+{
+    m_stop = clock();
+    m_update_time = m_stop - m_start;
 }
 
 void World::setBoundriesDirty()

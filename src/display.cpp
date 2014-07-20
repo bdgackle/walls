@@ -39,6 +39,8 @@ Display::~Display()
     deleteBuffers();
 }
 
+// PERF: Everything BEFORE updateScreen() is taking around 10ms... or about
+//       half the current frametime just to push data around
 void Display::draw(const World& world,
                    const MapLocation& upper_left,
                    int curs_x,
@@ -51,7 +53,6 @@ void Display::draw(const World& world,
     const list<Object*>& creatures = world.getCreatures().getObjects();
     const list<Object*>& prey = world.getPrey().getObjects();
     const list<Object*>& plants = world.getPlants().getObjects();
-
     drawMap(map, upper_left);
     drawObjects(plants, upper_left);
     drawObjects(creatures, upper_left);
@@ -61,8 +62,8 @@ void Display::draw(const World& world,
 
     drawDebugBlank();
     drawStatus(player_status, world);
-    drawDebug(world, upper_left, curs_x, curs_y);
     drawCursor(curs_x, curs_y, curs_visible);
+    drawDebug(world, upper_left, curs_x, curs_y);
 }
 
 void Display::drawDebug(const World& world,

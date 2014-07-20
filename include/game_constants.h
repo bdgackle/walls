@@ -45,6 +45,7 @@ enum Command {
     ADD_DOOR,
     ADD_SLOPE,
     ADD_GRASS,
+    WAIT
 };
 
 // Display Characters
@@ -104,6 +105,7 @@ extern const string PLAYER_STATUS_INVADE_FERRET_STRING;
 #define WALL_2          'F'
 #define MODE_TOGGLE_1   ' '
 #define MODE_TOGGLE_2   'a'
+#define WAIT_1          '.'
 
 } // walls
 

@@ -90,6 +90,10 @@ void UserInterface::doCommand(Command command)
         m_world->getMap()->getBlock(getCursorLocation())->setType(DOOR);
         m_world->setBoundriesDirty();
         break;
+
+    case WAIT:
+        // Do nothing, but world still gets updated
+        break;
     }
 
     if (command != NO_COMMAND) 

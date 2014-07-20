@@ -146,6 +146,8 @@ Command InputHandler::processInputCommon(int input)
             m_mode = NORMAL;
             return NO_COMMAND;
         }
+    case WAIT_1:
+        return WAIT;
     default:
         return NO_COMMAND;
     }

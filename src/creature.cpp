@@ -33,6 +33,7 @@ void Creature::update(int time)
     Object::update(time);
 }
 
+// PERF: 5
 void Creature::die() 
 {
     if (m_is_prey)
@@ -102,6 +103,7 @@ void Creature::moveTowardClosestPrey(int range)
     }
 }
 
+//PERF: 2
 void Creature::move(int d_x, int d_y, int d_z)
 {
     MapLocation old_loc = getLocation();
@@ -125,6 +127,7 @@ void Creature::move(int d_x, int d_y, int d_z)
 //        the center, and stopped at the first creature, since we'd search
 //        a lot fewer spots.  It is more complex that way, though, so will only
 //        go that route if this becomes a hot spot.
+// PERF: 250
 MapLocation Creature::findClosestPrey(int range)
 {
     list<MapLocation> adjacent;

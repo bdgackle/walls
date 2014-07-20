@@ -56,6 +56,7 @@ int Grass::getDisplayColor() const
         return COLOR_PAIR(3);
 }
 
+// PERF: 10
 void Grass::reproduce()
 {
     uint8_t random_number = rand() % 255;

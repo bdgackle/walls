@@ -51,6 +51,9 @@ class World {
     void addPlant(Object* plant);
     void addPrey(Object* prey);
 
+    void startClock() const;
+    void stopClock() const;
+
     void setBoundriesDirty();
 
  private:
@@ -64,7 +67,10 @@ class World {
     bool m_boundries_dirty;
 
     int m_time;
-    int m_update_time;
+
+    mutable clock_t m_start;
+    mutable clock_t m_stop;
+    mutable int m_update_time;
 };
 
 } // walls
