@@ -35,6 +35,13 @@ class Display {
               int curs_y,
               bool curs_visible);
 
+    void drawDebug(const World& world,
+                   const MapLocation& upper_left,
+                   int curs_x,
+                   int curs_y);
+
+    void drawDebugBlank();
+    
     int getHeight() const;
     int getWidth() const;
     int getCenterX() const;

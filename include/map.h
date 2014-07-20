@@ -41,6 +41,9 @@ class Map {
     bool exists(int index) const;
 
     void getEdges(list<int>* edges, int depth) const;
+    void getAdjacent(const MapLocation& location,
+                     list<MapLocation>* adjacent,
+                     int distance) const;
 
     void clearIsOutdoors();
 

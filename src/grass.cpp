@@ -17,8 +17,8 @@
 namespace walls {
 
 const int Grass::k_flower_min = 0;
-const int Grass::k_flower_max = 200;
-const int Grass::k_seed_max   = 300;
+const int Grass::k_flower_max = 100;
+const int Grass::k_seed_max   = 150;
 
 Grass::Grass(World* world, const MapLocation& location) :
     m_flower(false),
@@ -85,7 +85,7 @@ void Grass::reproduce() {
 void Grass::seed(const MapLocation& location) {
     if ((m_world->getMap()->exists(location)) &&
         (m_world->getMap()->getBlock(location)->getType() == GROUND) &&
-        (m_world->getMap()->getBlock(location)->getIsEmpty())) {
+        !(m_world->getMap()->getBlock(location)->getHasPlant())) {
         m_world->addPlant(new Grass(m_world, location));
     }
 }

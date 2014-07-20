@@ -47,9 +47,14 @@ int main()
     }
 
     // Seed the world with some random ferrets
-    for (int i = 0; i < 10; i++) {
-        world.addCreature(new Ferret(&world, MapLocation(5,i,0)));
-        world.addCreature(new Bunny(&world, MapLocation(15,i,0)));
+    for (int i = 0; i < 5; i++) {
+        world.addCreature(new Ferret(&world, MapLocation(5,i*2,0)));
+    }
+
+    for (int i = 0; i < 100; i++) {
+        world.addPrey(new Bunny(&world, MapLocation(15,i,0)));
+        world.addPrey(new Bunny(&world, MapLocation(115,i,0)));
+        world.addPrey(new Bunny(&world, MapLocation(185,i,0)));
     }
 
     // Make and start the ui

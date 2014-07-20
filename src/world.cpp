@@ -10,7 +10,6 @@
 #include "world.h"
 #include "maplocation.h"
 #include "game_constants.h"
-#include "ferret.h"
 #include "grass.h"
 #include "block.h"
 
@@ -34,6 +33,7 @@ void World::update(int time) {
 
     m_creatures.update(time);
     m_plants.update(time);
+    m_prey.update(time);
 
     m_time += time;
     clock_t stop = clock();
@@ -48,11 +48,15 @@ const ObjectList& World::getCreatures() const { return m_creatures; }
 
 const ObjectList& World::getPlants() const { return m_plants; }
 
+const ObjectList& World::getPrey() const { return m_prey; }
+
 int World::getTime() const { return m_time; }
 
 int World::getCreatureCount() const { return m_creatures.getCount(); }
 
 int World::getPlantCount() const { return m_plants.getCount(); }
+
+int World::getPreyCount() const { return m_prey.getCount(); }
 
 const char* World::getUpdateTime() const { return m_update_time; }
 
@@ -64,9 +68,13 @@ ObjectList* World::getCreatures() { return &m_creatures; }
 
 ObjectList* World::getPlants() { return &m_plants; }
 
+ObjectList* World::getPrey() { return &m_prey; }
+
 void World::addCreature(Object* creature) { m_creatures.addObject(creature); }
 
 void World::addPlant(Object* plant) { m_plants.addObject(plant); }
+
+void World::addPrey(Object* prey) { m_prey.addObject(prey); }
 
 void World::setBoundriesDirty() { m_boundries_dirty = true; }
 

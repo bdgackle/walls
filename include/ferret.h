@@ -19,9 +19,14 @@ class Ferret : public Creature {
     virtual ~Ferret();
 
     virtual void update(int time);
+    virtual void breed();
 
     char getDisplayChar() const;
     int getDisplayColor() const;
+
+ private:
+    int m_visual_range;
+    int m_food;
 };
 
 } // walls

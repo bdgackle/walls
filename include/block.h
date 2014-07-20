@@ -30,7 +30,9 @@ class Block {
     bool getIsEdge() const;
     bool getIsMovementBoundry() const;
     bool getIsIndoorBoundry() const;
-    bool getIsEmpty() const;
+    bool getHasPlant() const;
+    bool getHasCreature() const;
+    bool getHasPrey() const;
 
     void setType(BlockType type);
     void setIsOutdoors(bool outdoors);
@@ -38,15 +40,20 @@ class Block {
 
     void addCreature(Object* creature);
     void addPlant(Object* plant);
+    void addPrey(Object* prey);
+    Object* getCreature();
     Object* getPlant();
+    Object* getPrey();
     void removeCreature(Object* creature);
     void removePlant(Object* plant);
+    void removePrey(Object* prey);
 
  private:
     BlockType m_type;
     bool m_is_outdoors;
     bool m_is_edge;
     ObjectList m_creatures;
+    ObjectList m_prey;
     ObjectList m_plants;
 };
 

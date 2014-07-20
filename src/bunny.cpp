@@ -16,24 +16,28 @@
 namespace walls {
 
 Bunny::Bunny(World* world, const MapLocation& location) :
-    Creature(world, location),
+    Creature(world, location, true),
     m_food(100) {}
 
 Bunny::~Bunny() {}
 
 void Bunny::update(int time) {
-    Object::update(time);
+    Creature::update(time);
 
 
     if (m_food < 0)
         die();
 
-    if (m_food > 200) {
+    if (m_food > 150) {
         breed();
         m_food = 100;
     }
 
-    if ((m_world->getMap()->getBlock(getLocation())->getIsEmpty())) {
+    if ((m_world->getMap()->getBlock(getLocation())->getHasPlant())) {
+        m_world->getMap()->getBlock(getLocation())->getPlant()->die();
+        m_food += 3;
+    }
+    else {
         m_food--;
 
         MapLocation dirs[4];
@@ -48,7 +52,7 @@ void Bunny::update(int time) {
         for (int i = 0; i < 4; i++) {
             dir = (num + i) % 4;
             if (m_world->getMap()->exists(dirs[dir])) {
-                if (!(m_world->getMap()->getBlock(dirs[dir])->getIsEmpty())) {
+                if ((m_world->getMap()->getBlock(dirs[dir])->getHasPlant())) {
                     break;
                 }
             }
@@ -70,14 +74,10 @@ void Bunny::update(int time) {
             break;
         }
     }
-    else {
-        m_world->getMap()->getBlock(getLocation())->getPlant()->die();
-        m_food += 3;
-    }
 }
 
 void Bunny::breed() {
-    m_world->addCreature(new Bunny(m_world, getLocation()));
+    m_world->addPrey(new Bunny(m_world, getLocation()));
 }
 
 char Bunny::getDisplayChar() const { return 'b'; }

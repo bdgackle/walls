@@ -12,7 +12,8 @@ ObjectList::ObjectList() {}
 
 ObjectList::~ObjectList() {}
 
-void ObjectList::update(int time) {
+void ObjectList::update(int time)
+{
     list<Object*>::iterator iter = m_list.begin();
     while (iter != m_list.end()) {
         (*iter)->update(time);
@@ -26,16 +27,29 @@ void ObjectList::update(int time) {
     }
 }
 
-const list<Object*>& ObjectList::getObjects() const { return m_list; }
+const list<Object*>& ObjectList::getObjects() const
+{
+    return m_list;
+}
 
-Object* ObjectList::getFirstObject() {
+Object* ObjectList::getFirstObject()
+{
     return m_list.front();
 }
 
-int ObjectList::getCount() const { return m_list.size(); }
+int ObjectList::getCount() const
+{
+    return m_list.size();
+}
 
-void ObjectList::addObject(Object* object) { m_list.push_back(object); }
+void ObjectList::addObject(Object* object)
+{
+    m_list.push_back(object);
+}
 
-void ObjectList::removeObject(Object* object) {m_list.remove(object); }
+void ObjectList::removeObject(Object* object)
+{
+    m_list.remove(object);
+}
 
 } // walls

@@ -46,6 +46,8 @@ private:
     static int m_map_depth;
 };
 
+bool operator== (const MapLocation& lh, const MapLocation& rh);
+
 } // walls
 
 #endif // MAPLOCATION_H

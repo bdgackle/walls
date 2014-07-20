@@ -18,6 +18,7 @@
 #include "object.h"
 #include "world.h"
 #include "block.h"
+#include "creature.h"
 
 using std::string;
 using std::list;
@@ -47,15 +48,58 @@ void Display::draw(const World& world,
     PlayerStatus player_status = world.getPlayer().getStatus();
     MapLocation player_location = world.getPlayer().getLocation();
     const list<Object*>& creatures = world.getCreatures().getObjects();
+    const list<Object*>& prey = world.getPrey().getObjects();
     const list<Object*>& plants = world.getPlants().getObjects();
 
     drawMap(map, upper_left);
     drawObjects(plants, upper_left);
     drawObjects(creatures, upper_left);
+    drawObjects(prey, upper_left);
     drawPlayer(player_location, upper_left);
-    drawCursor(curs_x, curs_y, curs_visible);
     updateScreen();
+
+    drawDebugBlank();
     drawStatus(player_status, world);
+    if (curs_visible) drawDebug(world, upper_left, curs_x, curs_y);
+    drawCursor(curs_x, curs_y, curs_visible);
+}
+
+void Display::drawDebug(const World& world,
+                        const MapLocation& upper_left,
+                        int curs_x,
+                        int curs_y)
+{
+    MapLocation curs_loc = upper_left.getRelative(curs_x, curs_y, 0);
+    char line_one[40];
+    char line_two[40];
+    Block curs = world.getMap().getBlock(curs_loc);
+    if (curs.getHasCreature()) {
+        sprintf(line_one, "FEWWET!!!");
+        mvaddstr(0, 85, line_one);
+        Creature* cre = (Creature *)(curs.getCreature());
+        MapLocation cre_loc = cre->getTarget();
+
+        int cre_x;
+        int cre_y;
+        if (isOnScreen(cre_loc, upper_left, &cre_x, &cre_y)) {
+            drawTile(cre_x, cre_y, '!', COLOR_PAIR(7));
+        }
+        updateScreen();
+    }
+
+    if (curs.getHasPrey()) {
+        sprintf(line_one, "BUNNY!!!!!");
+        mvaddstr(0, 85, line_one);
+    }
+
+}
+
+void Display::drawDebugBlank()
+{
+    mvaddstr(0, 81, PLAYER_STATUS_NONE_STRING.c_str());
+    mvaddstr(1, 81, PLAYER_STATUS_NONE_STRING.c_str());
+    mvaddstr(2, 81, PLAYER_STATUS_NONE_STRING.c_str());
+    mvaddstr(3, 81, PLAYER_STATUS_NONE_STRING.c_str());
 }
 
 int Display::getHeight() const
@@ -105,12 +149,16 @@ void Display::drawStatus(PlayerStatus status, const World& world)
 
     string stat_string = getStatusString(status);
     mvaddstr(0, 0, stat_string.c_str());
-
+/*
     sprintf(line_two, "Time: %d", world.getTime());
     mvaddstr(1, 0, PLAYER_STATUS_NONE_STRING.c_str());
     mvaddstr(1, 0, line_two);
+*/
+    sprintf(line_two, "Ferrets: %d", world.getCreatureCount());
+    mvaddstr(1, 0, PLAYER_STATUS_NONE_STRING.c_str());
+    mvaddstr(1, 0, line_two);
 
-    sprintf(line_three, "Creatures: %d", world.getCreatureCount());
+    sprintf(line_three, "Bunnies: %d", world.getPreyCount());
     mvaddstr(2, 0, PLAYER_STATUS_NONE_STRING.c_str());
     mvaddstr(2, 0, line_three);
 /*

@@ -89,7 +89,8 @@ void UserInterface::doCommand(Command command) {
         break;
     }
 
-    m_world->update(1);
+    if (command != NO_COMMAND) 
+        m_world->update(1);
 }
 
 void UserInterface::centerPlayer() {
@@ -140,7 +141,7 @@ void UserInterface::init() {
     init_pair(4, COLOR_YELLOW, COLOR_BLACK);
     init_pair(5, COLOR_BLUE, COLOR_BLACK);
     init_pair(6, COLOR_MAGENTA, COLOR_BLACK);
-    init_pair(7, COLOR_CYAN, COLOR_BLACK);
+    init_pair(7, COLOR_YELLOW, COLOR_RED);
     init_pair(8, COLOR_WHITE, COLOR_BLACK);
     
     m_display.setDimensions(COLS, LINES);

@@ -28,40 +28,60 @@ MapLocation::MapLocation(const MapLocation& other) :
 
 MapLocation::~MapLocation() {}
 
-MapLocation& MapLocation::operator= (const MapLocation& other) {
+MapLocation& MapLocation::operator= (const MapLocation& other)
+{
     m_x = other.getX();
     m_y = other.getY();
     m_z = other.getZ();
     return *this;
 }
 
-MapLocation MapLocation::getRelative(int x, int y, int z) const {
+bool operator== (const MapLocation& lh, const MapLocation& rh)
+{
+    if ((lh.getX() == rh.getX()) &&
+        (lh.getY() == rh.getY()) &&
+        (lh.getZ() == rh.getZ())) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+MapLocation MapLocation::getRelative(int x, int y, int z) const
+{
     return MapLocation(getX() + x, getY() + y, getZ() + z);
 }
 
-int MapLocation::getRelativeIndex(int index, int x, int y, int z) {
+int MapLocation::getRelativeIndex(int index, int x, int y, int z)
+{
     return index + x + y * m_map_width + z * m_map_width * m_map_height;
 }
 
-void MapLocation::setDimensions(int width, int height, int depth) {
+void MapLocation::setDimensions(int width, int height, int depth)
+{
     m_map_width = width;
     m_map_height = height;
     m_map_depth = depth;
 }
 
-int MapLocation::getIndex() const {
+int MapLocation::getIndex() const
+{
     return m_x + m_y * m_map_width + m_z * m_map_height * m_map_width;
 }
 
-int MapLocation::getDistanceX(const MapLocation& location) const {
+int MapLocation::getDistanceX(const MapLocation& location) const
+{
     return location.getX() - m_x;
 }
 
-int MapLocation::getDistanceY(const MapLocation& location) const {
+int MapLocation::getDistanceY(const MapLocation& location) const
+{
     return location.getY() - m_y;
 }
 
-int MapLocation::getDistanceZ(const MapLocation& location) const {
+int MapLocation::getDistanceZ(const MapLocation& location) const
+{
     return location.getZ() - m_z;
 }
 

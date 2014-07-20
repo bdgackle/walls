@@ -33,19 +33,23 @@ class World {
     const Player& getPlayer() const;
     const ObjectList& getCreatures() const;
     const ObjectList& getPlants() const;
+    const ObjectList& getPrey() const;
 
     int getTime() const;
     int getCreatureCount() const;
     int getPlantCount() const;
+    int getPreyCount() const;
     const char* getUpdateTime() const;
 
     Map* getMap();
     Player* getPlayer();
     ObjectList* getCreatures();
     ObjectList* getPlants();
+    ObjectList* getPrey();
 
     void addCreature(Object* creature);
     void addPlant(Object* plant);
+    void addPrey(Object* prey);
 
     void setBoundriesDirty();
 
@@ -54,6 +58,7 @@ class World {
     Player m_player;
     ObjectList m_creatures;
     ObjectList m_plants;
+    ObjectList m_prey;
 
     BoundryScanner m_scanner;
     bool m_boundries_dirty;
