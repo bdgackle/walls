@@ -146,6 +146,30 @@ void Map::getAdjacent(const MapLocation& location,
                       list<MapLocation>* adjacent,
                       int distance) const
 {
+    MapLocation here = location.getRelative(0, -distance, 0);
+
+    for (int i = 0; i < distance; i++) {
+        here = here.getRelative(1, 1, 0);
+        adjacent->push_back(here);
+    }
+
+    for (int i = 0; i < distance; i++) {
+        here = here.getRelative(-1, 1, 0);
+        adjacent->push_back(here);
+    }
+
+    for (int i = 0; i < distance; i++) {
+        here = here.getRelative(-1, -1, 0);
+        adjacent->push_back(here);
+    }
+
+    for (int i = 0; i < distance; i++) {
+        here = here.getRelative(1, -1, 0);
+        adjacent->push_back(here);
+    }
+
+
+/*  OLD VERSION -- kept until conclusion of perf test
     int min_x = location.getX() - distance;
     int max_x = location.getX() + distance;
     int min_y = location.getY() - distance;
@@ -169,6 +193,7 @@ void Map::getAdjacent(const MapLocation& location,
             adjacent->push_back(MapLocation(x, y, z));
         }
     }
+*/
 }
 
 void Map::pushIndex(int index, list<int>* list, UpdateMap* done) const

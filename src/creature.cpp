@@ -5,9 +5,14 @@
 // C Standard Headers
 #include <stdlib.h>
 
+// C++ Standard Headers
+#include <list>
+
 // Internal Headers
 #include "creature.h"
 #include "world.h"
+
+using std::list;
 
 namespace walls {
 
@@ -33,7 +38,6 @@ void Creature::update(int time)
     Object::update(time);
 }
 
-// PERF: 5
 void Creature::die() 
 {
     if (m_is_prey)
@@ -103,7 +107,6 @@ void Creature::moveTowardClosestPrey(int range)
     }
 }
 
-//PERF: 2
 void Creature::move(int d_x, int d_y, int d_z)
 {
     MapLocation old_loc = getLocation();
@@ -127,21 +130,34 @@ void Creature::move(int d_x, int d_y, int d_z)
 //        the center, and stopped at the first creature, since we'd search
 //        a lot fewer spots.  It is more complex that way, though, so will only
 //        go that route if this becomes a hot spot.
-// PERF: 140 @ -O2, 350 @ -O0
+// PERF: 140, 350
 MapLocation Creature::findClosestPrey(int range)
 {
     m_world->startClock();
-    list<MapLocation> adjacent;
-    int closest_critter = range * 3 + 1;
-    MapLocation closest_critter_loc = m_location;
-    m_world->getMap()->getAdjacent(m_location, &adjacent, range);
+    for (int dist = 1; dist <= range; dist++) {
+        list<MapLocation> adjacent;
+        m_world->getMap()->getAdjacent(m_location, &adjacent, range);
 
+       while (adjacent.size() > 0) {
+            MapLocation loc = adjacent.back();
+            adjacent.pop_back();
+            if (m_world->getMap()->getBlock(loc)->getHasPrey()) {
+                return loc;
+            }
+        }
+    }
+    m_world->stopClock();
+
+    // No prey found in range
+    return m_location;
+
+/* OLD VERSION
+    m_world->getMap()->getAdjacent(m_location, &adjacent, range); //78, 101
     while (adjacent.size() > 0) {
         MapLocation loc = adjacent.back();
         adjacent.pop_back();
         Block* block = m_world->getMap()->getBlock(loc);
 
-        // use Manhatten distance calculation, since no diagnal moves yet
         if (block->getHasPrey()) {
             int distance = 0;
             distance += abs(m_location.getDistanceX(loc));
@@ -152,9 +168,8 @@ MapLocation Creature::findClosestPrey(int range)
             }
         }
     }
-
-    m_world->stopClock();
     return closest_critter_loc;
+*/
 }
 
 } // walls

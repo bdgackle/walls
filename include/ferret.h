@@ -32,7 +32,7 @@ class Ferret : public Creature {
     static const int POST_BREED_FOOD_VALUE = 400;
     static const int BUNNY_NUTRITION = 50;
     static const int MOVE_NUTRITION = 1;
-    static const int VISUAL_RANGE = 5;
+    static const int VISUAL_RANGE = 4;
 };
 
 } // walls
