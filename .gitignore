@@ -4,3 +4,5 @@ obj/*.d
 bin/perf.data
 bin/perf.data.old
 tags
+cscope*
+*.swp
