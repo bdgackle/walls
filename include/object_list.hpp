@@ -1,4 +1,4 @@
-/*
+/**
  *  @author Barry Gackle
  */
 
@@ -9,18 +9,17 @@
 #include "maplocation.hpp"
 
 // C++ Standard Headers
-#include <list>
+#include <vector>
 
 namespace walls {
 class Object;
 
 class ObjectList {
  public:
-    ObjectList();
-
     void update(int time);
 
-    const std::list<Object*>& getObjects() const;
+    const std::vector<Object*>& getObjects() const;
+    const Object& getFirstObject() const;
     Object* getFirstObject();
     int getCount() const;
 
@@ -28,7 +27,7 @@ class ObjectList {
     void removeObject(Object* object);
 
  private:
-    std::list<Object*> m_list;
+    std::vector<Object*> m_list;
 };
 
 } // namespace walls

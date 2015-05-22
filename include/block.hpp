@@ -32,8 +32,11 @@ class Block {
     void addCreature(Object* creature);
     void addPlant(Object* plant);
     void addPrey(Object* prey);
+    const Object& getCreature() const;
     Object* getCreature();
+    const Object& getPlant() const;
     Object* getPlant();
+    const Object& getPrey() const;
     Object* getPrey();
     void removeCreature(Object* creature);
     void removePlant(Object* plant);

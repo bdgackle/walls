@@ -6,25 +6,24 @@
 // Internal Includes
 #include "boundry_scanner.hpp"
 #include "map.hpp"
+#include "maplocation.hpp"
 #include "block.hpp"
 
 namespace walls {
 
 BoundryScanner::BoundryScanner(Map *map) :
     m_map(map),
-    m_updated(map->getBlockCount()) {}
+    m_updated(map->blockCount()) {}
 
 void BoundryScanner::updateBoundry()
 {
-    int block_count = m_map->getBlockCount();
+    int block_count = m_map->blockCount();
 
     m_updated.reset();
-    for (int i = 0; i < block_count; i++) {
-        m_map->getBlock(i)->setIsOutdoors(false);
-    }
+    m_map->clearIsOutdoors();
 
-    for (int z = 0; z < m_map->getDepth(); z++) {
-        m_map->getEdges(&m_stack, z);
+    for (int z = 0; z < m_map->depth(); z++) {
+        m_map->edges(&m_stack, z);
     }
 
     while (m_stack.size() > 0) {
@@ -37,13 +36,14 @@ void BoundryScanner::popLocation()
     int index = m_stack.back();
     m_stack.pop_back();
 
-    if (!(m_map->getBlock(index)->getIsIndoorBoundry())) {
-        int northern_neighbor = index - m_map->getWidth();
-        int southern_neighbor = index + m_map->getWidth();
+    //if (!(m_map->getBlock(index)->getIsIndoorBoundry())) {
+    if (!(m_map->isIndoorBoundry(index))) {
+        int northern_neighbor = index - m_map->width();
+        int southern_neighbor = index + m_map->width();
         int eastern_neighbor = index + 1;
         int western_neighbor = index - 1;
 
-        if (!(m_map->getBlock(index)->getIsEdge())) {
+        if (!(m_map->isEdge(index))) {
             pushLocation(northern_neighbor);
             pushLocation(southern_neighbor);
             pushLocation(eastern_neighbor);
@@ -66,7 +66,7 @@ void BoundryScanner::popLocation()
                 pushLocation(western_neighbor);
         }
 
-        m_map->getBlock(index)->setIsOutdoors(true);
+        m_map->isOutdoors(index, true);
     }
 }
 

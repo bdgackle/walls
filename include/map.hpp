@@ -6,60 +6,73 @@
 #define MAP_HPP
 
 // Local Headers
-#include "block.hpp"
+#include "game_constants.hpp"
 
 // C++ Standard Headers
-#include <list>
+#include <vector>
 
 namespace walls {
 class MapLocation;
-class UpdateMap;
+class Object;
 
 class Map {
  public:
-    Map(int width, int height, int depth);
-    virtual ~Map();
+    virtual ~Map() {}
 
-    int getHeight() const;
-    int getWidth() const;
-    int getDepth() const;
-    int getBlockCount() const;
-    int getMaxIndex() const;
+    // Map Properties
+    virtual int height() const = 0;
+    virtual int width() const = 0;
+    virtual int depth() const = 0;
+    virtual int blockCount() const = 0;
 
-    const Block& getBlock(const MapLocation& location) const;
-    Block* getBlock(const MapLocation& location);
+    virtual bool exists(const MapLocation& loc) const = 0;
+    virtual bool exists(int index) const = 0;
 
-    const Block& getBlock(int index) const;
-    Block* getBlock(int index);
+    virtual void edges(std::vector<int>* edges, int depth) const = 0;
+    virtual void adjacent(const MapLocation& loc,
+                          std::vector<MapLocation>* adjacent,
+                          int distance) const = 0;
 
-    bool exists(const MapLocation& location) const;
-    bool exists(int index) const;
+    // Specific block property accessors
+    virtual BlockType blockType(const MapLocation& loc) const = 0;
 
-    void getEdges(std::list<int>* edges, int depth) const;
-    void getAdjacent(const MapLocation& location,
-                     std::list<MapLocation>* adjacent,
-                     int distance) const;
+    virtual bool isOutdoors(const MapLocation& loc) const = 0;
+    virtual bool isEdge(int index) const = 0;
+    virtual bool isEdge(const MapLocation& loc) const = 0;
+    virtual bool isMovementBoundry(const MapLocation& loc) const = 0;
+    virtual bool isIndoorBoundry(int index) const = 0;
+    virtual bool isIndoorBoundry(const MapLocation& loc) const = 0;
+    virtual bool hasCreature(const MapLocation& loc) const = 0;
+    virtual bool hasPlant(const MapLocation& loc) const = 0;
+    virtual bool hasPrey(const MapLocation& loc) const = 0;
 
-    void clearIsOutdoors();
+    // Specific block property mutators
+    virtual void blockType(const MapLocation& loc, BlockType type) = 0;
+    virtual void isOutdoors(int index, bool outdoors) = 0;
+    virtual void isOutdoors(const MapLocation& loc, bool outdoors) = 0;
+    virtual void isEdge(const MapLocation& loc, bool edge) = 0;
 
- protected:
-    void pushIndex(int index, std::list<int>* list, UpdateMap* done) const;
+    virtual void addCreature(const MapLocation& loc,
+                             Object* creature) = 0;
+    virtual void addPlant(const MapLocation&  loc,
+                          Object* plant) = 0;
+    virtual void addPrey(const MapLocation& loc,
+                         Object* prey) = 0;
+    virtual void removeCreature(const MapLocation& loc,
+                                Object* creature) = 0;
+    virtual void removePlant(const MapLocation&  loc,
+                             Object* plant) = 0;
+    virtual void removePrey(const MapLocation& loc,
+                            Object* prey) = 0;
+    virtual const Object& creature(const MapLocation& loc) const = 0;
+    virtual Object* creature(const MapLocation& loc) = 0;
+    virtual const Object& plant(const MapLocation& loc) const = 0;
+    virtual Object* plant(const MapLocation& loc) = 0;
+    virtual const Object& prey(const MapLocation& loc) const = 0;
+    virtual Object* prey(const MapLocation& loc) = 0;
 
- private:
-    Block* m_blocks;
-    Block m_invalid_block;
-    const int m_width;
-    const int m_height;
-    const int m_depth;
+    virtual void clearIsOutdoors() = 0;
 
-    const int m_n_bound;
-    const int m_s_bound;
-    const int m_e_bound;
-    const int m_w_bound;
-    const int m_u_bound;
-    const int m_d_bound;
-
-    const int m_block_count;
 };
 
 } // walls

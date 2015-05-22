@@ -109,14 +109,29 @@ void Block::addPrey(Object* prey)
     m_prey.addObject(prey);
 }
 
+const Object& Block::getCreature() const
+{
+    m_creatures.getFirstObject();
+}
+
 Object* Block::getCreature()
 {
     m_creatures.getFirstObject();
 }
 
+const Object& Block::getPlant() const
+{
+    m_plants.getFirstObject();
+}
+
 Object* Block::getPlant()
 {
     m_plants.getFirstObject();
+}
+
+const Object& Block::getPrey() const
+{
+    m_prey.getFirstObject();
 }
 
 Object* Block::getPrey()

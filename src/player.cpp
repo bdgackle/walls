@@ -31,7 +31,7 @@ void Player::move(int d_x, int d_y, int d_z)
     MapLocation dest = m_location.getRelative(d_x, d_y, d_z);
 
     if ((m_world->getMap()->exists(dest)) &&
-        !(m_world->getMap()->getBlock(dest)->getIsMovementBoundry())) {
+        !(m_world->getMap()->isMovementBoundry(dest))) {
 
         setLocation(dest);
     }
@@ -41,7 +41,7 @@ void Player::setLocation(const MapLocation& location)
 {
     m_location = location;
 
-    if (m_world->getMap()->getBlock(location)->getIsOutdoors() == true)
+    if (m_world->getMap()->isOutdoors(location) == true)
         setStatus(VENGEFUL);
     else
         setStatus(HAPPY);

@@ -2,16 +2,15 @@
  *  @author Barry Gackle
  */
 
+// Local Headers
+#include "appearance.hpp"
+#include "creature_appearances.hpp"
+#include "bunny.hpp"
+#include "maplocation.hpp"
+#include "world.hpp"
+
 // C Standard Library
 #include <stdlib.h>
-
-// External Headers
-#include <ncurses.h>
-
-// Local Headers
-#include "bunny.hpp"
-#include "world.hpp"
-#include "maplocation.hpp"
 
 namespace walls {
 
@@ -20,9 +19,6 @@ Bunny::Bunny(World* world, const MapLocation& location) :
 
 void Bunny::update(int time)
 {
-    Creature::update(time);
-
-
     if (m_food < 0)
         die();
 
@@ -31,8 +27,8 @@ void Bunny::update(int time)
         m_food = 100;
     }
 
-    if ((m_world->getMap()->getBlock(getLocation())->getHasPlant())) {
-        m_world->getMap()->getBlock(getLocation())->getPlant()->die();
+    if (m_world->getMap()->hasPlant(getLocation())) {
+        m_world->getMap()->plant(getLocation())->die();
         m_food += 3;
     }
     else {
@@ -50,7 +46,7 @@ void Bunny::update(int time)
         for (int i = 0; i < 4; i++) {
             dir = (num + i) % 4;
             if (m_world->getMap()->exists(dirs[dir])) {
-                if ((m_world->getMap()->getBlock(dirs[dir])->getHasPlant())) {
+                if (m_world->getMap()->hasPlant(dirs[dir])) {
                     break;
                 }
             }
@@ -79,14 +75,9 @@ void Bunny::breed()
     m_world->addPrey(new Bunny(m_world, getLocation()));
 }
 
-char Bunny::getDisplayChar() const
+Appearance Bunny::appearance() const
 {
-    return 'b';
-}
-
-int Bunny::getDisplayColor() const
-{
-    return COLOR_PAIR(5);
+    return bunny_appearance;
 }
 
 } // namespace walls

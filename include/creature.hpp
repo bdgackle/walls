@@ -6,13 +6,13 @@
 #define CREATURE_HPP
 
 // Local Headers
-#include "object.hpp"
+#include "object_imp.hpp"
 #include "maplocation.hpp"
 
 namespace walls {
 class World;
 
-class Creature : public Object {
+class Creature : public ObjectImp {
  public:
     Creature(World* world,
              const MapLocation& location,
@@ -21,12 +21,9 @@ class Creature : public Object {
 
     virtual ~Creature() {}
 
-    virtual void update(int time);
-
     virtual void die();
-    virtual bool getIsPrey();
     int getFood() const;
-    MapLocation getTarget();
+    MapLocation getTarget() const;
 
  protected:
     virtual void moveRandom();

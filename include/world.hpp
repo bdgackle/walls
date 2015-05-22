@@ -8,7 +8,7 @@
 // Local Headers
 #include "boundry_scanner.hpp"
 #include "player.hpp"
-#include "map.hpp"
+#include "map_imp.hpp"
 #include "object_list.hpp"
 
 namespace walls {
@@ -48,7 +48,7 @@ class World {
     void setBoundriesDirty();
 
  private:
-    Map m_map;
+    MapImp m_map;
     Player m_player;
     ObjectList m_creatures;
     ObjectList m_plants;

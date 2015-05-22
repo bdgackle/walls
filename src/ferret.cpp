@@ -2,16 +2,15 @@
  *  @author Barry Gackle
  */
 
-// C Standard Library
-#include <stdlib.h>
-
-// External Headers
-#include <ncurses.h>
-
 // Local Headers
+#include "appearance.hpp"
+#include "creature_appearances.hpp"
 #include "ferret.hpp"
 #include "maplocation.hpp"
 #include "world.hpp"
+
+// C Standard Library
+#include <stdlib.h>
 
 namespace walls {
 
@@ -21,8 +20,6 @@ Ferret::Ferret(World* world, const MapLocation& location) :
 
 void Ferret::update(int time)
 {
-    Creature::update(time);
-
     if (m_food < 0)
         die();
 
@@ -31,8 +28,8 @@ void Ferret::update(int time)
         m_food = POST_BREED_FOOD_VALUE;
     }
 
-    if ((m_world->getMap()->getBlock(getLocation())->getHasPrey())) {
-        m_world->getMap()->getBlock(getLocation())->getPrey()->die();
+    if (m_world->getMap()->hasPrey(getLocation())) {
+        m_world->getMap()->prey(getLocation())->die();
         m_food += BUNNY_NUTRITION;
     }
     else {
@@ -50,14 +47,9 @@ void Ferret::breed()
     m_world->addCreature(new Ferret(m_world, getLocation()));
 }
 
-char Ferret::getDisplayChar() const
+Appearance Ferret::appearance() const
 {
-    return 'f';
-}
-
-int Ferret::getDisplayColor() const
-{
-    return COLOR_PAIR(2);
+    return ferret_appearance;
 }
 
 } // namespace walls

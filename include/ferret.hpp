@@ -6,6 +6,7 @@
 #define FERRET_HPP
 
 // Local Headers
+#include "appearance.hpp"
 #include "creature.hpp"
 
 namespace walls {
@@ -19,8 +20,7 @@ class Ferret : public Creature {
     virtual void update(int time);
     virtual void breed();
 
-    char getDisplayChar() const;
-    int getDisplayColor() const;
+    virtual Appearance appearance() const;
 
  private:
     int m_visual_range;

@@ -10,7 +10,7 @@
 
 // C++ Standard Headers
 #include <string>
-#include <list>
+#include <vector>
 
 namespace walls {
 class World;
@@ -47,7 +47,7 @@ class Display {
     void drawMap(const Map& map, const MapLocation& upper_left);
     void drawStatus(PlayerStatus status, const World& world);
     void drawPlayer(const MapLocation& location, const MapLocation& upper_left);
-    void drawObjects(const std::list<Object*>& objects,
+    void drawObjects(const std::vector<Object*>& objects,
                      const MapLocation& upper_left);
     void drawCursor(int curs_x, int curs_y, bool visible);
     void updateScreen();

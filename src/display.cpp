@@ -10,7 +10,6 @@
 #include "player.hpp"
 #include "object.hpp"
 #include "world.hpp"
-#include "block.hpp"
 #include "creature.hpp"
 #include "ferret.hpp"
 
@@ -19,10 +18,10 @@
 
 // C++ Standard Headers
 #include <string>
-#include <list>
+#include <vector>
 
 using std::string;
-using std::list;
+using std::vector;
 
 namespace walls {
 
@@ -50,9 +49,9 @@ void Display::draw(const World& world,
     const Map& map = world.getMap();
     PlayerStatus player_status = world.getPlayer().getStatus();
     MapLocation player_location = world.getPlayer().getLocation();
-    const list<Object*>& creatures = world.getCreatures().getObjects();
-    const list<Object*>& prey = world.getPrey().getObjects();
-    const list<Object*>& plants = world.getPlants().getObjects();
+    const vector<Object*>& creatures = world.getCreatures().getObjects();
+    const vector<Object*>& prey = world.getPrey().getObjects();
+    const vector<Object*>& plants = world.getPlants().getObjects();
     drawMap(map, upper_left);
     drawObjects(plants, upper_left);
     drawObjects(creatures, upper_left);
@@ -76,20 +75,19 @@ void Display::drawDebug(const World& world,
     char line_two[40];
     char line_three[40];
     char line_four[40];
-    char name[40]; *name = '\0';
+    char name[40];
 
     int food = 0;
-    int age = 0;
 
     MapLocation curs_loc = upper_left.getRelative(curs_x, curs_y, 0);
-    Block curs = world.getMap().getBlock(curs_loc);
+    const Map& map = world.getMap();
 
-    if (curs.getHasCreature()) {
-        Creature* cre = (Creature *)(curs.getCreature());
-        MapLocation cre_loc = cre->getTarget();
+    sprintf(name, "Nothing");
+    if (map.hasCreature(curs_loc)) {
+        const Creature& cre = (const Creature&)(map.creature(curs_loc));
+        MapLocation cre_loc = cre.getTarget();
         sprintf(name, "FEWWET!!");
-        food = cre->getFood();
-        age = cre->getAge();
+        food = cre.getFood();
 
         int cre_x;
         int cre_y;
@@ -99,9 +97,8 @@ void Display::drawDebug(const World& world,
         updateScreen();
     }
 
-    if (curs.getHasPrey()) {
+    if (map.hasPrey(curs_loc)) {
         sprintf(name,"BUNNY!!!!!");
-        mvaddstr(0, 85, line_one);
     }
 
     sprintf(line_one, "Critter: %s", name);
@@ -110,7 +107,7 @@ void Display::drawDebug(const World& world,
     sprintf(line_two, "FOOD: %d", food);
     mvaddstr(1, 85, line_two);
 
-    sprintf(line_three, "AGE: %d", age);
+    sprintf(line_three, "AGE: NOT IMPLEMENTED");
     mvaddstr(2, 85, line_three);
 
     sprintf(line_four, "Update: %d", world.getUpdateTime());
@@ -157,8 +154,7 @@ void Display::drawMap(const Map& map, const MapLocation& upper_left)
     for (int x = 0; x < m_width; x++) {
         for (int y = 0; y < m_height; y++) {
             MapLocation next = upper_left.getRelative(x, y, 0);
-            const Block& block = map.getBlock(next);
-            BlockType type = block.getType();
+            BlockType type = map.blockType(next);
             drawTile(x, y, getDisplayChar(type), getDisplayColor(type));
         }
     }
@@ -199,18 +195,18 @@ void Display::drawPlayer(const MapLocation& location,
         drawTile(x, y, PLAYER_CHAR);
 }
 
-void Display::drawObjects(const list<Object*>& objects,
+void Display::drawObjects(const vector<Object*>& objects,
                           const MapLocation& upper_left)
 {
-    list<Object*>::const_iterator iter;
+    vector<Object*>::const_iterator iter;
     for (iter = objects.begin(); iter != objects.end(); ++iter) {
         int x;
         int y;
-        char c = (*iter)->getDisplayChar();
-        int color = (*iter)->getDisplayColor();
+        Appearance appearance = (*iter)->appearance();
+
         MapLocation loc = (*iter)->getLocation();
         if (isOnScreen(loc, upper_left, &x, &y)) {
-            drawTile(x, y, c, color);
+            drawTile(x, y, appearance.glyph(), appearance.color());
         }
     }
 }

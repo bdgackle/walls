@@ -33,14 +33,14 @@ int main()
 
     // Seed the world with some random rocks/trees/pebbles
     Map* map = world.getMap();
-    for (int x = 0; x < map->getWidth(); x++) {
-        for (int y = 0; y < map->getHeight(); y++) {
+    for (int x = 0; x < map->width(); x++) {
+        for (int y = 0; y < map->height(); y++) {
             int random_number = rand() % 1000;
 
             if (random_number < 5)
-                map->getBlock(MapLocation(x, y, 0))->setType(walls::ROCK);
+                map->blockType(MapLocation(x, y, 0), walls::ROCK);
             else if (random_number < 10)
-                map->getBlock(MapLocation(x, y, 0))->setType(walls::SAPLING);
+                map->blockType(MapLocation(x, y, 0), walls::SAPLING);
             else if (random_number < 1000)
                 world.addPlant(new Grass(&world, MapLocation(x, y, 0)));
         }

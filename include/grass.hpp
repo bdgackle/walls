@@ -6,21 +6,23 @@
 #define GRASS_HPP
 
 // Local Headers
-#include "plant.hpp"
+#include "appearance.hpp"
+#include "object_imp.hpp"
 #include "maplocation.hpp"
 
 namespace walls {
 class World;
 class MapLocation;
 
-class Grass : public Plant {
+class Grass : public ObjectImp {
  public:
     Grass(World* world, const MapLocation& location);
 
     virtual void update(int time);
 
-    char getDisplayChar() const;
-    int getDisplayColor() const;
+    virtual Appearance appearance() const;
+
+    virtual void die();
 
  protected:
     void reproduce();
@@ -30,6 +32,7 @@ class Grass : public Plant {
     bool m_flower;
     int m_flower_time;
     int m_seed_time;
+    int m_age;
     static const int k_flower_min;
     static const int k_flower_max;
     static const int k_seed_max;

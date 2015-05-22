@@ -7,22 +7,20 @@
 #include "object.hpp"
 
 // C++ Standard Headers
-#include <list>
+#include <vector>
 
-using std::list;
+using std::vector;
 
 namespace walls {
 
-ObjectList::ObjectList() {}
-
 void ObjectList::update(int time)
 {
-    list<Object*>::iterator iter = m_list.begin();
+    vector<Object*>::iterator iter = m_list.begin();
     while (iter != m_list.end()) {
         (*iter)->update(time);
 
         if ((*iter)->getIsDead()) {
-            iter = m_list.erase(iter); // erase() returns iter++
+            iter = m_list.erase(iter); // Erase returns next valid element
         }
         else {
             ++iter;
@@ -30,9 +28,14 @@ void ObjectList::update(int time)
     }
 }
 
-const list<Object*>& ObjectList::getObjects() const
+const vector<Object*>& ObjectList::getObjects() const
 {
     return m_list;
+}
+
+const Object& ObjectList::getFirstObject() const
+{
+    return *(m_list.front());
 }
 
 Object* ObjectList::getFirstObject()
@@ -52,7 +55,14 @@ void ObjectList::addObject(Object* object)
 
 void ObjectList::removeObject(Object* object)
 {
-    m_list.remove(object);
+    vector<Object*>::iterator iter = m_list.begin();
+    while (iter != m_list.end()) {
+        if ((*iter) == object) {
+            m_list.erase(iter);
+            break;
+        }
+        iter++;
+    }
 }
 
 } // namespace walls

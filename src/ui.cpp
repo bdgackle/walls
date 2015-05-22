@@ -77,17 +77,17 @@ void UserInterface::doCommand(Command command)
         break;
 
     case ADD_WALL:
-        m_world->getMap()->getBlock(getCursorLocation())->setType(WALL);
+        m_world->getMap()->blockType(getCursorLocation(), WALL);
         m_world->setBoundriesDirty();
         break;
 
     case ADD_GROUND:
-        m_world->getMap()->getBlock(getCursorLocation())->setType(GROUND);
+        m_world->getMap()->blockType(getCursorLocation(), GROUND);
         m_world->setBoundriesDirty();
         break;
 
     case ADD_DOOR:
-        m_world->getMap()->getBlock(getCursorLocation())->setType(DOOR);
+        m_world->getMap()->blockType(getCursorLocation(), DOOR);
         m_world->setBoundriesDirty();
         break;
 
@@ -96,8 +96,9 @@ void UserInterface::doCommand(Command command)
         break;
     }
 
-    if (command != NO_COMMAND)
+    if (command != NO_COMMAND) {
         m_world->update(1);
+    }
 }
 
 void UserInterface::centerPlayer()

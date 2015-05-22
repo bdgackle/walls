@@ -10,9 +10,9 @@
 #include <stdlib.h>
 
 // C++ Standard Headers
-#include <list>
+#include <vector>
 
-using std::list;
+using std::vector;
 
 namespace walls {
 
@@ -20,34 +20,25 @@ Creature::Creature(World* world,
                    const MapLocation& location,
                    bool is_prey,
                    int initial_food) :
-    Object(world, location),
+    ObjectImp(world, location),
     m_is_prey(is_prey),
     m_target(0, 0, 0),
     m_food(initial_food)
 {
     if (m_is_prey)
-        m_world->getMap()->getBlock(getLocation())->addPrey(this);
+        m_world->getMap()->addPrey(getLocation(), this);
     else
-        m_world->getMap()->getBlock(getLocation())->addCreature(this);
-}
-
-void Creature::update(int time)
-{
-    Object::update(time);
+        m_world->getMap()->addCreature(getLocation(), this);
 }
 
 void Creature::die()
 {
     if (m_is_prey)
-        m_world->getMap()->getBlock(getLocation())->removePrey(this);
+        m_world->getMap()->removePrey(getLocation(), this);
     else
-        m_world->getMap()->getBlock(getLocation())->removeCreature(this);
-    setIsDead();
-}
+        m_world->getMap()->removeCreature(getLocation(), this);
 
-bool Creature::getIsPrey()
-{
-    return m_is_prey;
+    setIsDead();
 }
 
 int Creature::getFood() const
@@ -55,7 +46,7 @@ int Creature::getFood() const
     return m_food;
 }
 
-MapLocation Creature::getTarget()
+MapLocation Creature::getTarget() const
 {
     return m_target;
 }
@@ -111,28 +102,27 @@ void Creature::move(int d_x, int d_y, int d_z)
     MapLocation new_loc = old_loc.getRelative(d_x, d_y, d_z);
 
     if ((m_world->getMap()->exists(new_loc)) &&
-        !(m_world->getMap()->getBlock(new_loc)->getIsMovementBoundry())) {
+        !(m_world->getMap()->isMovementBoundry(new_loc))) {
         setLocation(new_loc);
         if (m_is_prey) {
-            m_world->getMap()->getBlock(old_loc)->removePrey(this);
-            m_world->getMap()->getBlock(new_loc)->addPrey(this);
-        }
-        else {
-            m_world->getMap()->getBlock(old_loc)->removeCreature(this);
-            m_world->getMap()->getBlock(new_loc)->addCreature(this);
+            m_world->getMap()->removePrey(old_loc, this);
+            m_world->getMap()->addPrey(new_loc, this);
+        } else {
+            m_world->getMap()->removeCreature(old_loc, this);
+            m_world->getMap()->addCreature(new_loc, this);
         }
     }
 }
 
 MapLocation Creature::findClosestPrey(int range)
 {
-    list<MapLocation> adjacent;
+    vector<MapLocation> adjacent;
     MapLocation loc;
     for (int dist = 1; dist <= range; dist++) {
-        m_world->getMap()->getAdjacent(m_location, &adjacent, dist);
+        m_world->getMap()->adjacent(m_location, &adjacent, dist);
 
         while (adjacent.size() > 0) {
-            if (m_world->getMap()->getBlock(adjacent.back())->getHasPrey()) {
+            if (m_world->getMap()->hasPrey(adjacent.back())) {
                 return adjacent.back();
             }
             adjacent.pop_back();
