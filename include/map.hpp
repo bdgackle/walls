@@ -2,14 +2,14 @@
  *  @author Barry Gackle
  */
 
-#ifndef MAP_H
-#define MAP_H
+#ifndef MAP_HPP
+#define MAP_HPP
 
 // C++ Standard Headers
 #include <list>
 
 // Internal Headers
-#include "block.h"
+#include "block.hpp"
 
 namespace walls {
     class MapLocation;
@@ -69,4 +69,4 @@ class Map {
 
 } // walls
 
-#endif // MAP_H
+#endif // MAP_HPP

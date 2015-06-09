@@ -2,11 +2,11 @@
  *  @author Barry Gackle
  */
 
-#ifndef OBJECT_LIST_H
-#define OBJECT_LIST_H
+#ifndef OBJECT_LIST_HPP
+#define OBJECT_LIST_HPP
 
 // Internal Headers
-#include "maplocation.h"
+#include "maplocation.hpp"
 
 // C++ Standard Headers
 #include <list>
@@ -40,4 +40,4 @@ class ObjectList {
 
 } // walls
 
-#endif // OBJECT_LIST_H
+#endif // OBJECT_LIST_HPP

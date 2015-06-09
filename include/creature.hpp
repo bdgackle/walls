@@ -2,12 +2,12 @@
  *  @author Barry Gackle
  */
 
-#ifndef CREATURE_H
-#define CREATURE_H
+#ifndef CREATURE_HPP
+#define CREATURE_HPP
 
 // Internal Headers
-#include "object.h"
-#include "maplocation.h"
+#include "object.hpp"
+#include "maplocation.hpp"
 
 namespace walls {
     class World;
@@ -44,4 +44,4 @@ class Creature : public Object {
 
 } // walls
 
-#endif // CREATURE_H
+#endif // CREATURE_HPP

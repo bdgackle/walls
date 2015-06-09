@@ -2,17 +2,17 @@
  *  @author Barry Gackle
  */
 
-#ifndef WORLD_H
-#define WORLD_H
+#ifndef WORLD_HPP
+#define WORLD_HPP
 
 // C++ Standard Headers
 #include <list>
 
 // Internal Headers
-#include "boundry_scanner.h"
-#include "player.h"
-#include "map.h"
-#include "object_list.h"
+#include "boundry_scanner.hpp"
+#include "player.hpp"
+#include "map.hpp"
+#include "object_list.hpp"
 
 namespace walls {
     class Object;
@@ -76,4 +76,4 @@ class World {
 
 } // walls
 
-#endif // WORLD_H
+#endif // WORLD_HPP

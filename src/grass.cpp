@@ -10,9 +10,9 @@
 #include <ncurses.h>
 
 // Internal Headers
-#include "grass.h"
-#include "block.h"
-#include "world.h"
+#include "grass.hpp"
+#include "block.hpp"
+#include "world.hpp"
 
 namespace walls {
 

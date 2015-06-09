@@ -2,15 +2,15 @@
  *  @author Barry Gackle
  */
 
-#ifndef BLOCK_H
-#define BLOCK_H
+#ifndef BLOCK_HPP
+#define BLOCK_HPP
 
 // C++ Standard Headers
 #include <list>
 
 // Internal Headers
-#include "game_constants.h"
-#include "object_list.h"
+#include "game_constants.hpp"
+#include "object_list.hpp"
 
 namespace walls {
     class Object;
@@ -59,4 +59,4 @@ class Block {
 
 } // walls
 
-#endif // BLOCK_H
+#endif // BLOCK_HPP

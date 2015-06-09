@@ -7,7 +7,7 @@
 #include <stdio.h>
 
 // Internal Headers
-#include "maplocation.h"
+#include "maplocation.hpp"
 
 namespace walls {
 

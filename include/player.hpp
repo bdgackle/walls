@@ -2,12 +2,12 @@
  *  @author Barry Gackle
  */
 
-#ifndef PLAYER_H
-#define PLAYER_H
+#ifndef PLAYER_HPP
+#define PLAYER_HPP
 
 // Internal Headers
-#include "maplocation.h"
-#include "game_constants.h"
+#include "maplocation.hpp"
+#include "game_constants.hpp"
 
 namespace walls {
     class Map;
@@ -39,4 +39,4 @@ class Player {
 
 } // namespace walls
 
-#endif // PLAYER_H
+#endif // PLAYER_HPP

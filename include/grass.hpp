@@ -2,12 +2,12 @@
  *  @author Barry Gackle
  */
 
-#ifndef GRASS_H
-#define GRASS_H
+#ifndef GRASS_HPP
+#define GRASS_HPP
 
 // Internal Headers
-#include "plant.h"
-#include "maplocation.h"
+#include "plant.hpp"
+#include "maplocation.hpp"
 
 namespace walls {
     class World;
@@ -41,4 +41,4 @@ class Grass : public Plant {
 
 } // walls
 
-#endif // GRASS_H
+#endif // GRASS_HPP

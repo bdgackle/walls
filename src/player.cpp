@@ -3,12 +3,12 @@
  */
 
 // Internal Headers
-#include "player.h"
-#include "game_constants.h"
-#include "world.h"
-#include "maplocation.h"
-#include "map.h"
-#include "block.h"
+#include "player.hpp"
+#include "game_constants.hpp"
+#include "world.hpp"
+#include "maplocation.hpp"
+#include "map.hpp"
+#include "block.hpp"
 
 namespace walls {
 

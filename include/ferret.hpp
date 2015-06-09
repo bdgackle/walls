@@ -2,11 +2,11 @@
  *  @author Barry Gackle
  */
 
-#ifndef FERRET_H
-#define FERRET_H
+#ifndef FERRET_HPP
+#define FERRET_HPP
 
 // Internal Headers
-#include "creature.h"
+#include "creature.hpp"
 
 namespace walls{
 
@@ -37,4 +37,4 @@ class Ferret : public Creature {
 
 } // walls
 
-#endif // CREATURE_H
+#endif // CREATURE_HPP

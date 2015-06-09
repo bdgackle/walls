@@ -3,8 +3,8 @@
  *  @author 4 July 2014
  */
 
-#ifndef GAME_CONSTANTS_H
-#define GAME_CONSTANTS_H
+#ifndef GAME_CONSTANTS_HPP
+#define GAME_CONSTANTS_HPP
 
 // C++ Standard Headers
 #include <string>
@@ -76,7 +76,7 @@ extern const char SLOPE_DOWN_COLOR;
 
 // Display Strings
 extern const string PLAYER_STATUS_NONE_STRING;
-extern const string PLAYER_STATUS_HAPPY_STRING;
+extern const string PLAYER_STATUS_HPPAPPY_STRING;
 extern const string PLAYER_STATUS_VENGEFUL_STRING;
 extern const string PLAYER_STATUS_SMELLS_FERRET_STRING;
 extern const string PLAYER_STATUS_INVADE_FERRET_STRING;
@@ -109,4 +109,4 @@ extern const string PLAYER_STATUS_INVADE_FERRET_STRING;
 
 } // walls
 
-#endif // GAME_CONSTANTS_H
+#endif // GAME_CONSTANTS_HPP

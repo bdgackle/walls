@@ -3,8 +3,8 @@
  */
 
 // Internal Headers
-#include "block.h"
-#include "game_constants.h"
+#include "block.hpp"
+#include "game_constants.hpp"
 
 namespace walls {
 

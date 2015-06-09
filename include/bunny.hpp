@@ -2,11 +2,11 @@
  *  @author Barry Gackle
  */
 
-#ifndef BUNNY_H
-#define BUNNY_H
+#ifndef BUNNY_HPP
+#define BUNNY_HPP
 
 // Internal Headers
-#include "creature.h"
+#include "creature.hpp"
 
 namespace walls{
 
@@ -27,4 +27,4 @@ class Bunny : public Creature {
 
 } // walls
 
-#endif // BUNNY_H
+#endif // BUNNY_HPP

@@ -9,8 +9,8 @@
 #include <list>
 
 // Internal Headers
-#include "creature.h"
-#include "world.h"
+#include "creature.hpp"
+#include "world.hpp"
 
 using std::list;
 

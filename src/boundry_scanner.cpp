@@ -4,9 +4,9 @@
  */
 
 // Internal Includes
-#include "boundry_scanner.h"
-#include "map.h"
-#include "block.h"
+#include "boundry_scanner.hpp"
+#include "map.hpp"
+#include "block.hpp"
 
 namespace walls {
 

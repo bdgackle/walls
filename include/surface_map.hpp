@@ -2,10 +2,10 @@
  *  @author Barry Gackle
  */
 
-#ifndef SURFACE_MAP_H
-#define SURFACE_MAP_H
+#ifndef SURFACE_MAP_HPP
+#define SURFACE_MAP_HPP
 
-#include "maplocation.h"
+#include "maplocation.hpp"
 
 namespace walls{
 
@@ -35,4 +35,4 @@ class SurfaceMap {
 
 } // walls
 
-#endif // SURFACE_MAP_H
+#endif // SURFACE_MAP_HPP

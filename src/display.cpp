@@ -10,16 +10,16 @@
 #include <curses.h>
 
 // Internal Headers
-#include "display.h"
-#include "game_constants.h"
-#include "maplocation.h"
-#include "map.h"
-#include "player.h"
-#include "object.h"
-#include "world.h"
-#include "block.h"
-#include "creature.h"
-#include "ferret.h"
+#include "display.hpp"
+#include "game_constants.hpp"
+#include "maplocation.hpp"
+#include "map.hpp"
+#include "player.hpp"
+#include "object.hpp"
+#include "world.hpp"
+#include "block.hpp"
+#include "creature.hpp"
+#include "ferret.hpp"
 
 using std::string;
 using std::list;

@@ -3,8 +3,8 @@
  *  @author 21 June 2014
  */
 
-#ifndef MAPLOCATION_H
-#define MAPLOCATION_H
+#ifndef MAPLOCATION_HPP
+#define MAPLOCATION_HPP
 
 namespace walls{
 
@@ -50,4 +50,4 @@ bool operator== (const MapLocation& lh, const MapLocation& rh);
 
 } // walls
 
-#endif // MAPLOCATION_H
+#endif // MAPLOCATION_HPP

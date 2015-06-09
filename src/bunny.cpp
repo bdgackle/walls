@@ -9,9 +9,9 @@
 #include <ncurses.h>
 
 // Internal Headers
-#include "bunny.h"
-#include "world.h"
-#include "maplocation.h"
+#include "bunny.hpp"
+#include "world.hpp"
+#include "maplocation.hpp"
 
 namespace walls {
 

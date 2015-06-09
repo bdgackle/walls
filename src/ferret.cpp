@@ -9,9 +9,9 @@
 #include <ncurses.h>
 
 // Internal Headers
-#include "ferret.h"
-#include "maplocation.h"
-#include "world.h"
+#include "ferret.hpp"
+#include "maplocation.hpp"
+#include "world.hpp"
 
 namespace walls {
 

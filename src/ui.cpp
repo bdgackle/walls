@@ -10,12 +10,12 @@
 #include <curses.h>
 
 // Internal Headers
-#include "ui.h"
-#include "game_constants.h"
-#include "world.h"
-#include "display.h"
-#include "input_handler.h"
-#include "block.h"
+#include "ui.hpp"
+#include "game_constants.hpp"
+#include "world.hpp"
+#include "display.hpp"
+#include "input_handler.hpp"
+#include "block.hpp"
 
 using std::string;
 

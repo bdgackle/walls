@@ -3,14 +3,14 @@
  *  @author 21 June 2014
  */
 
-#ifndef BOUNDRY_SCANNER_H
-#define BOUNDRY_SCANNER_H
+#ifndef BOUNDRY_SCANNER_HPP
+#define BOUNDRY_SCANNER_HPP
 
 // C++ Standard Headers
 #include <list>
 
 // Internal Headers
-#include "update_map.h"
+#include "update_map.hpp"
 
 using std::list;
 
@@ -42,4 +42,4 @@ class BoundryScanner
 
 } // namespace walls
 
-#endif // BOUNDRY_SCANNER_H
+#endif // BOUNDRY_SCANNER_HPP

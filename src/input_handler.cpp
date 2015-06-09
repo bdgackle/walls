@@ -7,8 +7,8 @@
 #include <curses.h>
 
 // Internal Headers
-#include "input_handler.h"
-#include "game_constants.h"
+#include "input_handler.hpp"
+#include "game_constants.hpp"
 
 namespace walls{
 

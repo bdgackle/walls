@@ -2,12 +2,12 @@
  *  @author Barry Gackle
  */
 
-#ifndef PLANT_H
-#define PLANT_H
+#ifndef PLANT_HPP
+#define PLANT_HPP
 
 // Internal Headers
-#include "object.h"
-#include "maplocation.h"
+#include "object.hpp"
+#include "maplocation.hpp"
 
 namespace walls{
     class World;
@@ -25,4 +25,4 @@ class Plant : public Object {
 
 } // walls
 
-#endif // PLANT_H
+#endif // PLANT_HPP

@@ -7,14 +7,14 @@
 #include <stdlib.h>
 
 // Internal Headers
-#include "world.h"
-#include "ui.h"
-#include "maplocation.h"
-#include "map.h"
-#include "game_constants.h"
-#include "ferret.h"
-#include "bunny.h"
-#include "grass.h"
+#include "world.hpp"
+#include "ui.hpp"
+#include "maplocation.hpp"
+#include "map.hpp"
+#include "game_constants.hpp"
+#include "ferret.hpp"
+#include "bunny.hpp"
+#include "grass.hpp"
 
 using walls::World;
 using walls::UserInterface;

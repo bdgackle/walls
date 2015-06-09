@@ -3,8 +3,8 @@
  */
 
 // Internal Headers
-#include "plant.h"
-#include "world.h"
+#include "plant.hpp"
+#include "world.hpp"
 
 namespace walls {
 

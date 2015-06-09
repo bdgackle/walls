@@ -3,13 +3,13 @@
  *  @author 21 June 2014
  */
 
-#ifndef UI_H
-#define UI_H
+#ifndef UI_HPP
+#define UI_HPP
 
 // Internal Headers
-#include "display.h"
-#include "input_handler.h"
-#include "maplocation.h"
+#include "display.hpp"
+#include "input_handler.hpp"
+#include "maplocation.hpp"
 
 using std::string;
 
@@ -45,4 +45,4 @@ class UserInterface {
 
 } // walls
 
-#endif // UI_H
+#endif // UI_HPP

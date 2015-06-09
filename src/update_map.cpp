@@ -3,7 +3,7 @@
  */
 
 // Internal Headers
-#include "update_map.h"
+#include "update_map.hpp"
 
 namespace walls {
 

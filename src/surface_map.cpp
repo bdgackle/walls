@@ -3,8 +3,8 @@
  */
 
 // Internal Headers
-#include "surface_map.h"
-#include "maplocation.h"
+#include "surface_map.hpp"
+#include "maplocation.hpp"
 
 namespace walls {
 

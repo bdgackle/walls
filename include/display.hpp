@@ -2,15 +2,15 @@
  *  @author Barry Gackle
  */
 
-#ifndef DISPLAY_H
-#define DISPLAY_H
+#ifndef DISPLAY_HPP
+#define DISPLAY_HPP
 
 // C++ Standard Headers
 #include <string>
 #include <list>
 
 // Internal Headers
-#include "game_constants.h"
+#include "game_constants.hpp"
 
 namespace walls {
     class World;
@@ -86,4 +86,4 @@ class Display {
 
 } // walls
 
-#endif // DISPLAY_H
+#endif // DISPLAY_HPP

@@ -9,10 +9,10 @@
 #include <list>
 
 // Internal Headers
-#include "map.h"
-#include "maplocation.h"
-#include "block.h"
-#include "update_map.h"
+#include "map.hpp"
+#include "maplocation.hpp"
+#include "block.hpp"
+#include "update_map.hpp"
 
 using std::list;
 

@@ -7,11 +7,11 @@
 #include <time.h>
 
 // Internal Headers
-#include "world.h"
-#include "maplocation.h"
-#include "game_constants.h"
-#include "grass.h"
-#include "block.h"
+#include "world.hpp"
+#include "maplocation.hpp"
+#include "game_constants.hpp"
+#include "grass.hpp"
+#include "block.hpp"
 
 namespace walls {
 

@@ -3,7 +3,7 @@
  */
 
 // Internal Headers
-#include "object.h"
+#include "object.hpp"
 
 namespace walls {
 

@@ -2,8 +2,8 @@
  *  @author Barry Gackle
  */
 
-#ifndef UPDATE_MAP_H
-#define UPDATE_MAP_H
+#ifndef UPDATE_MAP_HPP
+#define UPDATE_MAP_HPP
 
 namespace walls {
 
@@ -27,4 +27,4 @@ class UpdateMap {
 
 } // walls
 
-#endif // UPDATE_MAP_H
+#endif // UPDATE_MAP_HPP

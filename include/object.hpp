@@ -2,11 +2,11 @@
  *  @author Barry Gackle
  */
 
-#ifndef OBJECT_H
-#define OBJECT_H
+#ifndef OBJECT_HPP
+#define OBJECT_HPP
 
 // Internal Headers
-#include "maplocation.h"
+#include "maplocation.hpp"
 
 // Forward Declarations
 namespace walls {
@@ -47,4 +47,4 @@ class Object {
 
 } // walls
 
-#endif // OBJECT_H
+#endif // OBJECT_HPP

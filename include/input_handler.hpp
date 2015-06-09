@@ -3,11 +3,11 @@
  *  @author 4 July 2014
  */
 
-#ifndef INPUT_HANDLER_H
-#define INPUT_HANDLER_H
+#ifndef INPUT_HPPANDLER_HPP
+#define INPUT_HPPANDLER_HPP
 
 // Internal Headers
-#include "game_constants.h"
+#include "game_constants.hpp"
 
 namespace walls {
 
@@ -47,4 +47,4 @@ class InputHandler {
 
 } // walls
 
-#endif // INPUT_HANDLER_H
+#endif // INPUT_HPPANDLER_HPP
