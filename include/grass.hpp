@@ -16,7 +16,6 @@ class MapLocation;
 class Grass : public Plant {
  public:
     Grass(World* world, const MapLocation& location);
-    virtual ~Grass();
 
     virtual void update(int time);
 

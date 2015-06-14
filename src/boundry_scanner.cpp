@@ -14,8 +14,6 @@ BoundryScanner::BoundryScanner(Map *map) :
     m_map(map),
     m_updated(map->getBlockCount()) {}
 
-BoundryScanner::~BoundryScanner() {}
-
 void BoundryScanner::updateBoundry()
 {
     int block_count = m_map->getBlockCount();

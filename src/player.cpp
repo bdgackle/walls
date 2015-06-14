@@ -16,8 +16,6 @@ Player::Player(World* world) :
     m_status(HAPPY),
     m_world(world) {}
 
-Player::~Player() {}
-
 PlayerStatus Player::getStatus() const
 {
     return m_status;

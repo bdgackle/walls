@@ -17,7 +17,6 @@ class Object;
 class World {
  public:
     World(int width, int height, int depth);
-    virtual ~World();
 
     void update(int time);
 

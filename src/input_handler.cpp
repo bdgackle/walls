@@ -19,8 +19,6 @@ InputHandler::InputHandler() :
     m_screen_width(0),
     m_screen_height(0) {}
 
-InputHandler::~InputHandler() {}
-
 void InputHandler::init(int width, int height, int curs_x, int curs_y)
 {
     m_screen_width = width;

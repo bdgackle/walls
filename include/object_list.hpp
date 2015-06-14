@@ -17,7 +17,6 @@ class Object;
 class ObjectList {
  public:
     ObjectList();
-    virtual ~ObjectList();
 
     void update(int time);
 

@@ -19,7 +19,6 @@ class MapLocation {
     MapLocation();
     MapLocation(int x, int y, int z);
     MapLocation(const MapLocation& other);
-    virtual ~MapLocation();
     MapLocation& operator= (const MapLocation& other);
 
     MapLocation getRelative(int x, int y, int z) const;

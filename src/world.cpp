@@ -28,8 +28,6 @@ World::World(int width, int height, int depth) :
     m_player.setLocation(MapLocation(width/2, height/2, 0));
 }
 
-World::~World() {}
-
 void World::update(int time)
 {
     if (m_boundries_dirty) {

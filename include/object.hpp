@@ -14,7 +14,7 @@ class World;
 class Object {
  public:
     Object(World* world, const MapLocation& location);
-    virtual ~Object();
+    virtual ~Object() {}
 
     virtual void update(int time);
 

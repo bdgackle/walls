@@ -16,7 +16,6 @@ class World;
 class Player {
  public:
     Player(World* world);
-    virtual ~Player();
 
     PlayerStatus getStatus() const;
     MapLocation getLocation() const;

@@ -19,7 +19,7 @@ class Creature : public Object {
              bool is_prey,
              int initial_food);
 
-    virtual ~Creature();
+    virtual ~Creature() {}
 
     virtual void update(int time);
 

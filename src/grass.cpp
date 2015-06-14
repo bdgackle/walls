@@ -28,8 +28,6 @@ Grass::Grass(World* world, const MapLocation& location) :
     m_seed_time = m_flower_time + (rand() % (k_seed_max - k_flower_max));
 }
 
-Grass::~Grass() {}
-
 void Grass::update(int time)
 {
     Object::update(time);

@@ -15,8 +15,6 @@ namespace walls {
 
 ObjectList::ObjectList() {}
 
-ObjectList::~ObjectList() {}
-
 void ObjectList::update(int time)
 {
     list<Object*>::iterator iter = m_list.begin();

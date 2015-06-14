@@ -15,7 +15,6 @@ class MapLocation;
 class Bunny : public Creature {
  public:
     Bunny(World* world, const MapLocation& location);
-    virtual ~Bunny();
 
     virtual void update(int time);
     virtual void breed();

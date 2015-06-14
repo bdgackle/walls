@@ -31,14 +31,12 @@ Creature::Creature(World* world,
         m_world->getMap()->getBlock(getLocation())->addCreature(this);
 }
 
-Creature::~Creature() {}
-
 void Creature::update(int time)
 {
     Object::update(time);
 }
 
-void Creature::die() 
+void Creature::die()
 {
     if (m_is_prey)
         m_world->getMap()->getBlock(getLocation())->removePrey(this);

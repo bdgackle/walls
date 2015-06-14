@@ -26,8 +26,6 @@ MapLocation::MapLocation(const MapLocation& other) :
     m_y(other.getY()),
     m_z(other.getZ()) {}
 
-MapLocation::~MapLocation() {}
-
 MapLocation& MapLocation::operator= (const MapLocation& other)
 {
     m_x = other.getX();

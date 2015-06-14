@@ -14,8 +14,6 @@ Object::Object(World* world, const MapLocation& location) :
     m_id(m_next_id++),
     m_is_dead(false) {}
 
-Object::~Object() {}
-
 MapLocation Object::getLocation() const
 {
     return m_location;

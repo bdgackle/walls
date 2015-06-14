@@ -15,7 +15,6 @@ class Object;
 class Block {
  public:
     Block();
-    virtual ~Block();
 
     BlockType getType() const;
     bool getIsOutdoors() const;

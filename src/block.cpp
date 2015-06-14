@@ -13,8 +13,6 @@ Block::Block() :
     m_is_outdoors(true),
     m_is_edge(false) {}
 
-Block::~Block() {}
-
 BlockType Block::getType() const
 {
     return m_type;

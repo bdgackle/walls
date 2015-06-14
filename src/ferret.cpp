@@ -19,8 +19,6 @@ Ferret::Ferret(World* world, const MapLocation& location) :
     Creature(world, location, false, INITIAL_FOOD_VALUE),
     m_visual_range(VISUAL_RANGE) {}
 
-Ferret::~Ferret() {}
-
 void Ferret::update(int time)
 {
     Creature::update(time);

@@ -18,8 +18,6 @@ namespace walls {
 Bunny::Bunny(World* world, const MapLocation& location) :
     Creature(world, location, true, 100) {}
 
-Bunny::~Bunny() {}
-
 void Bunny::update(int time)
 {
     Creature::update(time);

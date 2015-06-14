@@ -15,7 +15,7 @@ class World;
 class Plant : public Object {
  public:
     Plant(World* world, const MapLocation& location);
-    virtual ~Plant();
+    virtual ~Plant() {}
 
     virtual void die();
 };

@@ -19,7 +19,6 @@ class BoundryScanner
 {
  public:
     BoundryScanner(Map* map);
-    virtual ~BoundryScanner();
 
     void init(int map_size);
 

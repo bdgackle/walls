@@ -14,8 +14,6 @@ Plant::Plant(World* world, const MapLocation& location) :
     m_world->getMap()->getBlock(getLocation())->addPlant(this);
 }
 
-Plant::~Plant() {}
-
 void Plant::die()
 {
     m_world->getMap()->getBlock(getLocation())->removePlant(this);

@@ -14,7 +14,6 @@ namespace walls {
 class InputHandler {
  public:
     InputHandler();
-    ~InputHandler();
 
     void init(int width, int height, int curs_x, int curs_y);
 
