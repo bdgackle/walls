@@ -2,15 +2,15 @@
  *  @author Barry Gackle
  */
 
+// Local Headers
+#include "creature.hpp"
+#include "world.hpp"
+
 // C Standard Headers
 #include <stdlib.h>
 
 // C++ Standard Headers
 #include <list>
-
-// Internal Headers
-#include "creature.hpp"
-#include "world.hpp"
 
 using std::list;
 
@@ -145,4 +145,4 @@ MapLocation Creature::findClosestPrey(int range)
     return m_location;
 }
 
-} // walls
+} // namespace walls

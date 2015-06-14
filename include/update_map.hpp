@@ -25,6 +25,6 @@ class UpdateMap {
     int m_size;
 };
 
-} // walls
+} // namespace walls
 
 #endif // UPDATE_MAP_HPP

@@ -6,18 +6,13 @@
 #ifndef UI_HPP
 #define UI_HPP
 
-// Internal Headers
+// Local Headers
 #include "display.hpp"
 #include "input_handler.hpp"
 #include "maplocation.hpp"
 
-using std::string;
-
 namespace walls {
-    class World;
-}
-
-namespace walls {
+class World;
 
 class UserInterface {
  public:
@@ -43,6 +38,6 @@ class UserInterface {
     MapLocation m_display_upper_left;
 };
 
-} // walls
+} // namespace walls
 
 #endif // UI_HPP

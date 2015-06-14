@@ -5,15 +5,12 @@
 #ifndef CREATURE_HPP
 #define CREATURE_HPP
 
-// Internal Headers
+// Local Headers
 #include "object.hpp"
 #include "maplocation.hpp"
 
 namespace walls {
-    class World;
-}
-
-namespace walls {
+class World;
 
 class Creature : public Object {
  public:
@@ -42,6 +39,6 @@ class Creature : public Object {
     int m_food;
 };
 
-} // walls
+} // namespace walls
 
 #endif // CREATURE_HPP

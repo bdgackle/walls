@@ -5,20 +5,15 @@
 #ifndef MAP_HPP
 #define MAP_HPP
 
+// Local Headers
+#include "block.hpp"
+
 // C++ Standard Headers
 #include <list>
 
-// Internal Headers
-#include "block.hpp"
-
 namespace walls {
-    class MapLocation;
-    class UpdateMap;
-}
-
-using std::list;
-
-namespace walls {
+class MapLocation;
+class UpdateMap;
 
 class Map {
  public:
@@ -40,15 +35,15 @@ class Map {
     bool exists(const MapLocation& location) const;
     bool exists(int index) const;
 
-    void getEdges(list<int>* edges, int depth) const;
+    void getEdges(std::list<int>* edges, int depth) const;
     void getAdjacent(const MapLocation& location,
-                     list<MapLocation>* adjacent,
+                     std::list<MapLocation>* adjacent,
                      int distance) const;
 
     void clearIsOutdoors();
 
  protected:
-    void pushIndex(int index, list<int>* list, UpdateMap* done) const;
+    void pushIndex(int index, std::list<int>* list, UpdateMap* done) const;
 
  private:
     Block* m_blocks;

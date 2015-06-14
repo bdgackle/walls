@@ -5,22 +5,14 @@
 #ifndef WORLD_HPP
 #define WORLD_HPP
 
-// C++ Standard Headers
-#include <list>
-
-// Internal Headers
+// Local Headers
 #include "boundry_scanner.hpp"
 #include "player.hpp"
 #include "map.hpp"
 #include "object_list.hpp"
 
 namespace walls {
-    class Object;
-}
-
-using std::list;
-
-namespace walls {
+class Object;
 
 class World {
  public:

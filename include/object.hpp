@@ -5,15 +5,11 @@
 #ifndef OBJECT_HPP
 #define OBJECT_HPP
 
-// Internal Headers
+// Local Headers
 #include "maplocation.hpp"
 
-// Forward Declarations
 namespace walls {
-    class World;
-}
-
-namespace walls {
+class World;
 
 class Object {
  public:
@@ -45,6 +41,6 @@ class Object {
     static int m_next_id;
 };
 
-} // walls
+} // namespace walls
 
 #endif // OBJECT_HPP

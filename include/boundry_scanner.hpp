@@ -6,19 +6,14 @@
 #ifndef BOUNDRY_SCANNER_HPP
 #define BOUNDRY_SCANNER_HPP
 
+// Local Headers
+#include "update_map.hpp"
+
 // C++ Standard Headers
 #include <list>
 
-// Internal Headers
-#include "update_map.hpp"
-
-using std::list;
-
 namespace walls {
-    class Map;
-}
-
-namespace walls {
+class Map;
 
 class BoundryScanner
 {
@@ -35,7 +30,7 @@ class BoundryScanner
     void pushLocation(int index);
 
  private:
-    list<int> m_stack;
+    std::list<int> m_stack;
     Map* m_map;
     UpdateMap m_updated;
 };

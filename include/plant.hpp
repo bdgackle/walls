@@ -5,15 +5,12 @@
 #ifndef PLANT_HPP
 #define PLANT_HPP
 
-// Internal Headers
+// Local Headers
 #include "object.hpp"
 #include "maplocation.hpp"
 
-namespace walls{
-    class World;
-}
-
 namespace walls {
+class World;
 
 class Plant : public Object {
  public:
@@ -23,6 +20,6 @@ class Plant : public Object {
     virtual void die();
 };
 
-} // walls
+} // namespace walls
 
 #endif // PLANT_HPP

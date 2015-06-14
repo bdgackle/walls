@@ -3,19 +3,19 @@
  *  @author 21 June 2014
  */
 
-// C++ Headers
-#include <string>
-
-// External Headers
-#include <curses.h>
-
-// Internal Headers
+// Local Headers
 #include "ui.hpp"
 #include "game_constants.hpp"
 #include "world.hpp"
 #include "display.hpp"
 #include "input_handler.hpp"
 #include "block.hpp"
+
+// C++ Headers
+#include <string>
+
+// External Headers
+#include <curses.h>
 
 using std::string;
 
@@ -96,7 +96,7 @@ void UserInterface::doCommand(Command command)
         break;
     }
 
-    if (command != NO_COMMAND) 
+    if (command != NO_COMMAND)
         m_world->update(1);
 }
 
@@ -153,7 +153,7 @@ void UserInterface::init()
     init_pair(6, COLOR_MAGENTA, COLOR_BLACK);
     init_pair(7, COLOR_YELLOW, COLOR_RED);
     init_pair(8, COLOR_WHITE, COLOR_BLACK);
-    
+
     m_display.setDimensions(COLS, LINES);
     m_input.init(COLS, LINES, 0, 2);
 
@@ -173,4 +173,4 @@ MapLocation UserInterface::getCursorLocation() const
     return MapLocation(command_x, command_y, getDepth());
 }
 
-} // walls
+} // namespace walls

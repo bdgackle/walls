@@ -3,10 +3,10 @@
  *  @author 4 July 2014
  */
 
-#ifndef INPUT_HPPANDLER_HPP
-#define INPUT_HPPANDLER_HPP
+#ifndef INPUT_HANDLER_HPP
+#define INPUT_HANDLER_HPP
 
-// Internal Headers
+// Local Headers
 #include "game_constants.hpp"
 
 namespace walls {
@@ -45,6 +45,6 @@ class InputHandler {
     int m_screen_height;
 };
 
-} // walls
+} // namespace walls
 
-#endif // INPUT_HPPANDLER_HPP
+#endif // INPUT_HANDLER_HPP

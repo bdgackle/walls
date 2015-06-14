@@ -9,8 +9,6 @@
 // C++ Standard Headers
 #include <string>
 
-using std::string;
-
 namespace walls{
 
 enum BlockType {
@@ -75,11 +73,11 @@ extern const char SLOPE_UP_COLOR;
 extern const char SLOPE_DOWN_COLOR;
 
 // Display Strings
-extern const string PLAYER_STATUS_NONE_STRING;
-extern const string PLAYER_STATUS_HPPAPPY_STRING;
-extern const string PLAYER_STATUS_VENGEFUL_STRING;
-extern const string PLAYER_STATUS_SMELLS_FERRET_STRING;
-extern const string PLAYER_STATUS_INVADE_FERRET_STRING;
+extern const std::string PLAYER_STATUS_NONE_STRING;
+extern const std::string PLAYER_STATUS_HAPPY_STRING;
+extern const std::string PLAYER_STATUS_VENGEFUL_STRING;
+extern const std::string PLAYER_STATUS_SMELLS_FERRET_STRING;
+extern const std::string PLAYER_STATUS_INVADE_FERRET_STRING;
 
 // Input Keys
 // These need to be #defines because I need literal constants for case labels
@@ -107,6 +105,6 @@ extern const string PLAYER_STATUS_INVADE_FERRET_STRING;
 #define MODE_TOGGLE_2   'a'
 #define WAIT_1          '.'
 
-} // walls
+} // namespace walls
 
 #endif // GAME_CONSTANTS_HPP

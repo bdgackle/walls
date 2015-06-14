@@ -3,17 +3,17 @@
  *  @author 4 July 2014
  */
 
-// C++ Standard Headers
-#include <string>
-
 // External Headers
 #include <ncurses.h>
+
+// C++ Standard Headers
+#include <string>
 
 using std::string;
 
 // Since we've wrapped these constants in a namespace, we'll need to explicitly
 // declare external linkage to keep them visible outside this file.
-namespace walls{
+namespace walls {
 
 // Mapping of display character types to actual display characters
 extern const char INVALID_CHAR          = 'B';
@@ -48,4 +48,4 @@ extern const string PLAYER_STATUS_SMELLS_FERRET_STRING =
     "Little guy smells ferrets.  They are wafting.       ";
 extern const string PLAYER_STATUS_INVADE_FERRET_STRING =
     "FERRETS IN HOUSE! FERRETS IN HOUSE! Ferrets are bad.";
-} // walls
+} // namespace walls

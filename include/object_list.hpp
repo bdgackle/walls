@@ -5,20 +5,14 @@
 #ifndef OBJECT_LIST_HPP
 #define OBJECT_LIST_HPP
 
-// Internal Headers
+// Local Headers
 #include "maplocation.hpp"
 
 // C++ Standard Headers
 #include <list>
 
-// Forward Declarations
 namespace walls {
-    class Object;
-}
-
-using std::list;
-
-namespace walls {
+class Object;
 
 class ObjectList {
  public:
@@ -27,7 +21,7 @@ class ObjectList {
 
     void update(int time);
 
-    const list<Object*>& getObjects() const;
+    const std::list<Object*>& getObjects() const;
     Object* getFirstObject();
     int getCount() const;
 
@@ -35,9 +29,9 @@ class ObjectList {
     void removeObject(Object* object);
 
  private:
-    list<Object*> m_list;
+    std::list<Object*> m_list;
 };
 
-} // walls
+} // namespace walls
 
 #endif // OBJECT_LIST_HPP

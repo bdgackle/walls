@@ -5,11 +5,10 @@
 #ifndef FERRET_HPP
 #define FERRET_HPP
 
-// Internal Headers
+// Local Headers
 #include "creature.hpp"
 
-namespace walls{
-
+namespace walls {
 class World;
 class MapLocation;
 
@@ -35,6 +34,6 @@ class Ferret : public Creature {
     static const int VISUAL_RANGE = 10;
 };
 
-} // walls
+} // namespace walls
 
 #endif // CREATURE_HPP

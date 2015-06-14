@@ -5,24 +5,18 @@
 #ifndef DISPLAY_HPP
 #define DISPLAY_HPP
 
+// Local Headers
+#include "game_constants.hpp"
+
 // C++ Standard Headers
 #include <string>
 #include <list>
 
-// Internal Headers
-#include "game_constants.hpp"
-
 namespace walls {
-    class World;
-    class Map;
-    class MapLocation;
-    class Object;
-}
-
-using std::string;
-using std::list;
-
-namespace walls {
+class World;
+class Map;
+class MapLocation;
+class Object;
 
 class Display {
  public:
@@ -41,7 +35,7 @@ class Display {
                    int curs_y);
 
     void drawDebugBlank();
-    
+
     int getHeight() const;
     int getWidth() const;
     int getCenterX() const;
@@ -53,7 +47,7 @@ class Display {
     void drawMap(const Map& map, const MapLocation& upper_left);
     void drawStatus(PlayerStatus status, const World& world);
     void drawPlayer(const MapLocation& location, const MapLocation& upper_left);
-    void drawObjects(const list<Object*>& objects,
+    void drawObjects(const std::list<Object*>& objects,
                      const MapLocation& upper_left);
     void drawCursor(int curs_x, int curs_y, bool visible);
     void updateScreen();
@@ -69,7 +63,7 @@ class Display {
 
     static char getDisplayChar(BlockType type);
     static int getDisplayColor(BlockType type);
-    static string getStatusString(PlayerStatus status);
+    static std::string getStatusString(PlayerStatus status);
 
     void createBuffers();
     void deleteBuffers();
@@ -84,6 +78,6 @@ class Display {
     int* m_buffer_colors;
 };
 
-} // walls
+} // namespace walls
 
 #endif // DISPLAY_HPP

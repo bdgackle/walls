@@ -2,7 +2,7 @@
  *  @author Barry Gackle
  */
 
-// Internal Headers
+// Local Headers
 #include "block.hpp"
 #include "game_constants.hpp"
 
@@ -16,7 +16,7 @@ Block::Block() :
 Block::~Block() {}
 
 BlockType Block::getType() const
-{ 
+{
     return m_type;
 }
 
@@ -58,7 +58,7 @@ bool Block::getIsIndoorBoundry() const
 }
 
 bool Block::getHasPlant() const
-{ 
+{
     if (m_plants.getCount() > 0)
         return true;
     else
@@ -141,4 +141,4 @@ void Block::removePrey(Object* prey)
     m_prey.removeObject(prey);
 }
 
-} // walls
+} // namespace walls

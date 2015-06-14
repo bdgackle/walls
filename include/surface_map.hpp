@@ -5,9 +5,10 @@
 #ifndef SURFACE_MAP_HPP
 #define SURFACE_MAP_HPP
 
+// Local Headers
 #include "maplocation.hpp"
 
-namespace walls{
+namespace walls {
 
 class SurfaceMap {
  public:
@@ -33,6 +34,6 @@ class SurfaceMap {
 };
 
 
-} // walls
+} // namespace walls
 
 #endif // SURFACE_MAP_HPP

@@ -5,16 +5,13 @@
 #ifndef GRASS_HPP
 #define GRASS_HPP
 
-// Internal Headers
+// Local Headers
 #include "plant.hpp"
 #include "maplocation.hpp"
 
 namespace walls {
-    class World;
-    class MapLocation;
-}
-
-namespace walls {
+class World;
+class MapLocation;
 
 class Grass : public Plant {
  public:
@@ -39,6 +36,6 @@ class Grass : public Plant {
     static const int k_seed_max;
 };
 
-} // walls
+} // namespace walls
 
 #endif // GRASS_HPP

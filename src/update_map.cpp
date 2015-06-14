@@ -2,7 +2,7 @@
  *  @author Barry Gackle
  */
 
-// Internal Headers
+// Local Headers
 #include "update_map.hpp"
 
 namespace walls {
@@ -20,7 +20,7 @@ UpdateMap::~UpdateMap()
 }
 
 int UpdateMap::get(int index) const
-{ 
+{
     if ((index < m_size) && (index > 0))
         return m_values[index];
     else
@@ -50,4 +50,4 @@ void UpdateMap::reset()
     }
 }
 
-} // walls
+} // namespace walls

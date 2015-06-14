@@ -6,7 +6,7 @@
 // C Standard Headers
 #include <stdlib.h>
 
-// Internal Headers
+// Local Headers
 #include "world.hpp"
 #include "ui.hpp"
 #include "maplocation.hpp"

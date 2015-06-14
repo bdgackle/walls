@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include <time.h>
 
-// Internal Headers
+// Local Headers
 #include "world.hpp"
 #include "maplocation.hpp"
 #include "game_constants.hpp"
@@ -157,4 +157,4 @@ void World::setBoundriesDirty()
     m_boundries_dirty = true;
 }
 
-} // walls
+} // namespace walls

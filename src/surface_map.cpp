@@ -2,7 +2,7 @@
  *  @author Barry Gackle
  */
 
-// Internal Headers
+// Local Headers
 #include "surface_map.hpp"
 #include "maplocation.hpp"
 
@@ -60,4 +60,4 @@ int SurfaceMap::getIndex(int x, int y) const
     return y * m_width + x;
 }
 
-} // walls
+} // namespace walls

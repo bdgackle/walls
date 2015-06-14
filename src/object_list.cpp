@@ -2,9 +2,14 @@
  *  @author Barry Gackle
  */
 
-// Internal Headers
+// Local Headers
 #include "object_list.hpp"
 #include "object.hpp"
+
+// C++ Standard Headers
+#include <list>
+
+using std::list;
 
 namespace walls {
 
@@ -52,4 +57,4 @@ void ObjectList::removeObject(Object* object)
     m_list.remove(object);
 }
 
-} // walls
+} // namespace walls

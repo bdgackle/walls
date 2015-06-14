@@ -2,14 +2,7 @@
  *  @author Barry Gackle
  */
 
-// C++ Standard Headers
-#include <string>
-#include <list>
-
-// External Headers
-#include <curses.h>
-
-// Internal Headers
+// Local Headers
 #include "display.hpp"
 #include "game_constants.hpp"
 #include "maplocation.hpp"
@@ -21,10 +14,17 @@
 #include "creature.hpp"
 #include "ferret.hpp"
 
+// External Headers
+#include <curses.h>
+
+// C++ Standard Headers
+#include <string>
+#include <list>
+
 using std::string;
 using std::list;
 
-namespace walls{
+namespace walls {
 
 Display::Display() :
     m_width(0),
@@ -106,7 +106,7 @@ void Display::drawDebug(const World& world,
 
     sprintf(line_one, "Critter: %s", name);
     mvaddstr(0, 85, line_one);
-    
+
     sprintf(line_two, "FOOD: %d", food);
     mvaddstr(1, 85, line_two);
 
@@ -396,4 +396,4 @@ void Display::deleteBuffers()
         delete [] m_buffer_colors;
 }
 
-} // walls
+} // namespace walls

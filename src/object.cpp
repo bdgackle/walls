@@ -2,7 +2,7 @@
  *  @author Barry Gackle
  */
 
-// Internal Headers
+// Local Headers
 #include "object.hpp"
 
 namespace walls {
@@ -19,7 +19,7 @@ Object::~Object() {}
 MapLocation Object::getLocation() const
 {
     return m_location;
-} 
+}
 
 bool Object::getIsDead() const
 {
@@ -48,4 +48,4 @@ void Object::update(int time)
 
 int Object::m_next_id = 0;
 
-} // walls
+} // namespace walls

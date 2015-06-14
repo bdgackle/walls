@@ -8,7 +8,7 @@
 // External Headers
 #include <ncurses.h>
 
-// Internal Headers
+// Local Headers
 #include "bunny.hpp"
 #include "world.hpp"
 #include "maplocation.hpp"
@@ -91,4 +91,4 @@ int Bunny::getDisplayColor() const
     return COLOR_PAIR(5);
 }
 
-} // walls
+} // namespace walls

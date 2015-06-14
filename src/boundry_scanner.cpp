@@ -80,4 +80,4 @@ void BoundryScanner::pushLocation(int index)
     }
 }
 
-} // walls
+} // namespace walls

@@ -8,7 +8,7 @@
 // External Headers
 #include <ncurses.h>
 
-// Internal Headers
+// Local Headers
 #include "ferret.hpp"
 #include "maplocation.hpp"
 #include "world.hpp"
@@ -53,13 +53,13 @@ void Ferret::breed()
 }
 
 char Ferret::getDisplayChar() const
-{ 
-    return 'f'; 
+{
+    return 'f';
 }
 
 int Ferret::getDisplayColor() const
-{ 
+{
     return COLOR_PAIR(2);
 }
 
-} // walls
+} // namespace walls

@@ -2,7 +2,7 @@
  *  @author Barry Gackle
  */
 
-// Internal Headers
+// Local Headers
 #include "plant.hpp"
 #include "world.hpp"
 
@@ -22,4 +22,4 @@ void Plant::die()
     setIsDead();
 }
 
-} // walls
+} // namespace walls

@@ -5,16 +5,13 @@
 #ifndef PLAYER_HPP
 #define PLAYER_HPP
 
-// Internal Headers
+// Local Headers
 #include "maplocation.hpp"
 #include "game_constants.hpp"
 
 namespace walls {
-    class Map;
-    class World;
-}
-
-namespace walls {
+class Map;
+class World;
 
 class Player {
  public:

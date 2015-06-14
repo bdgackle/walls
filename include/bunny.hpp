@@ -5,11 +5,10 @@
 #ifndef BUNNY_HPP
 #define BUNNY_HPP
 
-// Internal Headers
+// Local Headers
 #include "creature.hpp"
 
 namespace walls{
-
 class World;
 class MapLocation;
 
@@ -25,6 +24,6 @@ class Bunny : public Creature {
     int getDisplayColor() const;
 };
 
-} // walls
+} // namespace walls
 
 #endif // BUNNY_HPP

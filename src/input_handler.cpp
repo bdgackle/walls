@@ -6,11 +6,11 @@
 // External Headers
 #include <curses.h>
 
-// Internal Headers
+// Local Headers
 #include "input_handler.hpp"
 #include "game_constants.hpp"
 
-namespace walls{
+namespace walls {
 
 InputHandler::InputHandler() :
     m_mode(NORMAL),
@@ -169,4 +169,4 @@ void InputHandler::moveCursor(int delta_x, int delta_y)
         m_cursor_y = 0;
 }
 
-} // walls
+} // namespace walls

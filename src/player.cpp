@@ -2,7 +2,7 @@
  *  @author Barry Gackle
  */
 
-// Internal Headers
+// Local Headers
 #include "player.hpp"
 #include "game_constants.hpp"
 #include "world.hpp"
@@ -54,4 +54,4 @@ void Player::setStatus(PlayerStatus status)
     m_status = status;
 }
 
-} // walls
+} // namespace walls

@@ -6,7 +6,7 @@
 // C Standard Headers
 #include <stdio.h>
 
-// Internal Headers
+// Local Headers
 #include "maplocation.hpp"
 
 namespace walls {
@@ -95,4 +95,4 @@ int MapLocation::m_map_width = 0;
 int MapLocation::m_map_height = 0;
 int MapLocation::m_map_depth = 0;
 
-} // walls
+} // namespace walls

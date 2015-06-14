@@ -2,17 +2,17 @@
  *  @author Barry Gackle
  */
 
+// Local Headers
+#include "map.hpp"
+#include "maplocation.hpp"
+#include "block.hpp"
+#include "update_map.hpp"
+
 // C Standard Headers
 #include <stddef.h>
 
 // C++ Standard Headers
 #include <list>
-
-// Internal Headers
-#include "map.hpp"
-#include "maplocation.hpp"
-#include "block.hpp"
-#include "update_map.hpp"
 
 using std::list;
 
@@ -47,7 +47,7 @@ Map::Map(int width, int height, int depth) :
 }
 
 Map::~Map()
-{ 
+{
     delete [] m_blocks;
 }
 
@@ -183,4 +183,4 @@ void Map::pushIndex(int index, list<int>* list, UpdateMap* done) const
     }
 }
 
-} // walls
+} // namespace walls

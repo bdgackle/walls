@@ -5,20 +5,12 @@
 #ifndef BLOCK_HPP
 #define BLOCK_HPP
 
-// C++ Standard Headers
-#include <list>
-
-// Internal Headers
+// Local Headers
 #include "game_constants.hpp"
 #include "object_list.hpp"
 
 namespace walls {
-    class Object;
-}
-
-using std::list;
-
-namespace walls {
+class Object;
 
 class Block {
  public:
@@ -57,6 +49,6 @@ class Block {
     ObjectList m_plants;
 };
 
-} // walls
+} // namespace walls
 
 #endif // BLOCK_HPP

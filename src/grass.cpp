@@ -9,7 +9,7 @@
 // External Headers
 #include <ncurses.h>
 
-// Internal Headers
+// Local Headers
 #include "grass.hpp"
 #include "block.hpp"
 #include "world.hpp"
@@ -97,4 +97,4 @@ void Grass::seed(const MapLocation& location)
     }
 }
 
-} // walls
+} // namespace walls
