@@ -11,7 +11,6 @@
 #include "maplocation.hpp"
 #include "game_constants.hpp"
 #include "grass.hpp"
-#include "block.hpp"
 
 namespace walls {
 

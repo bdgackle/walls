@@ -72,7 +72,6 @@ class Map {
     virtual Object* prey(const MapLocation& loc) = 0;
 
     virtual void clearIsOutdoors() = 0;
-
 };
 
 } // walls

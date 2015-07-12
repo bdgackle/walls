@@ -7,7 +7,6 @@
 #include "boundry_scanner.hpp"
 #include "map.hpp"
 #include "maplocation.hpp"
-#include "block.hpp"
 
 namespace walls {
 
@@ -36,7 +35,6 @@ void BoundryScanner::popLocation()
     int index = m_stack.back();
     m_stack.pop_back();
 
-    //if (!(m_map->getBlock(index)->getIsIndoorBoundry())) {
     if (!(m_map->isIndoorBoundry(index))) {
         int northern_neighbor = index - m_map->width();
         int southern_neighbor = index + m_map->width();

@@ -9,7 +9,6 @@
 #include "world.hpp"
 #include "display.hpp"
 #include "input_handler.hpp"
-#include "block.hpp"
 
 // C++ Headers
 #include <string>

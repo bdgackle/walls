@@ -6,7 +6,6 @@
 #include "appearance.hpp"
 #include "creature_appearances.hpp"
 #include "grass.hpp"
-#include "block.hpp"
 #include "world.hpp"
 
 // C Standard Library

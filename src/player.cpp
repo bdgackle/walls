@@ -8,7 +8,6 @@
 #include "world.hpp"
 #include "maplocation.hpp"
 #include "map.hpp"
-#include "block.hpp"
 
 namespace walls {
 
