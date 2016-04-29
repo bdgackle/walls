@@ -1,0 +1,15 @@
+Basic design:
+
+I: MODEL
+    WorldModel -- overall model iterface; this is what the UI interacts with.
+        WorldMap -- Interface into just the map of the world.
+        MapSlice -- Part of the map; a two dimensional flat plan, used for UI
+        MapLocation -- Specific point on the map
+
+        GameSystem -- Generic interface that WorldModel uses to update all systems
+            PhysicalModel -- Kinematic model of game engine objects
+            ThermalModel -- Temperature mode of terrain and game objects
+            WeatherModel -- Background weather; affects thermal model among other things
+
+UserInterface -- Interface to the thing that does user IO
+
